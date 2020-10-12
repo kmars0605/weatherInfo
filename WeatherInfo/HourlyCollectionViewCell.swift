@@ -12,6 +12,7 @@ import Alamofire
 
 class HourlyCollectionViewCell: UICollectionViewCell {
 
+    var onecall: OneCallData?
     //時間を表示するラベル
     @IBOutlet weak var timeLabel: UILabel!
     //気温を表示するラベル
@@ -24,14 +25,13 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     
-    func setHourlyData(_ onecall:OneCallData){
+    func setHourlyData(_ hourlyData:HourlyData){
         //時間の表示
-        self.timeLabel.text = "\(onecall.dt)"
+        self.timeLabel.text = "\(hourlyData.hourlydt)"
         //気温の表示
-        self.tempLabel.text = "\(onecall.temp)"
-        //print(self.tempLabel.text)
+        self.tempLabel.text = "\(hourlyData.temp)℃"
         //湿度の表示
-        //self.humidLabel.text = "\(hourlyData.humidity)"
+        self.humidLabel.text = "\(hourlyData.humidity)%"
         //print(self.humidLabel.text)
     }
 

@@ -11,12 +11,16 @@ import Alamofire
 import SwiftyJSON
 
 class HourlyData: NSObject {
-    let dt: Double
+    var outputFormatterHH = DateFormatter()
+    let jsondt: Double
+    let hourlydt:String
     let temp: Double
     let humidity: Int
     
     init(jsonResponse: JSON) {
-        self.dt = jsonResponse["dt"].doubleValue
+        self.jsondt = jsonResponse["dt"].doubleValue
+        outputFormatterHH.dateFormat = "HH時"
+        self.hourlydt = (outputFormatterHH.string(from: Date(timeIntervalSince1970: jsondt)))
         self.temp = jsonResponse["temp"].doubleValue
         self.humidity = jsonResponse["humidity"].intValue
     }

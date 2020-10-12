@@ -9,7 +9,7 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-    var a = true
+    let homeViewController = HomeViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +20,11 @@ class TabBarController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
        
-        if /*homeViewController.userDefaults.array(forKey: "LATEST") == nil*/a == true {
+        if homeViewController.userDefaults.object(forKey: "LATEST") == nil {
             let settingPlaceViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingPlace")
             self.present(settingPlaceViewController!, animated: true, completion: nil)
-            print("a")
-            a = false
+            print(homeViewController.userDefaults.object(forKey: "LATEST"))
+            
         }
     }
     

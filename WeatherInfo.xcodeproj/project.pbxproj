@@ -21,6 +21,9 @@
 		21C695212530427300C8BE65 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C695202530427300C8BE65 /* SettingViewController.swift */; };
 		21C69523253048BF00C8BE65 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C69522253048BF00C8BE65 /* TabBarController.swift */; };
 		21C6952525304B5300C8BE65 /* SettingPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6952425304B5300C8BE65 /* SettingPlaceViewController.swift */; };
+		21E33DCE253460C800C7524D /* DailyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E33DCD253460C800C7524D /* DailyData.swift */; };
+		21E33DD12534645900C7524D /* DailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E33DCF2534645900C7524D /* DailyTableViewCell.swift */; };
+		21E33DD22534645900C7524D /* DailyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 21E33DD02534645900C7524D /* DailyTableViewCell.xib */; };
 		8D8DD4F8779584383D5AE13A /* Pods_WeatherInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 649198ED5CCA5E1C3B7BA4B0 /* Pods_WeatherInfo.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +44,9 @@
 		21C695202530427300C8BE65 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		21C69522253048BF00C8BE65 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		21C6952425304B5300C8BE65 /* SettingPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPlaceViewController.swift; sourceTree = "<group>"; };
+		21E33DCD253460C800C7524D /* DailyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyData.swift; sourceTree = "<group>"; };
+		21E33DCF2534645900C7524D /* DailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewCell.swift; sourceTree = "<group>"; };
+		21E33DD02534645900C7524D /* DailyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyTableViewCell.xib; sourceTree = "<group>"; };
 		649198ED5CCA5E1C3B7BA4B0 /* Pods_WeatherInfo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherInfo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A27D2075EAEBF7212FE1EBE7 /* Pods-WeatherInfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherInfo.release.xcconfig"; path = "Target Support Files/Pods-WeatherInfo/Pods-WeatherInfo.release.xcconfig"; sourceTree = "<group>"; };
 		EA6A4222B9753ABACF6DED40 /* Pods-WeatherInfo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherInfo.debug.xcconfig"; path = "Target Support Files/Pods-WeatherInfo/Pods-WeatherInfo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -88,6 +94,9 @@
 				21C6951E2530426100C8BE65 /* TagViewController.swift */,
 				21C695202530427300C8BE65 /* SettingViewController.swift */,
 				21C69516252D7B6800C8BE65 /* OneCallData.swift */,
+				21E33DCD253460C800C7524D /* DailyData.swift */,
+				21E33DCF2534645900C7524D /* DailyTableViewCell.swift */,
+				21E33DD02534645900C7524D /* DailyTableViewCell.xib */,
 				21C69512252CC7D400C8BE65 /* HourlyData.swift */,
 				21C6950C252CC48E00C8BE65 /* HourlyCollectionViewCell.swift */,
 				21C6950D252CC48E00C8BE65 /* HourlyCollectionViewCell.xib */,
@@ -176,6 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21C69449252989F200C8BE65 /* LaunchScreen.storyboard in Resources */,
+				21E33DD22534645900C7524D /* DailyTableViewCell.xib in Resources */,
 				21C69446252989F200C8BE65 /* Assets.xcassets in Resources */,
 				21C69444252989ED00C8BE65 /* Main.storyboard in Resources */,
 				21C6950F252CC48E00C8BE65 /* HourlyCollectionViewCell.xib in Resources */,
@@ -235,10 +245,12 @@
 				21C69517252D7B6800C8BE65 /* OneCallData.swift in Sources */,
 				21C6952525304B5300C8BE65 /* SettingPlaceViewController.swift in Sources */,
 				21C6943F252989E600C8BE65 /* SceneDelegate.swift in Sources */,
+				21E33DCE253460C800C7524D /* DailyData.swift in Sources */,
 				21C69523253048BF00C8BE65 /* TabBarController.swift in Sources */,
 				21C69513252CC7D400C8BE65 /* HourlyData.swift in Sources */,
 				21C695212530427300C8BE65 /* SettingViewController.swift in Sources */,
 				21C6951F2530426100C8BE65 /* TagViewController.swift in Sources */,
+				21E33DD12534645900C7524D /* DailyTableViewCell.swift in Sources */,
 				21C6951D2530424900C8BE65 /* HomeViewController.swift in Sources */,
 				21C6950E252CC48E00C8BE65 /* HourlyCollectionViewCell.swift in Sources */,
 			);

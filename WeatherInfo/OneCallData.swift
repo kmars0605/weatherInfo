@@ -15,7 +15,9 @@ class OneCallData: NSObject {
     let lat: Float
     let lon: Float
     let jsoncurrent: JSON
-    let dt: Double
+    let jsondt: Double
+    let hourdt:String
+    let daydt:String
     let sunrise: Double
     let sunset: Double
     let temp: Double
@@ -29,7 +31,12 @@ class OneCallData: NSObject {
     let jsonweather: JSON
     let main: String
     let dscrption: String
+    
     let hourly: [HourlyData]
+    var outputFormatterHH = DateFormatter()
+    var outputFormatterDD = DateFormatter()
+    
+    let daily: [DailyData]
     //    let jsonCurrent:String
     //
     //    let jsonCurrentdt:String
@@ -80,7 +87,11 @@ class OneCallData: NSObject {
         self.lon = jsonResponse["lon"].floatValue
         
         self.jsoncurrent = jsonResponse["current"]
-        self.dt = jsoncurrent["dt"].doubleValue
+        self.jsondt = jsoncurrent["dt"].doubleValue
+        outputFormatterHH.dateFormat = "HH時"
+        self.hourdt = (outputFormatterHH.string(from: Date(timeIntervalSince1970: jsondt)))
+        outputFormatterDD.dateFormat = "dd日"
+        self.daydt = (outputFormatterDD.string(from: Date(timeIntervalSince1970: jsondt)))
         self.sunrise = jsoncurrent["sunrise"].doubleValue
         self.sunset = jsoncurrent["sunset"].doubleValue
         self.temp = jsoncurrent["temp"].doubleValue
@@ -111,6 +122,12 @@ class OneCallData: NSObject {
            
         }
         self.hourly = hourlyData
+        
+        var dailyData: [DailyData] = []
+        for json in jsonResponse["daily"].arrayValue{
+            dailyData.append(DailyData(jsonResponse: json))
+        }
+        self.daily = dailyData
         
 //        //Current情報
 //        jsonCurrent = jsonResponse["current"].string!
