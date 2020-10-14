@@ -13,7 +13,7 @@ class DailyTableViewCell: UITableViewCell {
     //日付を表示
     @IBOutlet weak var dayLabel: UILabel!
     //天気を表示
-    @IBOutlet weak var weatherLabel: UILabel!
+    @IBOutlet weak var weatherImage: UIImageView!
     //最高気温を表示
     @IBOutlet weak var maxtemp: UILabel!
     //最低気温を表示
@@ -35,10 +35,14 @@ class DailyTableViewCell: UITableViewCell {
     //DailyDataをセルに表示
     func setDailyData(_ dailyData: DailyData){
         self.dayLabel.text = "\(dailyData.daydt)"
-        self.weatherLabel.text = "\(dailyData.main)"
         self.maxtemp.text = "\(dailyData.maxtemp)℃"
         self.mintemp.text = "\(dailyData.mintemp)℃"
         self.humidity.text = "\(dailyData.humidity)%"
+        if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(dailyData.icon).png"),
+            let data = try? Data(contentsOf: weatherIcon),
+            let image = UIImage(data: data) {
+            self.weatherImage.image = image
+        }
         
     }
     

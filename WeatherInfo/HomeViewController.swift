@@ -20,19 +20,25 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     
     
     
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var tmrimageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     
     //日付を表示するラベル
     @IBOutlet weak var dayLabel: UILabel!
+    @IBOutlet weak var tmrdayLabel: UILabel!
     //天気を表示するラベル
     @IBOutlet weak var weatherLabel: UILabel!
+    @IBOutlet weak var tmrweatherLabel: UILabel!
     //都市名を表示するラベル
     @IBOutlet weak var cityLabel: UILabel!
     //温度を表示するラベル
     @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var tmrtempLabel: UILabel!
     //湿度を表示するラベル
     @IBOutlet weak var humidLabel: UILabel!
+    @IBOutlet weak var tmrhumidLabel: UILabel!
     //ロケーションマネージャ
     var locationManager: CLLocationManager!
     var latitude: String = "0"
@@ -60,7 +66,7 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     }
     override func viewWillAppear(_ animated: Bool) {
         location()
-       
+        
     }
     
     
@@ -130,6 +136,7 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
                         self.tableView.reloadData()
                         
                         
+                        
                     case .failure(let value):
                         debugPrint(value)
                     }
@@ -140,12 +147,12 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       
+        
         if self.onecall == nil{
-           return 0
+            return 0
             
         }else {
-            return onecall!.hourly.count
+            return onecall!.hourly.count/2
             
         }
         
@@ -164,16 +171,33 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
         self.weatherLabel.text = "\(self.onecall!.main)"
         self.tempLabel.text = "\(self.onecall!.temp)℃"
         self.humidLabel.text = "\(self.onecall!.humidity)%"
+        if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(self.onecall!.icon).png"),
+            let data = try? Data(contentsOf: weatherIcon),
+            let image = UIImage(data: data) {
+            self.imageView.image = image
+        }
+        
+        self.tmrdayLabel.text = "\(self.onecall!.daily[1].daydt)"
+        self.tmrweatherLabel.text = "\(self.onecall!.daily[1].main)"
+        self.tmrtempLabel.text = "\(self.onecall!.daily[1].maxtemp)"
+        self.tmrhumidLabel.text = "\(self.onecall!.daily[1].humidity)"
+        if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(self.onecall!.daily[1].icon).png"),
+            let data = try? Data(contentsOf: weatherIcon),
+            let image = UIImage(data: data) {
+            self.tmrimageView.image = image
+            print(self.onecall!.icon)
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.onecall == nil{
-                  return 0
-                   
-               }else {
-                   return onecall!.daily.count
-                   
-               }
+            return 0
+            
+        }else {
+            return onecall!.daily.count
+            
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

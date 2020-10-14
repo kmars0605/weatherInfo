@@ -19,7 +19,8 @@ class HourlyCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var tempLabel: UILabel!
     //湿度を表示するラベル
     @IBOutlet weak var humidLabel: UILabel!
-    
+    //天気画像を表示するビュー
+    @IBOutlet weak var imageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,7 +33,17 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         self.tempLabel.text = "\(hourlyData.temp)℃"
         //湿度の表示
         self.humidLabel.text = "\(hourlyData.humidity)%"
-        //print(self.humidLabel.text)
+        //画像を表示
+        if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(hourlyData.icon).png"),
+           let data = try? Data(contentsOf: weatherIcon),
+           let image = UIImage(data: data) {
+           self.imageView.image = image
+           print("あああああああああああああ")
+            print(image)
+            print(data)
+            print(weatherIcon)
+       }
+        
     }
 
 

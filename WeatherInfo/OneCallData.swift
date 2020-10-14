@@ -31,6 +31,7 @@ class OneCallData: NSObject {
     let jsonweather: JSON
     let main: String
     let dscrption: String
+    let icon:String
     
     let hourly: [HourlyData]
     var outputFormatterHH = DateFormatter()
@@ -90,7 +91,8 @@ class OneCallData: NSObject {
         self.jsondt = jsoncurrent["dt"].doubleValue
         outputFormatterHH.dateFormat = "HH時"
         self.hourdt = (outputFormatterHH.string(from: Date(timeIntervalSince1970: jsondt)))
-        outputFormatterDD.dateFormat = "dd日"
+        outputFormatterDD.locale = Locale(identifier: "ja_JP")
+        outputFormatterDD.dateFormat = "dd日(EEE)"
         self.daydt = (outputFormatterDD.string(from: Date(timeIntervalSince1970: jsondt)))
         self.sunrise = jsoncurrent["sunrise"].doubleValue
         self.sunset = jsoncurrent["sunset"].doubleValue
@@ -105,6 +107,7 @@ class OneCallData: NSObject {
         self.jsonweather = jsoncurrent["weather"].array![0]
         self.main = jsonweather["main"].stringValue
         self.dscrption = jsonweather["description"].stringValue
+        self.icon = jsonweather["icon"].stringValue
         
         
         /*var currentData: [CurrentData] = []
