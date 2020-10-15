@@ -21,6 +21,7 @@ class OneCallData: NSObject {
     let sunrise: Double
     let sunset: Double
     let temp: Double
+    let tempRound:Int
     let feellike: Double
     let pressure: Int
     let humidity: Int
@@ -92,11 +93,12 @@ class OneCallData: NSObject {
         outputFormatterHH.dateFormat = "HH時"
         self.hourdt = (outputFormatterHH.string(from: Date(timeIntervalSince1970: jsondt)))
         outputFormatterDD.locale = Locale(identifier: "ja_JP")
-        outputFormatterDD.dateFormat = "dd日(EEE)"
+        outputFormatterDD.dateFormat = "d日(EEE)"
         self.daydt = (outputFormatterDD.string(from: Date(timeIntervalSince1970: jsondt)))
         self.sunrise = jsoncurrent["sunrise"].doubleValue
         self.sunset = jsoncurrent["sunset"].doubleValue
         self.temp = jsoncurrent["temp"].doubleValue
+        self.tempRound = Int(round(temp))
         self.feellike = jsoncurrent["feel_like"].doubleValue
         self.pressure = jsoncurrent["pressure"].intValue
         self.humidity = jsoncurrent["humidity"].intValue

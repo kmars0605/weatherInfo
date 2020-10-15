@@ -30,7 +30,7 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         //時間の表示
         self.timeLabel.text = "\(hourlyData.hourlydt)"
         //気温の表示
-        self.tempLabel.text = "\(hourlyData.temp)℃"
+        self.tempLabel.text = "\(hourlyData.tempRound)℃"
         //湿度の表示
         self.humidLabel.text = "\(hourlyData.humidity)%"
         //画像を表示
@@ -38,10 +38,6 @@ class HourlyCollectionViewCell: UICollectionViewCell {
            let data = try? Data(contentsOf: weatherIcon),
            let image = UIImage(data: data) {
            self.imageView.image = image
-           print("あああああああああああああ")
-            print(image)
-            print(data)
-            print(weatherIcon)
        }
         
     }

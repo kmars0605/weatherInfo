@@ -35,8 +35,10 @@ class DailyTableViewCell: UITableViewCell {
     //DailyDataをセルに表示
     func setDailyData(_ dailyData: DailyData){
         self.dayLabel.text = "\(dailyData.daydt)"
-        self.maxtemp.text = "\(dailyData.maxtemp)℃"
-        self.mintemp.text = "\(dailyData.mintemp)℃"
+        self.maxtemp.textColor = UIColor.red
+        self.maxtemp.text = "\(dailyData.maxtempRound)℃"
+        self.mintemp.textColor = UIColor.blue
+        self.mintemp.text = "\(dailyData.mintempRound)℃"
         self.humidity.text = "\(dailyData.humidity)%"
         if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(dailyData.icon).png"),
             let data = try? Data(contentsOf: weatherIcon),

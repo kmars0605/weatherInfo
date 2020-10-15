@@ -15,6 +15,7 @@ class HourlyData: NSObject {
     let jsondt: Double
     let hourlydt:String
     let temp: Double
+    let tempRound: Int
     let humidity: Int
     let jsonweather:JSON
     let main:String
@@ -25,6 +26,7 @@ class HourlyData: NSObject {
         outputFormatterHH.dateFormat = "H時"
         self.hourlydt = (outputFormatterHH.string(from: Date(timeIntervalSince1970: jsondt)))
         self.temp = jsonResponse["temp"].doubleValue
+        self.tempRound = Int(round(temp))
         self.humidity = jsonResponse["humidity"].intValue
         self.jsonweather = jsonResponse["weather"].array![0]
         self.main = jsonweather["main"].stringValue

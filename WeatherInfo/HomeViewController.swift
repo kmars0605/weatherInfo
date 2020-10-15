@@ -18,6 +18,9 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     var place:CLLocation?
     let userDefaults = UserDefaults.standard
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var adView: UIView!
     
     
     @IBOutlet weak var imageView: UIImageView!
@@ -33,12 +36,13 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     @IBOutlet weak var tmrweatherLabel: UILabel!
     //都市名を表示するラベル
     @IBOutlet weak var cityLabel: UILabel!
-    //温度を表示するラベル
-    @IBOutlet weak var tempLabel: UILabel!
-    @IBOutlet weak var tmrtempLabel: UILabel!
-    //湿度を表示するラベル
-    @IBOutlet weak var humidLabel: UILabel!
-    @IBOutlet weak var tmrhumidLabel: UILabel!
+    //最高気温を表示するラベル
+    @IBOutlet weak var maxTemp: UILabel!
+    @IBOutlet weak var tmrmaxTemp: UILabel!
+    //最低気温を表示するラベル
+    @IBOutlet weak var minTemp: UILabel!
+    @IBOutlet weak var tmrminTemp: UILabel!
+    
     //ロケーションマネージャ
     var locationManager: CLLocationManager!
     var latitude: String = "0"
@@ -66,10 +70,7 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     }
     override func viewWillAppear(_ animated: Bool) {
         location()
-        
     }
-    
-    
     //ロケーションマネージャのセットアップ
     func setupLocationManager() {
         locationManager = CLLocationManager()
@@ -135,7 +136,8 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
                         self.collectionView.reloadData()
                         self.tableView.reloadData()
                         
-                        
+                        self.contentView.frame.size.height += self.tableView.frame.size.height + self.adView.frame.size.height + 8
+                        self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.contentView.frame.size.height)
                         
                     case .failure(let value):
                         debugPrint(value)
@@ -169,8 +171,10 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     func setLabel(onecall: OneCallData){
         self.dayLabel.text = "\(self.onecall!.daydt)"
         self.weatherLabel.text = "\(self.onecall!.main)"
-        self.tempLabel.text = "\(self.onecall!.temp)℃"
-        self.humidLabel.text = "\(self.onecall!.humidity)%"
+        self.maxTemp.textColor = UIColor.red
+        self.maxTemp.text = "\(self.onecall!.daily[0].maxtempRound)℃"
+        self.minTemp.textColor = UIColor.blue
+        self.minTemp.text = "\(self.onecall!.daily[0].mintempRound)℃"
         if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(self.onecall!.icon).png"),
             let data = try? Data(contentsOf: weatherIcon),
             let image = UIImage(data: data) {
@@ -179,8 +183,11 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
         
         self.tmrdayLabel.text = "\(self.onecall!.daily[1].daydt)"
         self.tmrweatherLabel.text = "\(self.onecall!.daily[1].main)"
-        self.tmrtempLabel.text = "\(self.onecall!.daily[1].maxtemp)"
-        self.tmrhumidLabel.text = "\(self.onecall!.daily[1].humidity)"
+        self.tmrmaxTemp.textColor = UIColor.red
+        self.tmrmaxTemp.text = "\(self.onecall!.daily[1].maxtempRound)℃"
+        self.tmrminTemp.textColor = UIColor.blue
+        self.tmrminTemp.text = "\(self.onecall!.daily[1].mintempRound)℃"
+       
         if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(self.onecall!.daily[1].icon).png"),
             let data = try? Data(contentsOf: weatherIcon),
             let image = UIImage(data: data) {
@@ -203,6 +210,7 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableCell", for: indexPath) as! DailyTableViewCell
         cell.setDailyData(onecall!.daily[indexPath.row])
+        tableView.isScrollEnabled = false
         return cell
     }
 }

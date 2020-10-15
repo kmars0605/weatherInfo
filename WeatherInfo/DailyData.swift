@@ -20,6 +20,8 @@ class DailyData: NSObject {
     let jsontemp:JSON
     let maxtemp:Double
     let mintemp:Double
+    let maxtempRound:Int
+    let mintempRound:Int
     let humidity:Int
     var outputFormatterDD = DateFormatter()
     
@@ -34,6 +36,8 @@ class DailyData: NSObject {
         self.jsontemp = jsonResponse["temp"]
         self.maxtemp = jsontemp["max"].doubleValue
         self.mintemp = jsontemp["min"].doubleValue
+        self.maxtempRound = Int(round(maxtemp))
+        self.mintempRound = Int(round(mintemp))
         self.humidity = jsonResponse["humidity"].intValue
         
     }
