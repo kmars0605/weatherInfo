@@ -131,7 +131,6 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
                     switch response.result{
                     case .success(let value):
                         self.onecall = OneCallData(jsonResponse: JSON(value))
-                        print(self.onecall)
                         self.setLabel(onecall: self.onecall!)
                         self.collectionView.reloadData()
                         self.tableView.reloadData()

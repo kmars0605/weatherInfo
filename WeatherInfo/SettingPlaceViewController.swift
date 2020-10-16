@@ -35,7 +35,6 @@ class SettingPlaceViewController: UIViewController,UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchCompleter.results.count
-        print(searchCompleter.results.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

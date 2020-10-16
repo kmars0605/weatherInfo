@@ -24,7 +24,6 @@ class TabBarController: UITabBarController {
         if homeViewController.userDefaults.object(forKey: "LATEST") == nil {
             let settingPlaceViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingPlace")
             self.present(settingPlaceViewController!, animated: true, completion: nil)
-            print(homeViewController.userDefaults.object(forKey: "LATEST"))
             
         }
     }
