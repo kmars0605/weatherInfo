@@ -34,16 +34,13 @@ class HourlyCollectionViewCell: UICollectionViewCell {
         //湿度の表示
         self.humidLabel.text = "\(hourlyData.humidity)%"
         //画像を表示
-        if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(hourlyData.icon).png"),
+        /*if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(hourlyData.icon).png"),
            let data = try? Data(contentsOf: weatherIcon),
            let image = UIImage(data: data) {
            self.imageView.image = image
-       }
+       }*/
+        self.imageView.image = UIImage(named: "\(hourlyData.icon)")
         
     }
-
-
-
-
 }
 

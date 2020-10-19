@@ -18,6 +18,8 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     var place:CLLocation?
     let userDefaults = UserDefaults.standard
     
+    
+    @IBOutlet weak var laundryIndex: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var adView: UIView!
@@ -45,8 +47,8 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     
     //ロケーションマネージャ
     var locationManager: CLLocationManager!
-    var latitude: String = "0"
-    var longitude: String = "0"
+    var latitude: String?
+    var longitude: String?
     
     
     
@@ -125,11 +127,12 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
                     self.longitude = "\(lon)"
                     
                 }
-                
-                AF.request("https://api.openweathermap.org/data/2.5/onecall?lat=\(self.latitude)&lon=\(self.longitude)&units=metric&lang=ja&APPID=12de4b711b7224a6556ea9e11f9a03ee").responseJSON{
+                if self.latitude != nil && self.longitude != nil {
+                AF.request("https://api.openweathermap.org/data/2.5/onecall?lat=\(self.latitude!)&lon=\(self.longitude!)&units=metric&lang=ja&APPID=12de4b711b7224a6556ea9e11f9a03ee").responseJSON{
                     response in
                     switch response.result{
                     case .success(let value):
+                        print("通信成功")
                         self.onecall = OneCallData(jsonResponse: JSON(value))
                         self.setLabel(onecall: self.onecall!)
                         self.collectionView.reloadData()
@@ -139,8 +142,10 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
                         self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.contentView.frame.size.height)
                         
                     case .failure(let value):
+                        print("通信失敗")
                         debugPrint(value)
                     }
+                }
                 }
             }
             
@@ -168,18 +173,20 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     }
     
     func setLabel(onecall: OneCallData){
-        self.dayLabel.text = "\(self.onecall!.daydt)"
-        self.weatherLabel.text = "\(self.onecall!.main)"
+        self.dayLabel.text = "\(self.onecall!.daily[0].daydt)"
+        self.weatherLabel.text = "\(self.onecall!.daily[0].main)"
+        print(weatherLabel.text)
         self.maxTemp.textColor = UIColor.red
         self.maxTemp.text = "\(self.onecall!.daily[0].maxtempRound)℃"
         self.minTemp.textColor = UIColor.blue
         self.minTemp.text = "\(self.onecall!.daily[0].mintempRound)℃"
-        if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(self.onecall!.icon).png"),
+        /*if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(self.onecall!.icon).png"),
             let data = try? Data(contentsOf: weatherIcon),
             let image = UIImage(data: data) {
             self.imageView.image = image
-        }
-        
+        }*/
+        self.imageView.image = UIImage(named: "\(self.onecall!.daily[0].icon)")
+        print(self.onecall!.daily[0].icon)
         self.tmrdayLabel.text = "\(self.onecall!.daily[1].daydt)"
         self.tmrweatherLabel.text = "\(self.onecall!.daily[1].main)"
         self.tmrmaxTemp.textColor = UIColor.red
@@ -187,12 +194,13 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
         self.tmrminTemp.textColor = UIColor.blue
         self.tmrminTemp.text = "\(self.onecall!.daily[1].mintempRound)℃"
        
-        if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(self.onecall!.daily[1].icon).png"),
+        /*if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(self.onecall!.daily[1].icon).png"),
             let data = try? Data(contentsOf: weatherIcon),
             let image = UIImage(data: data) {
             self.tmrimageView.image = image
-            print(self.onecall!.icon)
-        }
+        }*/
+        self.tmrimageView.image = UIImage(named: "\(self.onecall!.daily[1].icon)")
+        self.laundryIndex.image = UIImage(named: "index\(self.onecall!.daily[1].laundryIndex)")
         
     }
     

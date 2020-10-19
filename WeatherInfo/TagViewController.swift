@@ -11,17 +11,13 @@ import UIKit
 class TagViewController: UIViewController,UICollectionViewDataSource, UICollectionViewDelegate  {
 
     
-    
-    @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet weak var tableView: UITableView!
     let tag = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
+       
         
         // Do any additional setup after loading the view.
     }
@@ -40,7 +36,6 @@ class TagViewController: UIViewController,UICollectionViewDataSource, UICollecti
         label.textColor = UIColor.red
         label.text = tag[indexPath.row]
         //label.backgroundColor = UIColor.red
-        print(label.text!)
         
        
         

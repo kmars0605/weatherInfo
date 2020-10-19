@@ -10,13 +10,31 @@ import UIKit
 
 class SettingViewController: UIViewController {
 
+    
+    @IBOutlet weak var currentLocation: UILabel!
+    let userDefaults = UserDefaults.standard
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Do any additional setup after loading the view.
     }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        if let _ = UserDefaults.standard.object(forKey: "LATEST") as? String{
+            self.currentLocation.text = userDefaults.object(forKey: "LATEST") as! String
+        }
+    }
+    @IBAction func settingPlaceButton(_ sender: Any) {
+        let settingPlaceViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingPlace")
+        self.present(settingPlaceViewController!, animated: true, completion: nil)
+    }
+    
+    @IBAction func iconDescButton(_ sender: Any) {
+    }
+    
+    @IBAction func inquiryButton(_ sender: Any) {
+    }
     /*
     // MARK: - Navigation
 

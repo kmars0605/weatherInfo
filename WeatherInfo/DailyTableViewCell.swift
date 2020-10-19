@@ -21,6 +21,7 @@ class DailyTableViewCell: UITableViewCell {
     //湿度を表示
     @IBOutlet weak var humidity: UILabel!
     
+    @IBOutlet weak var laundryIndex: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -34,17 +35,23 @@ class DailyTableViewCell: UITableViewCell {
     
     //DailyDataをセルに表示
     func setDailyData(_ dailyData: DailyData){
+        self.dayLabel.adjustsFontSizeToFitWidth = true
         self.dayLabel.text = "\(dailyData.daydt)"
+        self.maxtemp.adjustsFontSizeToFitWidth = true
         self.maxtemp.textColor = UIColor.red
         self.maxtemp.text = "\(dailyData.maxtempRound)℃"
+        self.mintemp.adjustsFontSizeToFitWidth = true
         self.mintemp.textColor = UIColor.blue
         self.mintemp.text = "\(dailyData.mintempRound)℃"
+        self.humidity.adjustsFontSizeToFitWidth = true
         self.humidity.text = "\(dailyData.humidity)%"
-        if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(dailyData.icon).png"),
+        /*if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(dailyData.icon).png"),
             let data = try? Data(contentsOf: weatherIcon),
             let image = UIImage(data: data) {
             self.weatherImage.image = image
-        }
+        }*/
+        self.weatherImage.image = UIImage(named: "\(dailyData.icon)")
+        self.laundryIndex.image = UIImage(named: "index\(dailyData.laundryIndex)")
         
     }
     
