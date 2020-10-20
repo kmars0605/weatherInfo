@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		210B056425375A6F00F427A7 /* JIS.symbol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 210B056325375A6F00F427A7 /* JIS.symbol.ttf */; };
 		210B056625375A8C00F427A7 /* ISOsymbol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 210B056525375A8C00F427A7 /* ISOsymbol.ttf */; };
+		2135CA15253DC884004EE6EC /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135CA13253DC884004EE6EC /* TagTableViewCell.swift */; };
+		2135CA16253DC884004EE6EC /* TagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2135CA14253DC884004EE6EC /* TagTableViewCell.xib */; };
+		2135CA18253DD554004EE6EC /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135CA17253DD554004EE6EC /* TagViewController.swift */; };
 		21C6943D252989E600C8BE65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6943C252989E600C8BE65 /* AppDelegate.swift */; };
 		21C6943F252989E600C8BE65 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6943E252989E600C8BE65 /* SceneDelegate.swift */; };
 		21C69444252989ED00C8BE65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21C69442252989ED00C8BE65 /* Main.storyboard */; };
@@ -19,7 +22,6 @@
 		21C69513252CC7D400C8BE65 /* HourlyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C69512252CC7D400C8BE65 /* HourlyData.swift */; };
 		21C69517252D7B6800C8BE65 /* OneCallData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C69516252D7B6800C8BE65 /* OneCallData.swift */; };
 		21C6951D2530424900C8BE65 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6951C2530424900C8BE65 /* HomeViewController.swift */; };
-		21C6951F2530426100C8BE65 /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6951E2530426100C8BE65 /* TagViewController.swift */; };
 		21C695212530427300C8BE65 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C695202530427300C8BE65 /* SettingViewController.swift */; };
 		21C69523253048BF00C8BE65 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C69522253048BF00C8BE65 /* TabBarController.swift */; };
 		21C6952525304B5300C8BE65 /* SettingPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6952425304B5300C8BE65 /* SettingPlaceViewController.swift */; };
@@ -32,6 +34,9 @@
 /* Begin PBXFileReference section */
 		210B056325375A6F00F427A7 /* JIS.symbol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JIS.symbol.ttf; sourceTree = "<group>"; };
 		210B056525375A8C00F427A7 /* ISOsymbol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ISOsymbol.ttf; sourceTree = "<group>"; };
+		2135CA13253DC884004EE6EC /* TagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
+		2135CA14253DC884004EE6EC /* TagTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagTableViewCell.xib; sourceTree = "<group>"; };
+		2135CA17253DD554004EE6EC /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = SOURCE_ROOT; };
 		21C69439252989E600C8BE65 /* WeatherInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21C6943C252989E600C8BE65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21C6943E252989E600C8BE65 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,7 +49,6 @@
 		21C69512252CC7D400C8BE65 /* HourlyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyData.swift; sourceTree = "<group>"; };
 		21C69516252D7B6800C8BE65 /* OneCallData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneCallData.swift; sourceTree = "<group>"; };
 		21C6951C2530424900C8BE65 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		21C6951E2530426100C8BE65 /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		21C695202530427300C8BE65 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		21C69522253048BF00C8BE65 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		21C6952425304B5300C8BE65 /* SettingPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPlaceViewController.swift; sourceTree = "<group>"; };
@@ -89,13 +93,15 @@
 		21C6943B252989E600C8BE65 /* WeatherInfo */ = {
 			isa = PBXGroup;
 			children = (
+				2135CA17253DD554004EE6EC /* TagViewController.swift */,
 				21C6943C252989E600C8BE65 /* AppDelegate.swift */,
 				21C6943E252989E600C8BE65 /* SceneDelegate.swift */,
 				21C69442252989ED00C8BE65 /* Main.storyboard */,
+				2135CA13253DC884004EE6EC /* TagTableViewCell.swift */,
+				2135CA14253DC884004EE6EC /* TagTableViewCell.xib */,
 				21C69522253048BF00C8BE65 /* TabBarController.swift */,
 				21C6952425304B5300C8BE65 /* SettingPlaceViewController.swift */,
 				21C6951C2530424900C8BE65 /* HomeViewController.swift */,
-				21C6951E2530426100C8BE65 /* TagViewController.swift */,
 				21C695202530427300C8BE65 /* SettingViewController.swift */,
 				21C69516252D7B6800C8BE65 /* OneCallData.swift */,
 				21E33DCD253460C800C7524D /* DailyData.swift */,
@@ -194,6 +200,7 @@
 				210B056625375A8C00F427A7 /* ISOsymbol.ttf in Resources */,
 				21E33DD22534645900C7524D /* DailyTableViewCell.xib in Resources */,
 				21C69446252989F200C8BE65 /* Assets.xcassets in Resources */,
+				2135CA16253DC884004EE6EC /* TagTableViewCell.xib in Resources */,
 				21C69444252989ED00C8BE65 /* Main.storyboard in Resources */,
 				210B056425375A6F00F427A7 /* JIS.symbol.ttf in Resources */,
 				21C6950F252CC48E00C8BE65 /* HourlyCollectionViewCell.xib in Resources */,
@@ -253,11 +260,12 @@
 				21C69517252D7B6800C8BE65 /* OneCallData.swift in Sources */,
 				21C6952525304B5300C8BE65 /* SettingPlaceViewController.swift in Sources */,
 				21C6943F252989E600C8BE65 /* SceneDelegate.swift in Sources */,
+				2135CA18253DD554004EE6EC /* TagViewController.swift in Sources */,
+				2135CA15253DC884004EE6EC /* TagTableViewCell.swift in Sources */,
 				21E33DCE253460C800C7524D /* DailyData.swift in Sources */,
 				21C69523253048BF00C8BE65 /* TabBarController.swift in Sources */,
 				21C69513252CC7D400C8BE65 /* HourlyData.swift in Sources */,
 				21C695212530427300C8BE65 /* SettingViewController.swift in Sources */,
-				21C6951F2530426100C8BE65 /* TagViewController.swift in Sources */,
 				21E33DD12534645900C7524D /* DailyTableViewCell.swift in Sources */,
 				21C6951D2530424900C8BE65 /* HomeViewController.swift in Sources */,
 				21C6950E252CC48E00C8BE65 /* HourlyCollectionViewCell.swift in Sources */,

@@ -16,6 +16,7 @@ class DailyData: NSObject {
     let daydt:String
     let jsonweather:JSON
     let main:String
+    let mainjp:String
     let icon:String
     let pop:Double
     let jsontemp:JSON
@@ -82,7 +83,7 @@ class DailyData: NSObject {
         case 25...100:
             self.totalScore = Int(round(humidCapacity*1.4))
             print(totalScore!)
-
+            
         default:
             print("ok")
         }
@@ -152,9 +153,35 @@ class DailyData: NSObject {
             print("ok")
             
         }
-
-
+        
+        switch main {
+        case "Thunderstorm":
+            self.mainjp = "雷雨"
+        case "Drizzle":
+            self.mainjp = "弱い雨"
+        case "Rain":
+            self.mainjp = "雨"
+        case "Snow":
+            self.mainjp = "雪"
+        case "Clear":
+            self.mainjp = "快晴"
+        case "Clouds":
+            self.mainjp = "雷雨"
+        case "Thunderstorm":
+            self.mainjp = "雷雨"
+        case "Thunderstorm":
+            self.mainjp = "雷雨"
+        case "Thunderstorm":
+            self.mainjp = "雷雨"
+        case "Thunderstorm":
+            self.mainjp = "雷雨"
+        default:
+            self.mainjp = "a"
+            print("a")
+        }
+        
+        
         
     }
-
+    
 }

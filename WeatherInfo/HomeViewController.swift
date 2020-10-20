@@ -128,7 +128,7 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
                     
                 }
                 if self.latitude != nil && self.longitude != nil {
-                AF.request("https://api.openweathermap.org/data/2.5/onecall?lat=\(self.latitude!)&lon=\(self.longitude!)&units=metric&lang=ja&APPID=12de4b711b7224a6556ea9e11f9a03ee").responseJSON{
+                AF.request("https://api.openweathermap.org/data/2.5/onecall?lat=\(self.latitude!)&lon=\(self.longitude!)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee").responseJSON{
                     response in
                     switch response.result{
                     case .success(let value):
@@ -175,7 +175,6 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     func setLabel(onecall: OneCallData){
         self.dayLabel.text = "\(self.onecall!.daily[0].daydt)"
         self.weatherLabel.text = "\(self.onecall!.daily[0].main)"
-        print(weatherLabel.text)
         self.maxTemp.textColor = UIColor.red
         self.maxTemp.text = "\(self.onecall!.daily[0].maxtempRound)℃"
         self.minTemp.textColor = UIColor.blue
@@ -221,4 +220,5 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
         return cell
     }
 }
+
 
