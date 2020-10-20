@@ -93,15 +93,15 @@
 		21C6943B252989E600C8BE65 /* WeatherInfo */ = {
 			isa = PBXGroup;
 			children = (
-				2135CA17253DD554004EE6EC /* TagViewController.swift */,
 				21C6943C252989E600C8BE65 /* AppDelegate.swift */,
 				21C6943E252989E600C8BE65 /* SceneDelegate.swift */,
 				21C69442252989ED00C8BE65 /* Main.storyboard */,
-				2135CA13253DC884004EE6EC /* TagTableViewCell.swift */,
-				2135CA14253DC884004EE6EC /* TagTableViewCell.xib */,
 				21C69522253048BF00C8BE65 /* TabBarController.swift */,
 				21C6952425304B5300C8BE65 /* SettingPlaceViewController.swift */,
 				21C6951C2530424900C8BE65 /* HomeViewController.swift */,
+				2135CA17253DD554004EE6EC /* TagViewController.swift */,
+				2135CA13253DC884004EE6EC /* TagTableViewCell.swift */,
+				2135CA14253DC884004EE6EC /* TagTableViewCell.xib */,
 				21C695202530427300C8BE65 /* SettingViewController.swift */,
 				21C69516252D7B6800C8BE65 /* OneCallData.swift */,
 				21E33DCD253460C800C7524D /* DailyData.swift */,
