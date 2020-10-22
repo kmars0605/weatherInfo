@@ -68,5 +68,6 @@ class SettingPlaceViewController: UIViewController,UITableViewDelegate, UITableV
         //let nextViewController = TabBarController()
         //self.present(nextViewController, animated: true, completion: nil) // 画面遷移
         self.dismiss(animated: true, completion: nil)
+        
     }
 }

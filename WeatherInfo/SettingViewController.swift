@@ -1,48 +1,56 @@
 //
-//  SettingViewController.swift
+//  SetViewController.swift
 //  WeatherInfo
 //
-//  Created by 伊藤光次郎 on 2020/10/09.
+//  Created by 伊藤光次郎 on 2020/10/20.
 //  Copyright © 2020 kojiro.ito. All rights reserved.
 //
 
 import UIKit
 
-class SettingViewController: UIViewController {
-
+class SettingViewController: UIViewController,UITableViewDataSource,UITableViewDelegate{
     
-    @IBOutlet weak var currentLocation: UILabel!
-    let userDefaults = UserDefaults.standard
+    let array = ["地点登録","アイコン説明","お問い合わせ"]
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+       
+        
+        
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        if let _ = UserDefaults.standard.object(forKey: "LATEST") as? String{
-            self.currentLocation.text = userDefaults.object(forKey: "LATEST") as! String
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return array.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        // セルに表示する値を設定する
+        cell.textLabel!.text = array[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // アクションを実装
+        print(indexPath.row)
+        
+        if indexPath.row == 0{
+            let settingPlaceViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingPlace")
+            self.present(settingPlaceViewController!, animated: true, completion: nil)
+            let UINavigationController = tabBarController?.viewControllers?[0]
+            tabBarController?.selectedViewController = UINavigationController
+             
         }
-    }
-    @IBAction func settingPlaceButton(_ sender: Any) {
-        let settingPlaceViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingPlace")
-        self.present(settingPlaceViewController!, animated: true, completion: nil)
-    }
-    
-    @IBAction func iconDescButton(_ sender: Any) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        
     }
     
-    @IBAction func inquiryButton(_ sender: Any) {
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

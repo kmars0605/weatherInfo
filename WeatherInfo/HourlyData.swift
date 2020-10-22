@@ -20,6 +20,8 @@ class HourlyData: NSObject {
     let jsonweather:JSON
     let main:String
     let icon:String
+    let windspd:Double
+    let pop:Double
     
     init(jsonResponse: JSON) {
         self.jsondt = jsonResponse["dt"].doubleValue
@@ -31,6 +33,8 @@ class HourlyData: NSObject {
         self.jsonweather = jsonResponse["weather"].array![0]
         self.main = jsonweather["main"].stringValue
         self.icon = jsonweather["icon"].stringValue
+        self.windspd = jsonResponse["wind_speed"].doubleValue
+        self.pop = jsonResponse["pop"].doubleValue * 100
         
         
     }

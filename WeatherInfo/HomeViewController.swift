@@ -17,8 +17,20 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     var onecall:OneCallData?
     var place:CLLocation?
     let userDefaults = UserDefaults.standard
+    let dt = Date()
+    
+    //let dateFormatter = DateFormatter()
+    var hourdt:String?
+    var int = 0
     
     
+    
+    
+    
+    
+    @IBOutlet weak var wingspdLabel: UILabel!
+    @IBOutlet weak var popLabel: UILabel!
+    @IBOutlet weak var humidLabel: UILabel!
     @IBOutlet weak var laundryIndex: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -55,6 +67,10 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        /*dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "H", options: 0, locale: Locale(identifier: "ja_JP"))
+        print("現在の時間：\(dateFormatter.string(from: dt))")
+        hourdt = dateFormatter.string(from:dt)*/
+       
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -71,6 +87,8 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
         setupLocationManager()
     }
     override func viewWillAppear(_ animated: Bool) {
+        int += 1
+        print("呼び出し：\(int)")
         location()
     }
     //ロケーションマネージャのセットアップ
@@ -114,10 +132,11 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     
     
     func location(){
+        let unixtime: Int = Int(dt.timeIntervalSince1970)
         if let _ = UserDefaults.standard.object(forKey: "LATEST") as? String {
             self.address = userDefaults.object(forKey: "LATEST") as! String
             self.cityLabel.text = address
-            
+            //print("現在の時刻：\(unixtime)")
             CLGeocoder().geocodeAddressString(self.address) { placemarks, error in
                 if let lat = placemarks?.first?.location?.coordinate.latitude {
                     self.latitude = "\(lat)"
@@ -127,25 +146,93 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
                     self.longitude = "\(lon)"
                     
                 }
+                
                 if self.latitude != nil && self.longitude != nil {
-                AF.request("https://api.openweathermap.org/data/2.5/onecall?lat=\(self.latitude!)&lon=\(self.longitude!)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee").responseJSON{
-                    response in
-                    switch response.result{
-                    case .success(let value):
-                        print("通信成功")
-                        self.onecall = OneCallData(jsonResponse: JSON(value))
-                        self.setLabel(onecall: self.onecall!)
-                        self.collectionView.reloadData()
-                        self.tableView.reloadData()
+                    
+                    //if userDefaults.object(forKey:"time") != nil{
                         
-                        self.contentView.frame.size.height += self.tableView.frame.size.height + self.adView.frame.size.height + 8
-                        self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.contentView.frame.size.height)
+                    //}
+                    if self.userDefaults.object(forKey:"DATA") == nil{
+                        AF.request("https://api.openweathermap.org/data/2.5/onecall?lat=\(self.latitude!)&lon=\(self.longitude!)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee").responseJSON{
+                            response in
+                            switch response.result{
+                            case .success(let value):
+                                print("初回通信成功")
+                                
+                                self.onecall = OneCallData(jsonResponse: JSON(value))
+                                //self.userDefaults.set(OneCallData(jsonResponse: JSON(value)),forKey:"DATA")
+                                self.setLabel(onecall: self.onecall!)
+                                self.collectionView.reloadData()
+                                self.tableView.reloadData()
+                                
+                                self.contentView.frame.size.height += self.tableView.frame.size.height + self.adView.frame.size.height + 8
+                                self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.contentView.frame.size.height)
+                                self.userDefaults.set(self.onecall,forKey:"DATA")
+                                
+                                
+                            case .failure(let value):
+                                print("通信失敗")
+                                debugPrint(value)
+                            }
+                        }
+                    } else {
+                        self.onecall = self.userDefaults.object(forKey:"DATA") as? OneCallData
+                        if Int(self.onecall!.hourly[0].jsondt) <= unixtime && unixtime < Int(self.onecall!.hourly[1].jsondt){
+                            print("同データ表示")
+                           self.setLabel(onecall: self.onecall!)
+                           self.collectionView.reloadData()
+                           self.tableView.reloadData()
+                           
+                           self.contentView.frame.size.height += self.tableView.frame.size.height + self.adView.frame.size.height + 8
+                           self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.contentView.frame.size.height)
+                        } else {
+                            AF.request("https://api.openweathermap.org/data/2.5/onecall?lat=\(self.latitude!)&lon=\(self.longitude!)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee").responseJSON{
+                                response in
+                                switch response.result{
+                                case .success(let value):
+                                    print("再通信成功")
+                                    
+                                    self.onecall = OneCallData(jsonResponse: JSON(value))
+                                    //self.userDefaults.set(OneCallData(jsonResponse: JSON(value)),forKey:"DATA")
+                                    self.setLabel(onecall: self.onecall!)
+                                    self.collectionView.reloadData()
+                                    self.tableView.reloadData()
+                                    
+                                    self.contentView.frame.size.height += self.tableView.frame.size.height + self.adView.frame.size.height + 8
+                                    self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.contentView.frame.size.height)
+                                    self.userDefaults.set(OneCallData(jsonResponse:JSON(value)),forKey:"DATA")
+                                    
+                                    
+                                case .failure(let value):
+                                    print("通信失敗")
+                                    debugPrint(value)
+                                }
+                            }
+                        }
                         
-                    case .failure(let value):
-                        print("通信失敗")
-                        debugPrint(value)
                     }
-                }
+                    /*AF.request("https://api.openweathermap.org/data/2.5/onecall?lat=\(self.latitude!)&lon=\(self.longitude!)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee").responseJSON{
+                        response in
+                        switch response.result{
+                        case .success(let value):
+                            print("通信成功")
+                            
+                            self.onecall = OneCallData(jsonResponse: JSON(value))
+                            //self.userDefaults.set(OneCallData(jsonResponse: JSON(value)),forKey:"DATA")
+                            self.setLabel(onecall: self.onecall!)
+                            self.collectionView.reloadData()
+                            self.tableView.reloadData()
+                            
+                            self.contentView.frame.size.height += self.tableView.frame.size.height + self.adView.frame.size.height + 8
+                            self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.contentView.frame.size.height)
+                            
+                            
+                            
+                        case .failure(let value):
+                            print("通信失敗")
+                            debugPrint(value)
+                        }
+                    }*/
                 }
             }
             
@@ -179,27 +266,19 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
         self.maxTemp.text = "\(self.onecall!.daily[0].maxtempRound)℃"
         self.minTemp.textColor = UIColor.blue
         self.minTemp.text = "\(self.onecall!.daily[0].mintempRound)℃"
-        /*if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(self.onecall!.icon).png"),
-            let data = try? Data(contentsOf: weatherIcon),
-            let image = UIImage(data: data) {
-            self.imageView.image = image
-        }*/
         self.imageView.image = UIImage(named: "\(self.onecall!.daily[0].icon)")
-        print(self.onecall!.daily[0].icon)
         self.tmrdayLabel.text = "\(self.onecall!.daily[1].daydt)"
         self.tmrweatherLabel.text = "\(self.onecall!.daily[1].main)"
         self.tmrmaxTemp.textColor = UIColor.red
         self.tmrmaxTemp.text = "\(self.onecall!.daily[1].maxtempRound)℃"
         self.tmrminTemp.textColor = UIColor.blue
         self.tmrminTemp.text = "\(self.onecall!.daily[1].mintempRound)℃"
-       
-        /*if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(self.onecall!.daily[1].icon).png"),
-            let data = try? Data(contentsOf: weatherIcon),
-            let image = UIImage(data: data) {
-            self.tmrimageView.image = image
-        }*/
         self.tmrimageView.image = UIImage(named: "\(self.onecall!.daily[1].icon)")
         self.laundryIndex.image = UIImage(named: "index\(self.onecall!.daily[1].laundryIndex)")
+        self.humidLabel.text = "\(self.onecall!.hourly[0].humidity)%"
+        self.popLabel.text = "\(self.onecall!.hourly[0].pop)%"
+        self.wingspdLabel.text = "\(round(self.onecall!.hourly[0].windspd))m"
+        
         
     }
     

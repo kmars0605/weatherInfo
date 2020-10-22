@@ -12,6 +12,7 @@
 		2135CA15253DC884004EE6EC /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135CA13253DC884004EE6EC /* TagTableViewCell.swift */; };
 		2135CA16253DC884004EE6EC /* TagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2135CA14253DC884004EE6EC /* TagTableViewCell.xib */; };
 		2135CA18253DD554004EE6EC /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135CA17253DD554004EE6EC /* TagViewController.swift */; };
+		2135CA1E253EEA34004EE6EC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135CA1D253EEA33004EE6EC /* SettingViewController.swift */; };
 		21C6943D252989E600C8BE65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6943C252989E600C8BE65 /* AppDelegate.swift */; };
 		21C6943F252989E600C8BE65 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6943E252989E600C8BE65 /* SceneDelegate.swift */; };
 		21C69444252989ED00C8BE65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21C69442252989ED00C8BE65 /* Main.storyboard */; };
@@ -22,7 +23,6 @@
 		21C69513252CC7D400C8BE65 /* HourlyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C69512252CC7D400C8BE65 /* HourlyData.swift */; };
 		21C69517252D7B6800C8BE65 /* OneCallData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C69516252D7B6800C8BE65 /* OneCallData.swift */; };
 		21C6951D2530424900C8BE65 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6951C2530424900C8BE65 /* HomeViewController.swift */; };
-		21C695212530427300C8BE65 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C695202530427300C8BE65 /* SettingViewController.swift */; };
 		21C69523253048BF00C8BE65 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C69522253048BF00C8BE65 /* TabBarController.swift */; };
 		21C6952525304B5300C8BE65 /* SettingPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6952425304B5300C8BE65 /* SettingPlaceViewController.swift */; };
 		21E33DCE253460C800C7524D /* DailyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E33DCD253460C800C7524D /* DailyData.swift */; };
@@ -37,6 +37,7 @@
 		2135CA13253DC884004EE6EC /* TagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		2135CA14253DC884004EE6EC /* TagTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagTableViewCell.xib; sourceTree = "<group>"; };
 		2135CA17253DD554004EE6EC /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = SOURCE_ROOT; };
+		2135CA1D253EEA33004EE6EC /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		21C69439252989E600C8BE65 /* WeatherInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21C6943C252989E600C8BE65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21C6943E252989E600C8BE65 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,7 +50,6 @@
 		21C69512252CC7D400C8BE65 /* HourlyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyData.swift; sourceTree = "<group>"; };
 		21C69516252D7B6800C8BE65 /* OneCallData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneCallData.swift; sourceTree = "<group>"; };
 		21C6951C2530424900C8BE65 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		21C695202530427300C8BE65 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		21C69522253048BF00C8BE65 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		21C6952425304B5300C8BE65 /* SettingPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPlaceViewController.swift; sourceTree = "<group>"; };
 		21E33DCD253460C800C7524D /* DailyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyData.swift; sourceTree = "<group>"; };
@@ -96,13 +96,13 @@
 				21C6943C252989E600C8BE65 /* AppDelegate.swift */,
 				21C6943E252989E600C8BE65 /* SceneDelegate.swift */,
 				21C69442252989ED00C8BE65 /* Main.storyboard */,
+				2135CA1D253EEA33004EE6EC /* SettingViewController.swift */,
 				21C69522253048BF00C8BE65 /* TabBarController.swift */,
 				21C6952425304B5300C8BE65 /* SettingPlaceViewController.swift */,
 				21C6951C2530424900C8BE65 /* HomeViewController.swift */,
 				2135CA17253DD554004EE6EC /* TagViewController.swift */,
 				2135CA13253DC884004EE6EC /* TagTableViewCell.swift */,
 				2135CA14253DC884004EE6EC /* TagTableViewCell.xib */,
-				21C695202530427300C8BE65 /* SettingViewController.swift */,
 				21C69516252D7B6800C8BE65 /* OneCallData.swift */,
 				21E33DCD253460C800C7524D /* DailyData.swift */,
 				21E33DCF2534645900C7524D /* DailyTableViewCell.swift */,
@@ -265,8 +265,8 @@
 				21E33DCE253460C800C7524D /* DailyData.swift in Sources */,
 				21C69523253048BF00C8BE65 /* TabBarController.swift in Sources */,
 				21C69513252CC7D400C8BE65 /* HourlyData.swift in Sources */,
-				21C695212530427300C8BE65 /* SettingViewController.swift in Sources */,
 				21E33DD12534645900C7524D /* DailyTableViewCell.swift in Sources */,
+				2135CA1E253EEA34004EE6EC /* SettingViewController.swift in Sources */,
 				21C6951D2530424900C8BE65 /* HomeViewController.swift in Sources */,
 				21C6950E252CC48E00C8BE65 /* HourlyCollectionViewCell.swift in Sources */,
 			);
