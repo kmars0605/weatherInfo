@@ -39,8 +39,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Fh-aI-6cB">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mappin" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Oyd-a8-snC">
-                                        <rect key="frame" x="120" y="40.5" width="42" height="30"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin" translatesAutoresizingMaskIntoConstraints="NO" id="Oyd-a8-snC">
+                                        <rect key="frame" x="120" y="41" width="42" height="30"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="42" id="Lvf-ER-Exk"/>
@@ -114,7 +114,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00日(月)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMF-zE-o5x">
-                                                        <rect key="frame" x="286" y="8" width="61" height="18"/>
+                                                        <rect key="frame" x="323" y="8" width="61" height="18"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="textColor"/>
@@ -128,14 +128,14 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="明日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VaV-21-dMz">
-                                                        <rect key="frame" x="243" y="8" width="31" height="18"/>
+                                                        <rect key="frame" x="270" y="8" width="31" height="18"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D4n-2A-b6P">
-                                                        <rect key="frame" x="243" y="37" width="70" height="70"/>
+                                                        <rect key="frame" x="289" y="37" width="70" height="70"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="天気" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHq-aG-7fo">
@@ -153,28 +153,28 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="天気" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3om-Bc-h6S">
-                                                        <rect key="frame" x="235" y="114" width="108" height="21"/>
+                                                        <rect key="frame" x="276" y="114" width="108" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="25℃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJ6-t1-aQJ">
-                                                        <rect key="frame" x="234" y="143" width="42" height="21"/>
+                                                        <rect key="frame" x="275" y="143" width="42" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="15℃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BS0-ps-CGh">
-                                                        <rect key="frame" x="304" y="143" width="42" height="21"/>
+                                                        <rect key="frame" x="345" y="143" width="42" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FFl-NY-bJN">
-                                                        <rect key="frame" x="208" y="0.0" width="4" height="177"/>
+                                                        <rect key="frame" x="250" y="0.0" width="4" height="177"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </view>
@@ -192,7 +192,7 @@
                                                 <rect key="frame" x="0.0" y="185" width="43" height="128"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="時刻" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9B-25-8ib">
-                                                        <rect key="frame" x="8" y="8" width="27" height="16"/>
+                                                        <rect key="frame" x="8" y="5" width="27" height="16"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <nil key="textColor"/>
@@ -353,7 +353,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8Xx-o4-qBL"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="ホーム" image="house.fill" catalog="system" id="rVD-an-BMl"/>
+                    <tabBarItem key="tabBarItem" title="ホーム" image="home" id="rVD-an-BMl"/>
                     <size key="freeformSize" width="414" height="1300"/>
                     <connections>
                         <outlet property="adView" destination="Ulp-GI-hy2" id="Yv4-og-2AB"/>
@@ -413,7 +413,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="sNM-wz-7cA"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="洗濯タグ" image="person.fill" catalog="system" id="jJ2-1x-onn"/>
+                    <tabBarItem key="tabBarItem" title="洗濯タグ" image="tag" id="jJ2-1x-onn"/>
                     <connections>
                         <outlet property="tableView" destination="rP2-C0-xUf" id="IIc-pL-WOO"/>
                     </connections>
@@ -539,7 +539,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="GxR-fi-vqb"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="設定" image="gear" catalog="system" id="oTh-9K-eMd"/>
+                    <tabBarItem key="tabBarItem" title="設定" image="setting" id="oTh-9K-eMd"/>
                     <connections>
                         <outlet property="tableView" destination="IgG-Ik-qKk" id="U4c-UY-2Jn"/>
                     </connections>
@@ -550,9 +550,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="gear" catalog="system" width="128" height="119"/>
-        <image name="house.fill" catalog="system" width="128" height="106"/>
-        <image name="mappin" catalog="system" width="105" height="128"/>
-        <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="home" width="30" height="30"/>
+        <image name="pin" width="170" height="170"/>
+        <image name="setting" width="30" height="30"/>
+        <image name="tag" width="30" height="30"/>
     </resources>
 </document>

@@ -45,7 +45,7 @@ class OneCallData: NSObject {
         self.lon = jsonResponse["lon"].floatValue
         
         self.jsoncurrent = jsonResponse["current"]
-        self.jsondt = jsoncurrent["dt"].doubleValue
+        self.jsondt = jsonResponse["current"]["dt"].doubleValue
         outputFormatterHH.dateFormat = "HH時"
         self.hourdt = (outputFormatterHH.string(from: Date(timeIntervalSince1970: jsondt)))
         outputFormatterDD.locale = Locale(identifier: "ja_JP")

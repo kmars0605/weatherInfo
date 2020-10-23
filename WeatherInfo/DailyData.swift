@@ -54,35 +54,34 @@ class DailyData: NSObject {
         self.e = 6.1078*pow(10, 7.5*maxtemp/(maxtemp+237.3))
         self.vaporAmount = 217*e/(10+273.15)
         //飽和水蒸気量
-        print("飽和水蒸気量：\(vaporAmount)")
+      
         self.humidCapacity = round(vaporAmount*(1-humidPer))
-        print("含有力:\(humidCapacity)")
-        
+       
         switch Int(maxtemp){
         case -100...18 :
             self.totalScore = Int(round(humidCapacity*1))
-            print(totalScore!)
+            
         case 19:
             self.totalScore = Int(round(humidCapacity*1.05))
-            print(totalScore!)
+            
         case 20:
             self.totalScore = Int(round(humidCapacity*1.11))
-            print(totalScore!)
+            
         case 21:
             self.totalScore = Int(round(humidCapacity*1.17))
-            print(totalScore!)
+            
         case 22:
             self.totalScore = Int(round(humidCapacity*1.22))
-            print(totalScore!)
+            
         case 23:
             self.totalScore = Int(round(humidCapacity*1.28))
-            print(totalScore!)
+           
         case 24:
             self.totalScore = Int(round(humidCapacity*1.33))
-            print(totalScore!)
+           
         case 25...100:
             self.totalScore = Int(round(humidCapacity*1.4))
-            print(totalScore!)
+           
             
         default:
             print("ok")
@@ -92,13 +91,12 @@ class DailyData: NSObject {
         switch totalScore! {
         case -500...5:
             self.laundryIndex = 1
-            print("洗濯指数：1")
+         
             if self.pop >= 0.7{
                 self.laundryIndex = 1
             }
         case 6...9:
             self.laundryIndex = 2
-            print("洗濯指数：2")
             switch pop {
             case 0.7...1:
                 self.laundryIndex = 1
@@ -111,7 +109,7 @@ class DailyData: NSObject {
             }
         case 10...13:
             self.laundryIndex = 3
-            print("洗濯指数：3")
+            
             switch pop {
             case 0.7...1:
                 self.laundryIndex = 1
@@ -124,7 +122,7 @@ class DailyData: NSObject {
             }
         case 14...16:
             self.laundryIndex = 4
-            print("洗濯指数：4")
+            
             switch pop {
             case 0.7...1:
                 self.laundryIndex = 1
@@ -137,7 +135,7 @@ class DailyData: NSObject {
             }
         case 17...500:
             self.laundryIndex = 5
-            print("洗濯指数：5")
+           
             switch pop {
             case 0.7...1:
                 self.laundryIndex = 1

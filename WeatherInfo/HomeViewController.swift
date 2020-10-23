@@ -18,15 +18,12 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     var place:CLLocation?
     let userDefaults = UserDefaults.standard
     let dt = Date()
-    
-    //let dateFormatter = DateFormatter()
     var hourdt:String?
     var int = 0
-    
-    
-    
-    
-    
+    var bool = true
+    var time = 0
+    var unixtime = 0
+    var pastunix = 0
     
     @IBOutlet weak var wingspdLabel: UILabel!
     @IBOutlet weak var popLabel: UILabel!
@@ -67,9 +64,7 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "H", options: 0, locale: Locale(identifier: "ja_JP"))
-        print("現在の時間：\(dateFormatter.string(from: dt))")
-        hourdt = dateFormatter.string(from:dt)*/
+       
        
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -89,6 +84,14 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     override func viewWillAppear(_ animated: Bool) {
         int += 1
         print("呼び出し：\(int)")
+        self.userDefaults.set(self.unixtime, forKey: "TIME")
+        self.unixtime = Int(dt.timeIntervalSince1970)
+        print(self.bool)
+        //if self.userDefaults.object(forKey: "TIME") != nil {
+        //self.userDefaults.set(self.userDefaults, forKey: "TIME")
+            //self.pastunix = self.userDefaults.object(forKey: "TIME") as! Int
+            
+        //}
         location()
     }
     //ロケーションマネージャのセットアップ
@@ -132,7 +135,7 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     
     
     func location(){
-        let unixtime: Int = Int(dt.timeIntervalSince1970)
+        
         if let _ = UserDefaults.standard.object(forKey: "LATEST") as? String {
             self.address = userDefaults.object(forKey: "LATEST") as! String
             self.cityLabel.text = address
@@ -149,10 +152,8 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
                 
                 if self.latitude != nil && self.longitude != nil {
                     
-                    //if userDefaults.object(forKey:"time") != nil{
-                        
-                    //}
-                    if self.userDefaults.object(forKey:"DATA") == nil{
+                   
+                    if self.bool == true{
                         AF.request("https://api.openweathermap.org/data/2.5/onecall?lat=\(self.latitude!)&lon=\(self.longitude!)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee").responseJSON{
                             response in
                             switch response.result{
@@ -167,7 +168,11 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
                                 
                                 self.contentView.frame.size.height += self.tableView.frame.size.height + self.adView.frame.size.height + 8
                                 self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.contentView.frame.size.height)
-                                self.userDefaults.set(self.onecall,forKey:"DATA")
+                                self.userDefaults.set(Int(self.onecall!.jsondt),forKey:"TIME")
+                                self.time = self.userDefaults.object(forKey: "TIME") as! Int
+                                print("時間：\(self.time)")
+                                
+                                self.bool = false
                                 
                                 
                             case .failure(let value):
@@ -175,64 +180,7 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
                                 debugPrint(value)
                             }
                         }
-                    } else {
-                        self.onecall = self.userDefaults.object(forKey:"DATA") as? OneCallData
-                        if Int(self.onecall!.hourly[0].jsondt) <= unixtime && unixtime < Int(self.onecall!.hourly[1].jsondt){
-                            print("同データ表示")
-                           self.setLabel(onecall: self.onecall!)
-                           self.collectionView.reloadData()
-                           self.tableView.reloadData()
-                           
-                           self.contentView.frame.size.height += self.tableView.frame.size.height + self.adView.frame.size.height + 8
-                           self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.contentView.frame.size.height)
-                        } else {
-                            AF.request("https://api.openweathermap.org/data/2.5/onecall?lat=\(self.latitude!)&lon=\(self.longitude!)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee").responseJSON{
-                                response in
-                                switch response.result{
-                                case .success(let value):
-                                    print("再通信成功")
-                                    
-                                    self.onecall = OneCallData(jsonResponse: JSON(value))
-                                    //self.userDefaults.set(OneCallData(jsonResponse: JSON(value)),forKey:"DATA")
-                                    self.setLabel(onecall: self.onecall!)
-                                    self.collectionView.reloadData()
-                                    self.tableView.reloadData()
-                                    
-                                    self.contentView.frame.size.height += self.tableView.frame.size.height + self.adView.frame.size.height + 8
-                                    self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.contentView.frame.size.height)
-                                    self.userDefaults.set(OneCallData(jsonResponse:JSON(value)),forKey:"DATA")
-                                    
-                                    
-                                case .failure(let value):
-                                    print("通信失敗")
-                                    debugPrint(value)
-                                }
-                            }
-                        }
-                        
                     }
-                    /*AF.request("https://api.openweathermap.org/data/2.5/onecall?lat=\(self.latitude!)&lon=\(self.longitude!)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee").responseJSON{
-                        response in
-                        switch response.result{
-                        case .success(let value):
-                            print("通信成功")
-                            
-                            self.onecall = OneCallData(jsonResponse: JSON(value))
-                            //self.userDefaults.set(OneCallData(jsonResponse: JSON(value)),forKey:"DATA")
-                            self.setLabel(onecall: self.onecall!)
-                            self.collectionView.reloadData()
-                            self.tableView.reloadData()
-                            
-                            self.contentView.frame.size.height += self.tableView.frame.size.height + self.adView.frame.size.height + 8
-                            self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.contentView.frame.size.height)
-                            
-                            
-                            
-                        case .failure(let value):
-                            print("通信失敗")
-                            debugPrint(value)
-                        }
-                    }*/
                 }
             }
             
