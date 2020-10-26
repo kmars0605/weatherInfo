@@ -17,7 +17,7 @@ class HourlyData: NSObject {
     let temp: Double
     let tempRound: Int
     let humidity: Int
-    let jsonweather:JSON
+    //let jsonweather:JSON
     let main:String
     let icon:String
     let windspd:Double
@@ -30,9 +30,9 @@ class HourlyData: NSObject {
         self.temp = jsonResponse["temp"].doubleValue
         self.tempRound = Int(round(temp))
         self.humidity = jsonResponse["humidity"].intValue
-        self.jsonweather = jsonResponse["weather"].array![0]
-        self.main = jsonweather["main"].stringValue
-        self.icon = jsonweather["icon"].stringValue
+        //self.jsonweather = jsonResponse["weather"].array![0]
+        self.main = jsonResponse["weather"].array![0]["main"].stringValue
+        self.icon = jsonResponse["weather"].array![0]["icon"].stringValue
         self.windspd = jsonResponse["wind_speed"].doubleValue
         self.pop = jsonResponse["pop"].doubleValue * 100
         

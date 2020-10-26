@@ -38,10 +38,8 @@ class DailyTableViewCell: UITableViewCell {
         self.dayLabel.adjustsFontSizeToFitWidth = true
         self.dayLabel.text = "\(dailyData.daydt)"
         self.maxtemp.adjustsFontSizeToFitWidth = true
-        self.maxtemp.textColor = UIColor.red
         self.maxtemp.text = "\(dailyData.maxtempRound)℃"
         self.mintemp.adjustsFontSizeToFitWidth = true
-        self.mintemp.textColor = UIColor.blue
         self.mintemp.text = "\(dailyData.mintempRound)℃"
         self.humidity.adjustsFontSizeToFitWidth = true
         self.humidity.text = "\(dailyData.humidity)%"

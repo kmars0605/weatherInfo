@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class OneCallData: NSObject {
-    
+    let jsonresponse:JSON
     let lat: Float
     let lon: Float
     let jsoncurrent: JSON
@@ -29,7 +29,7 @@ class OneCallData: NSObject {
     let clouds: Int
     let windSpeed: Double
     let windDeg: Int
-    let jsonweather: JSON
+    //let jsonweather: JSON
     let main: String
     let dscrption: String
     let icon:String
@@ -41,6 +41,7 @@ class OneCallData: NSObject {
     let daily: [DailyData]
   
     init(jsonResponse:JSON) {
+        self.jsonresponse = jsonResponse
         self.lat = jsonResponse["lat"].floatValue
         self.lon = jsonResponse["lon"].floatValue
         
@@ -51,21 +52,21 @@ class OneCallData: NSObject {
         outputFormatterDD.locale = Locale(identifier: "ja_JP")
         outputFormatterDD.dateFormat = "d日(EEE)"
         self.daydt = (outputFormatterDD.string(from: Date(timeIntervalSince1970: jsondt)))
-        self.sunrise = jsoncurrent["sunrise"].doubleValue
-        self.sunset = jsoncurrent["sunset"].doubleValue
-        self.temp = jsoncurrent["temp"].doubleValue
+        self.sunrise = jsonResponse["current"]["sunrise"].doubleValue
+        self.sunset = jsonResponse["current"]["sunset"].doubleValue
+        self.temp = jsonResponse["current"]["temp"].doubleValue
         self.tempRound = Int(round(temp))
-        self.feellike = jsoncurrent["feel_like"].doubleValue
-        self.pressure = jsoncurrent["pressure"].intValue
-        self.humidity = jsoncurrent["humidity"].intValue
-        self.uv = jsoncurrent["uvi"].doubleValue
-        self.clouds = jsoncurrent["clouds"].intValue
-        self.windSpeed = jsoncurrent["wind_speed"].doubleValue
-        self.windDeg = jsoncurrent["wind_deg"].intValue
-        self.jsonweather = jsoncurrent["weather"].array![0]
-        self.main = jsonweather["main"].stringValue
-        self.dscrption = jsonweather["description"].stringValue
-        self.icon = jsonweather["icon"].stringValue
+        self.feellike = jsonResponse["current"]["feel_like"].doubleValue
+        self.pressure = jsonResponse["current"]["pressure"].intValue
+        self.humidity = jsonResponse["current"]["humidity"].intValue
+        self.uv = jsonResponse["current"]["uvi"].doubleValue
+        self.clouds = jsonResponse["current"]["clouds"].intValue
+        self.windSpeed = jsonResponse["current"]["wind_speed"].doubleValue
+        self.windDeg = jsonResponse["current"]["wind_deg"].intValue
+        //self.jsonweather = jsonResponse["current"]["weather"].array![0]
+        self.main = jsonResponse["current"]["weather"].array![0]["main"].stringValue
+        self.dscrption = jsonResponse["current"]["weather"].array![0]["description"].stringValue
+        self.icon = jsonResponse["current"]["weather"].array![0]["icon"].stringValue
         
         
        

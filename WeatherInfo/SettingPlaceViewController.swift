@@ -60,7 +60,7 @@ class SettingPlaceViewController: UIViewController,UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.address = "\(searchCompleter.results[indexPath.row].title)"
        
-        homeViewController.userDefaults.set(self.address, forKey:"LATEST")
+        homeViewController.userDefaults.set(self.address, forKey:"latest")
         homeViewController.userDefaults.synchronize()
         // セルの選択を解除
         tableView.deselectRow(at: indexPath, animated: true)

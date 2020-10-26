@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SafariServices
+
 
 class SettingViewController: UIViewController,UITableViewDataSource,UITableViewDelegate{
     
@@ -47,6 +49,16 @@ class SettingViewController: UIViewController,UITableViewDataSource,UITableViewD
             let UINavigationController = tabBarController?.viewControllers?[0]
             tabBarController?.selectedViewController = UINavigationController
              
+        } else if indexPath.row == 2{
+            /*let inquiryViewController = self.storyboard?.instantiateViewController(withIdentifier: "Inquiry")
+            self.present(inquiryViewController!, animated: true, completion: nil)
+            let UINavigationController = tabBarController?.viewControllers?[0]
+            tabBarController?.selectedViewController = UINavigationController*/
+            let url = URL(string:"https://forms.gle/U6PhvHVNUxH6zgJD9")
+            if let url = url{
+                let vc = SFSafariViewController(url: url)
+                present(vc, animated: true, completion: nil)
+            }
         }
         tableView.deselectRow(at: indexPath, animated: true)
         

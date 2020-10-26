@@ -17,13 +17,9 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     var onecall:OneCallData?
     var place:CLLocation?
     let userDefaults = UserDefaults.standard
-    let dt = Date()
-    var hourdt:String?
-    var int = 0
-    var bool = true
-    var time = 0
+    var callNumber = 0
+    var upper = 0
     var unixtime = 0
-    var pastunix = 0
     
     @IBOutlet weak var wingspdLabel: UILabel!
     @IBOutlet weak var popLabel: UILabel!
@@ -32,13 +28,11 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var adView: UIView!
-    
-    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var tmrimageView: UIImageView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var laundryIndxdesc: UILabel!
     //日付を表示するラベル
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var tmrdayLabel: UILabel!
@@ -59,13 +53,11 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     var latitude: String?
     var longitude: String?
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
-       
+        
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -82,16 +74,8 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
         setupLocationManager()
     }
     override func viewWillAppear(_ animated: Bool) {
-        int += 1
-        print("呼び出し：\(int)")
-        self.userDefaults.set(self.unixtime, forKey: "TIME")
-        self.unixtime = Int(dt.timeIntervalSince1970)
-        print(self.bool)
-        //if self.userDefaults.object(forKey: "TIME") != nil {
-        //self.userDefaults.set(self.userDefaults, forKey: "TIME")
-            //self.pastunix = self.userDefaults.object(forKey: "TIME") as! Int
-            
-        //}
+        callNumber += 1
+        print("呼び出し：\(callNumber)")
         location()
     }
     //ロケーションマネージャのセットアップ
@@ -133,13 +117,10 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
         present(alert, animated: true, completion: nil)
     }
     
-    
     func location(){
-        
-        if let _ = UserDefaults.standard.object(forKey: "LATEST") as? String {
-            self.address = userDefaults.object(forKey: "LATEST") as! String
+        if let _ = UserDefaults.standard.object(forKey: "latest") as? String {
+            self.address = userDefaults.object(forKey: "latest") as! String
             self.cityLabel.text = address
-            //print("現在の時刻：\(unixtime)")
             CLGeocoder().geocodeAddressString(self.address) { placemarks, error in
                 if let lat = placemarks?.first?.location?.coordinate.latitude {
                     self.latitude = "\(lat)"
@@ -151,39 +132,80 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
                 }
                 
                 if self.latitude != nil && self.longitude != nil {
-                    
-                   
-                    if self.bool == true{
+                    let visit = UserDefaults.standard.bool(forKey: "visit")
+                    if visit {
+                        //二回目以降のアクセスかつデータ更新前アクセス
+                        print("二回目以降データ更新前アクセス")
+                        self.upper = self.userDefaults.object(forKey: "upper") as! Int
+                        self.unixtime = Int(Date().timeIntervalSince1970)
+                        print(self.upper)
+                        print(self.unixtime)
+
+                        if self.unixtime < self.upper{
+                            self.onecall = OneCallData(jsonResponse: self.getJSON("data")!)
+                            self.setLabel(onecall: self.onecall!)
+                            self.collectionView.reloadData()
+                            self.tableView.reloadData()
+                            
+                            self.contentView.frame.size.height += self.tableView.frame.size.height + self.adView.frame.size.height + 8
+                            self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.contentView.frame.size.height)
+                            //データ更新後アクセス
+                        } else {
+                            print("データ更新後アクセス")
+                            AF.request("https://api.openweathermap.org/data/2.5/onecall?lat=\(self.latitude!)&lon=\(self.longitude!)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee").responseJSON{
+                                response in
+                                switch response.result{
+                                case .success(let value):
+                                    print("データ更新成功")
+                                    self.onecall = OneCallData(jsonResponse: JSON(value))
+                                    self.setLabel(onecall: self.onecall!)
+                                    self.collectionView.reloadData()
+                                    self.tableView.reloadData()
+                                    
+                                    self.contentView.frame.size.height += self.tableView.frame.size.height + self.adView.frame.size.height + 8
+                                    self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.contentView.frame.size.height)
+                                    //JSON型のデータを保存
+                                    self.saveJSON(json: JSON(value), key: "data")
+                                    //通信した時間の1時間後をunixで保存
+                                    self.userDefaults.set(self.onecall!.hourly[1].jsondt, forKey: "upper")
+                                    
+                                case .failure(let value):
+                                    print("通信失敗")
+                                    debugPrint(value)
+                                }
+                            }
+                            UserDefaults.standard.set(true, forKey: "visit")
+                        }
+                        
+                        
+                    } else {
+                        //初回アクセス
                         AF.request("https://api.openweathermap.org/data/2.5/onecall?lat=\(self.latitude!)&lon=\(self.longitude!)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee").responseJSON{
                             response in
                             switch response.result{
                             case .success(let value):
                                 print("初回通信成功")
-                                
                                 self.onecall = OneCallData(jsonResponse: JSON(value))
-                                //self.userDefaults.set(OneCallData(jsonResponse: JSON(value)),forKey:"DATA")
                                 self.setLabel(onecall: self.onecall!)
                                 self.collectionView.reloadData()
                                 self.tableView.reloadData()
                                 
                                 self.contentView.frame.size.height += self.tableView.frame.size.height + self.adView.frame.size.height + 8
                                 self.scrollView.contentSize = CGSize(width: self.scrollView.frame.width, height: self.contentView.frame.size.height)
-                                self.userDefaults.set(Int(self.onecall!.jsondt),forKey:"TIME")
-                                self.time = self.userDefaults.object(forKey: "TIME") as! Int
-                                print("時間：\(self.time)")
-                                
-                                self.bool = false
-                                
+                                //JSON型のデータを保存
+                                self.saveJSON(json: JSON(value), key: "data")
+                                //通信した時間の1時間後をunixで保存
+                                self.userDefaults.set(self.onecall!.hourly[1].jsondt, forKey: "upper")
                                 
                             case .failure(let value):
                                 print("通信失敗")
                                 debugPrint(value)
                             }
                         }
+                        UserDefaults.standard.set(true, forKey: "visit")
                     }
                 }
             }
-            
         }
     }
     
@@ -209,25 +231,22 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
     
     func setLabel(onecall: OneCallData){
         self.dayLabel.text = "\(self.onecall!.daily[0].daydt)"
-        self.weatherLabel.text = "\(self.onecall!.daily[0].main)"
-        self.maxTemp.textColor = UIColor.red
+        self.weatherLabel.text = "\(self.onecall!.daily[0].mainjp)"
         self.maxTemp.text = "\(self.onecall!.daily[0].maxtempRound)℃"
-        self.minTemp.textColor = UIColor.blue
         self.minTemp.text = "\(self.onecall!.daily[0].mintempRound)℃"
         self.imageView.image = UIImage(named: "\(self.onecall!.daily[0].icon)")
         self.tmrdayLabel.text = "\(self.onecall!.daily[1].daydt)"
-        self.tmrweatherLabel.text = "\(self.onecall!.daily[1].main)"
-        self.tmrmaxTemp.textColor = UIColor.red
+        self.tmrweatherLabel.text = "\(self.onecall!.daily[1].mainjp)"
         self.tmrmaxTemp.text = "\(self.onecall!.daily[1].maxtempRound)℃"
-        self.tmrminTemp.textColor = UIColor.blue
         self.tmrminTemp.text = "\(self.onecall!.daily[1].mintempRound)℃"
         self.tmrimageView.image = UIImage(named: "\(self.onecall!.daily[1].icon)")
-        self.laundryIndex.image = UIImage(named: "index\(self.onecall!.daily[1].laundryIndex)")
+        self.laundryIndex.image = UIImage(named: "index\(self.onecall!.daily[0].laundryIndex)")
         self.humidLabel.text = "\(self.onecall!.hourly[0].humidity)%"
         self.popLabel.text = "\(self.onecall!.hourly[0].pop)%"
         self.wingspdLabel.text = "\(round(self.onecall!.hourly[0].windspd))m"
-        
-        
+        self.laundryIndxdesc.text = self.onecall!.daily[0].laundryIndexdesc
+        print(self.onecall!.daily[0].laundryIndex)
+        print(self.onecall!.daily[0].laundryIndexdesc)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -245,6 +264,32 @@ class HomeViewController: UIViewController,CLLocationManagerDelegate,UICollectio
         cell.setDailyData(onecall!.daily[indexPath.row])
         tableView.isScrollEnabled = false
         return cell
+    }
+    
+    func saveJSON(json: JSON, key:String)  {
+        if let jsonString = json.rawString(){
+            UserDefaults.standard.setValue(jsonString, forKey: key)
+        }
+    }
+    
+    func getJSON(_ key: String)->JSON?{
+        var p = ""
+        if let result = UserDefaults.standard.string(forKey: key){
+            p = result
+        }
+        if p != "" {
+            if let json = p.data(using: String.Encoding.utf8, allowLossyConversion: false) {
+                do {
+                    return try JSON(data: json)
+                } catch {
+                    return nil
+                }
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
     }
 }
 

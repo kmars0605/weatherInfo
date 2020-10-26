@@ -21,6 +21,7 @@ class HourlyCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var humidLabel: UILabel!
     //天気画像を表示するビュー
     @IBOutlet weak var imageView: UIImageView!
+   
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -40,6 +41,7 @@ class HourlyCollectionViewCell: UICollectionViewCell {
            self.imageView.image = image
        }*/
         self.imageView.image = UIImage(named: "\(hourlyData.icon)")
+        
         
     }
 }

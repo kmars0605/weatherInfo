@@ -21,7 +21,7 @@ class TabBarController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
        
-        if homeViewController.userDefaults.object(forKey: "LATEST") == nil {
+        if homeViewController.userDefaults.object(forKey: "latest") == nil {
             let settingPlaceViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingPlace")
             self.present(settingPlaceViewController!, animated: true, completion: nil)
             
