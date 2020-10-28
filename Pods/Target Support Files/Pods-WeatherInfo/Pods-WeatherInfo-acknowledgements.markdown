@@ -24,6 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+## NendSDK_iOS
+
+Copyright 2020 FAN Communications, Inc. All Rights Reserved.
+
 ## SwiftyJSON
 
 The MIT License (MIT)

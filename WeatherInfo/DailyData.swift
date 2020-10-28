@@ -18,6 +18,7 @@ class DailyData: NSObject {
     let main:String
     let desc:String
     let mainjp:String
+    let jsonicon:String
     let icon:String
     let pop:Double
     //let jsontemp:JSON
@@ -45,7 +46,7 @@ class DailyData: NSObject {
         //self.jsonweather = jsonResponse["weather"].array![0]
         self.main = jsonResponse["weather"].array![0]["main"].stringValue
         self.desc = jsonResponse["weather"].array![0]["description"].stringValue
-        self.icon = jsonResponse["weather"].array![0]["icon"].stringValue
+        self.jsonicon = jsonResponse["weather"].array![0]["icon"].stringValue
         self.pop  = jsonResponse["pop"].doubleValue
         //self.jsontemp = jsonResponse["temp"]
         self.maxtemp = jsonResponse["temp"]["max"].doubleValue
@@ -156,134 +157,211 @@ class DailyData: NSObject {
         }
         switch laundryIndex {
         case 1:
-            self.laundryIndexdesc = "部屋干し推奨"
+            self.laundryIndexdesc = "乾かない"
         case 2:
             self.laundryIndexdesc = "あまり乾かない"
         case 3:
             self.laundryIndexdesc = "やや乾く"
         case 4:
-            self.laundryIndexdesc = "よく乾く"
+            self.laundryIndexdesc = "乾く"
         case 5:
-            self.laundryIndexdesc = "大変よく乾く"
+            self.laundryIndexdesc = "よく乾く"
         default:
             self.laundryIndexdesc = "エラー"
         }
         
         switch desc {
+        //雷
         case "thunderstorm with light rain":
             self.mainjp = "雷雨"
+            self.icon = "11d"
         case "thunderstorm with rain":
             self.mainjp = "雷雨"
+            self.icon = "11d"
         case "thunderstorm with heavy rain":
             self.mainjp = "激しい雷雨"
+            self.icon = "11d"
         case "light thunderstorm":
             self.mainjp = "雷"
+            self.icon = "11d"
         case "thunderstorm":
             self.mainjp = "雷"
+            self.icon = "11d"
         case "heavy thunderstorm":
             self.mainjp = "激しい雷"
+            self.icon = "11d"
         case "ragged thunderstorm":
             self.mainjp = "雷"
+            self.icon = "11d"
         case "thunderstorm with light drizzle":
             self.mainjp = "雷雨"
+            self.icon = "11d"
         case "thunderstorm with drizzle":
             self.mainjp = "雷雨"
+            self.icon = "11d"
         case "thunderstorm with heavy drizzle":
             self.mainjp = "激しい雷雨"
+            self.icon = "11d"
+        //雨
         case "light intensity drizzle":
             self.mainjp = "弱い雨"
+            self.icon = "09d"
         case "drizzle":
             self.mainjp = "雨"
+            self.icon = "09d"
         case "heavy intensity drizzle":
             self.mainjp = "強い雨"
+            self.icon = "10d"
         case "light intensity drizzle rain":
             self.mainjp = "雨"
+            self.icon = "10d"
         case "drizzle rain":
             self.mainjp = "雨"
+            self.icon = "10d"
         case "heavy intensity drizzle rain":
             self.mainjp = "強い雨"
+            self.icon = "10d"
         case "shower rain and drizzle":
             self.mainjp = "雨"
+            self.icon = "10d"
         case "heavy shower rain and drizzle":
             self.mainjp = "激しい雨"
+            self.icon = "10d"
         case "shower drizzle":
             self.mainjp = "雨"
+            self.icon = "09d"
         case "light rain":
             self.mainjp = "弱い雨"
+            self.icon = "09d"
         case "moderate rain":
             self.mainjp = "雨"
+            self.icon = "10d"
         case "heavy intensity rain":
             self.mainjp = "強い雨"
+            self.icon = "10d"
         case "very heavy rain":
             self.mainjp = "激しい雨"
+            self.icon = "10d"
         case "extreme rain":
             self.mainjp = "とても激しい雨"
+            self.icon = "10d"
         case "freezing rain":
             self.mainjp = "ひょう"
+            self.icon = "13d"
         case "light intensity shower rain":
             self.mainjp = "弱い雨"
+            self.icon = "09d"
         case "shower rain":
             self.mainjp = "雨"
+            self.icon = "10d"
         case "heavy intensity shower rain":
             self.mainjp = "強い雨"
+            self.icon = "10d"
         case "ragged shower rain":
             self.mainjp = "雨"
+            self.icon = "10d"
+        //ゆき
         case "light snow":
             self.mainjp = "雪"
-        case "Snow":
+            self.icon = "13d"
+        case "snow":
             self.mainjp = "雪"
-        case "Heavy snow":
+            self.icon = "13d"
+        case "heavy snow":
             self.mainjp = "激しい雪"
-        case "Sleet":
+            self.icon = "13d"
+        case "sleet":
             self.mainjp = "みぞれ"
-        case "Light shower sleet":
+            self.icon = "13d"
+        case "light shower sleet":
             self.mainjp = "みぞれ"
-        case "Shower sleet":
+            self.icon = "13d"
+        case "shower sleet":
             self.mainjp = "みぞれ"
-        case "Light rain and snow":
+            self.icon = "13d"
+        case "light rain and snow":
             self.mainjp = "雪"
-        case "Rain and snow":
+            self.icon = "13d"
+        case "rain and snow":
             self.mainjp = "雪"
-        case "Light shower snow":
+            self.icon = "13d"
+        case "light shower snow":
             self.mainjp = "雪"
-        case "Shower snow":
+            self.icon = "13d"
+        case "shower snow":
             self.mainjp = "雪"
-        case "Heavy shower snow":
+            self.icon = "13d"
+        case "heavy shower snow":
             self.mainjp = "激しい雪"
+            self.icon = "13d"
+        //その他
         case "mist":
             self.mainjp = "きり"
-        case "Smoke":
+            self.icon = "50d"
+        case "smoke":
             self.mainjp = "きり"
-        case "Haze":
+            self.icon = "50d"
+        case "haze":
             self.mainjp = "きり"
+            self.icon = "50d"
         case "sand/ dust whirls":
             self.mainjp = "砂塵"
+            self.icon = "50d"
         case "fog":
             self.mainjp = "きり"
+            self.icon = "50d"
         case "sand":
             self.mainjp = "砂塵"
+            self.icon = "50d"
         case "dust":
             self.mainjp = "砂塵"
+            self.icon = "50d"
         case "volcanic ash":
             self.mainjp = "火山灰"
+            self.icon = "50d"
         case "squalls":
             self.mainjp = "突風"
+            self.icon = "50d"
         case "tornado":
             self.mainjp = "竜巻"
+            self.icon = "50d"
+        //晴れ
         case "clear sky":
             self.mainjp = "快晴"
+            switch self.jsonicon {
+            case "01d":
+                self.icon = "01d"
+            case "01n":
+                self.icon = "01n"
+            default:
+                self.icon = "01d"
+            }
         case "few clouds":
-            self.mainjp = "くもり"
+            self.mainjp = "晴れ"
+            switch self.jsonicon {
+            case "02d":
+                self.icon = "02d"
+            case "02n":
+                self.icon = "02n"
+            default:
+                self.icon = "01d"
+            }
+            
+        //くもり
         case "scattered clouds":
             self.mainjp = "くもり"
+            self.icon = "03d"
         case "broken clouds":
             self.mainjp = "くもり"
+            self.icon = "04d"
         case "overcast clouds":
             self.mainjp = "くもり"
+            self.icon = "04d"
             
         default:
             self.mainjp = "エラー"
-            print("エラー")
+            self.icon = "エラー"
+            print("DailyDataでエラー")
         }
         
         

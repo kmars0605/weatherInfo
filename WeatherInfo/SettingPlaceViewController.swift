@@ -10,8 +10,12 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class SettingPlaceViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,MKLocalSearchCompleterDelegate {
+class SettingPlaceViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,MKLocalSearchCompleterDelegate,UITextFieldDelegate {
     
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBAction func cancelButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     let homeViewController = HomeViewController()
     @IBOutlet private weak var textField: UITextField!
     @IBOutlet private weak var tableView: UITableView!
@@ -29,8 +33,19 @@ class SettingPlaceViewController: UIViewController,UITableViewDelegate, UITableV
         tableView.dataSource = self
         
         searchCompleter.delegate = self
+        textField.delegate = self
         
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if homeViewController.userDefaults.object(forKey: "latest") != nil{
+            self.cancelButton.isHidden = false
+            self.cancelButton.isEnabled = true
+        } else if homeViewController.userDefaults.object(forKey: "latest") == nil{
+            self.cancelButton.isHidden = true
+            self.cancelButton.isEnabled = false
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,4 +85,10 @@ class SettingPlaceViewController: UIViewController,UITableViewDelegate, UITableV
         self.dismiss(animated: true, completion: nil)
         
     }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+            // キーボードを閉じる
+            textField.resignFirstResponder()
+     
+            return true
+        }
 }

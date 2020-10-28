@@ -43,14 +43,9 @@ class DailyTableViewCell: UITableViewCell {
         self.mintemp.text = "\(dailyData.mintempRound)℃"
         self.humidity.adjustsFontSizeToFitWidth = true
         self.humidity.text = "\(dailyData.humidity)%"
-        /*if let weatherIcon = URL(string: "https://openweathermap.org/img/wn/\(dailyData.icon).png"),
-            let data = try? Data(contentsOf: weatherIcon),
-            let image = UIImage(data: data) {
-            self.weatherImage.image = image
-        }*/
         self.weatherImage.image = UIImage(named: "\(dailyData.icon)")
         self.laundryIndex.image = UIImage(named: "index\(dailyData.laundryIndex)")
-        
+       
     }
     
 }

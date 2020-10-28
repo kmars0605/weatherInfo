@@ -1,20 +1,24 @@
 PODS:
-  - Alamofire (5.2.2)
+  - Alamofire (5.3.0)
+  - NendSDK_iOS (7.0.1)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - Alamofire
+  - NendSDK_iOS
   - SwiftyJSON
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - NendSDK_iOS
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  Alamofire: 2c792affbdc2f18016e08fdbcacd60aebe1ba593
+  NendSDK_iOS: ce03a45947a68e990453d33c359ab03b85bfb5b9
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 3026b65f1a6a3eb444d3d21499de1db71179f98c
+PODFILE CHECKSUM: 7f3f823c3aee33c69f18d334c25ac2846f80dd65
 
 COCOAPODS: 1.9.3

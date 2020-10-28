@@ -41,8 +41,6 @@ class SettingViewController: UIViewController,UITableViewDataSource,UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // アクションを実装
-        print(indexPath.row)
-        
         if indexPath.row == 0{
             let settingPlaceViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingPlace")
             self.present(settingPlaceViewController!, animated: true, completion: nil)
@@ -59,6 +57,9 @@ class SettingViewController: UIViewController,UITableViewDataSource,UITableViewD
                 let vc = SFSafariViewController(url: url)
                 present(vc, animated: true, completion: nil)
             }
+        } else if indexPath.row == 1{
+            let settingPlaceViewController = self.storyboard?.instantiateViewController(withIdentifier: "IconDesc")
+            self.present(settingPlaceViewController!, animated: true, completion: nil)
         }
         tableView.deselectRow(at: indexPath, animated: true)
         
