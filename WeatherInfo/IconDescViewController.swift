@@ -34,10 +34,10 @@ class IconDescViewController: UIViewController,UITableViewDataSource,UITableView
         ["title":"03d", "content":"くもり。雲量25%〜50%"],
         ["title":"04d", "content":"くもり。雲量51%〜84%\nまたは雲量85%〜100%"],
         ["title":"09d", "content":"弱い雨。弱い雨が降ったり止んだり。"],
-        ["title":"10d", "content":"雨または激しい雨。"],
-        ["title":"11d", "content":"雷または雷雨。"],
-        ["title":"13d", "content":"雪、激しい雪、みぞれ、ひょう。"],
-        ["title":"50d", "content":"きり、砂塵、火山、灰突風、竜巻"]
+        ["title":"10d", "content":"雨・激しい雨"],
+        ["title":"11d", "content":"雷・雷雨"],
+        ["title":"13d", "content":"雪・激しい雪・みぞれ・ひょう"],
+        ["title":"50d", "content":"きり・砂塵・火山・灰突風・竜巻"]
 
     ]
     

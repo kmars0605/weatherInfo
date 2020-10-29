@@ -12,6 +12,7 @@ import MapKit
 
 class SettingPlaceViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,MKLocalSearchCompleterDelegate,UITextFieldDelegate {
     
+    @IBOutlet weak var cancelIcon: UIImageView!
     @IBOutlet weak var cancelButton: UIButton!
     @IBAction func cancelButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -39,13 +40,20 @@ class SettingPlaceViewController: UIViewController,UITableViewDelegate, UITableV
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        
         if homeViewController.userDefaults.object(forKey: "latest") != nil{
             self.cancelButton.isHidden = false
+            self.cancelIcon.isHidden = false
             self.cancelButton.isEnabled = true
+            self.textField.placeholder = "位置情報を入力"
         } else if homeViewController.userDefaults.object(forKey: "latest") == nil{
             self.cancelButton.isHidden = true
+            self.cancelIcon.isHidden = true
             self.cancelButton.isEnabled = false
+            self.textField.placeholder = "位置情報を登録してください"
         }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -89,7 +89,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="HHU-su-too">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="cellIdentifire" id="HHU-su-too" customClass="HourlyCollectionViewCell" customModule="WeatherInfo" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="4.5" width="128" height="119"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jlv-sH-t4C">
@@ -657,7 +657,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y8c-jJ-jMa">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="位置情報を入力" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y8c-jJ-jMa">
                                 <rect key="frame" x="20" y="100" width="335" height="34"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -762,6 +762,7 @@
                     </view>
                     <connections>
                         <outlet property="cancelButton" destination="MMm-ST-Pja" id="RZx-4x-2K8"/>
+                        <outlet property="cancelIcon" destination="QUP-XV-tHJ" id="akX-Pd-MY4"/>
                         <outlet property="tableView" destination="H2f-0e-mPp" id="LLn-1f-bw2"/>
                         <outlet property="textField" destination="y8c-jJ-jMa" id="qzQ-LC-jB7"/>
                     </connections>
