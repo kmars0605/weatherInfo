@@ -34,7 +34,7 @@ class DailyTableViewCell: UITableViewCell {
     }
     
     //DailyDataをセルに表示
-    func setDailyData(_ dailyData: DailyData){
+    func setDailyData(_ dailyData: DailyData,_ weekData: WeekData){
         self.dayLabel.adjustsFontSizeToFitWidth = true
         self.dayLabel.text = "\(dailyData.daydt)"
         self.maxtemp.adjustsFontSizeToFitWidth = true
@@ -43,8 +43,10 @@ class DailyTableViewCell: UITableViewCell {
         self.mintemp.text = "\(dailyData.mintempRound)℃"
         self.humidity.adjustsFontSizeToFitWidth = true
         self.humidity.text = "\(dailyData.humidity)%"
-        self.weatherImage.image = UIImage(named: "\(dailyData.icon)")
+        //self.weatherImage.image = UIImage(named: "\(dailyData.icon)")
+        self.weatherImage.image = UIImage(named: "\(weekData.icon)")
         self.laundryIndex.image = UIImage(named: "index\(dailyData.laundryIndex)")
+       
        
     }
     

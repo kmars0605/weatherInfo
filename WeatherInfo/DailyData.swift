@@ -17,9 +17,9 @@ class DailyData: NSObject {
     //let jsonweather:JSON
     let main:String
     let desc:String
-    let mainjp:String
+    var mainjp:String
     let jsonicon:String
-    let icon:String
+    var icon:String
     let pop:Double
     //let jsontemp:JSON
     let maxtemp:Double
@@ -35,10 +35,12 @@ class DailyData: NSObject {
     var humidCapacity:Double
     var totalScore:Int?
     var outputFormatterDD = DateFormatter()
+    var officialDay1:String
+    var officialDay2:String
+    var officialDay3:String
     
     
-    
-    init(jsonResponse: JSON) {
+    init(jsonResponse: JSON,string1: String, string2: String, string3: String) {
         self.jsondt = jsonResponse["dt"].doubleValue
         outputFormatterDD.locale = Locale(identifier: "ja_JP")
         outputFormatterDD.dateFormat = "d日(EEE)"
@@ -57,6 +59,7 @@ class DailyData: NSObject {
         self.humidPer = Double(humidity) / 100
         self.e = 6.1078*pow(10, 7.5*maxtemp/(maxtemp+237.3))
         self.vaporAmount = 217*e/(10+273.15)
+       
         //飽和水蒸気量
         
         self.humidCapacity = round(vaporAmount*(1-humidPer))
@@ -354,6 +357,7 @@ class DailyData: NSObject {
         case "broken clouds":
             self.mainjp = "くもり"
             self.icon = "04d"
+            
         case "overcast clouds":
             self.mainjp = "くもり"
             self.icon = "04d"
@@ -364,7 +368,16 @@ class DailyData: NSObject {
             print("DailyDataでエラー")
         }
         
+        self.officialDay1 = string1
+        self.officialDay2 = string2
+        self.officialDay3 = string3
         
+        switch self.officialDay1{
+        case "晴れ":
+            self.icon = "暴風雪"
+        default:
+            print("")
+        }
         
     }
     

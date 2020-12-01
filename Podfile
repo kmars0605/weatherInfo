@@ -9,6 +9,7 @@ target 'WeatherInfo' do
   pod 'SwiftyJSON'
   pod 'Alamofire'
   pod 'NendSDK_iOS'
+  pod "Kanna"
 
 
 end
