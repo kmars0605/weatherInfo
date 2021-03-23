@@ -1,27 +1,11 @@
-//
-//  DailyData.swift
-//  WeatherInfo
-//
-//  Created by 伊藤光次郎 on 2020/10/12.
-//  Copyright © 2020 kojiro.ito. All rights reserved.
-//
+import Foundation
 
-import UIKit
-import Alamofire
-import SwiftyJSON
-
-class DailyData: NSObject {
-    
-    let jsondt:Double
-    let daydt:String
-    //let jsonweather:JSON
-    let main:String
+struct DailyWeatherDetail: Codable {
     let desc:String
-    var mainjp:String
+    let mainjp:String
     let jsonicon:String
-    var icon:String
+    let icon:String
     let pop:Double
-    //let jsontemp:JSON
     let maxtemp:Double
     let mintemp:Double
     let maxtempRound:Int
@@ -34,71 +18,56 @@ class DailyData: NSObject {
     var vaporAmount:Double
     var humidCapacity:Double
     var totalScore:Int?
-    var outputFormatterDD = DateFormatter()
-    var officialDay1:String
-    var officialDay2:String
-    var officialDay3:String
-    
-    
-    init(jsonResponse: JSON,string1: String, string2: String, string3: String) {
-        self.jsondt = jsonResponse["dt"].doubleValue
-        outputFormatterDD.locale = Locale(identifier: "ja_JP")
-        outputFormatterDD.dateFormat = "d日(EEE)"
-        self.daydt = (outputFormatterDD.string(from: Date(timeIntervalSince1970: jsondt)))
-        //self.jsonweather = jsonResponse["weather"].array![0]
-        self.main = jsonResponse["weather"].array![0]["main"].stringValue
-        self.desc = jsonResponse["weather"].array![0]["description"].stringValue
-        self.jsonicon = jsonResponse["weather"].array![0]["icon"].stringValue
-        self.pop  = jsonResponse["pop"].doubleValue
+
+    init(daily: Daily) {
+        self.desc = daily.weather[0].description
+        self.jsonicon = daily.weather[0].icon
+        self.pop  = daily.pop
         //self.jsontemp = jsonResponse["temp"]
-        self.maxtemp = jsonResponse["temp"]["max"].doubleValue
-        self.mintemp = jsonResponse["temp"]["min"].doubleValue
+        self.maxtemp = daily.temp.max
+        self.mintemp = daily.temp.min
         self.maxtempRound = Int(round(maxtemp))
         self.mintempRound = Int(round(mintemp))
-        self.humidity = jsonResponse["humidity"].intValue
+        self.humidity = daily.humidity
         self.humidPer = Double(humidity) / 100
         self.e = 6.1078*pow(10, 7.5*maxtemp/(maxtemp+237.3))
         self.vaporAmount = 217*e/(10+273.15)
-       
         //飽和水蒸気量
-        
+
         self.humidCapacity = round(vaporAmount*(1-humidPer))
-        
+
         switch Int(maxtemp){
         case -100...18 :
             self.totalScore = Int(round(humidCapacity*1))
-            
+
         case 19:
             self.totalScore = Int(round(humidCapacity*1.05))
-            
+
         case 20:
             self.totalScore = Int(round(humidCapacity*1.11))
-            
+
         case 21:
             self.totalScore = Int(round(humidCapacity*1.17))
-            
+
         case 22:
             self.totalScore = Int(round(humidCapacity*1.22))
-            
+
         case 23:
             self.totalScore = Int(round(humidCapacity*1.28))
-            
+
         case 24:
             self.totalScore = Int(round(humidCapacity*1.33))
-            
+
         case 25...100:
             self.totalScore = Int(round(humidCapacity*1.4))
-            
-            
+
         default:
-            print("ok")
+            break
         }
-        
-        
         switch totalScore! {
         case -500...5:
             self.laundryIndex = 1
-            
+
             if self.pop >= 0.7{
                 self.laundryIndex = 1
             }
@@ -116,7 +85,7 @@ class DailyData: NSObject {
             }
         case 10...13:
             self.laundryIndex = 3
-            
+
             switch pop {
             case 0.7...1:
                 self.laundryIndex = 1
@@ -129,7 +98,7 @@ class DailyData: NSObject {
             }
         case 14...16:
             self.laundryIndex = 4
-            
+
             switch pop {
             case 0.7...1:
                 self.laundryIndex = 1
@@ -142,7 +111,7 @@ class DailyData: NSObject {
             }
         case 17...500:
             self.laundryIndex = 5
-            
+
             switch pop {
             case 0.7...1:
                 self.laundryIndex = 1
@@ -155,8 +124,7 @@ class DailyData: NSObject {
             }
         default:
             self.laundryIndex = 6
-            print("エラー")
-            
+
         }
         switch laundryIndex {
         case 1:
@@ -172,7 +140,6 @@ class DailyData: NSObject {
         default:
             self.laundryIndexdesc = "エラー"
         }
-        
         switch desc {
         //雷
         case "thunderstorm with light rain":
@@ -349,7 +316,6 @@ class DailyData: NSObject {
             default:
                 self.icon = "01d"
             }
-            
         //くもり
         case "scattered clouds":
             self.mainjp = "くもり"
@@ -357,28 +323,12 @@ class DailyData: NSObject {
         case "broken clouds":
             self.mainjp = "くもり"
             self.icon = "04d"
-            
         case "overcast clouds":
             self.mainjp = "くもり"
             self.icon = "04d"
-            
         default:
             self.mainjp = "エラー"
             self.icon = "エラー"
-            print("DailyDataでエラー")
         }
-        
-        self.officialDay1 = string1
-        self.officialDay2 = string2
-        self.officialDay3 = string3
-        
-        switch self.officialDay1{
-        case "晴れ":
-            self.icon = "暴風雪"
-        default:
-            print("")
-        }
-        
     }
-    
 }

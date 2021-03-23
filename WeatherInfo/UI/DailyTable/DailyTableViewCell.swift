@@ -1,11 +1,3 @@
-//
-//  DailyTableViewCell.swift
-//  WeatherInfo
-//
-//  Created by 伊藤光次郎 on 2020/10/12.
-//  Copyright © 2020 kojiro.ito. All rights reserved.
-//
-
 import UIKit
 
 class DailyTableViewCell: UITableViewCell {
@@ -20,34 +12,29 @@ class DailyTableViewCell: UITableViewCell {
     @IBOutlet weak var mintemp: UILabel!
     //湿度を表示
     @IBOutlet weak var humidity: UILabel!
-    
+    //洗濯指数を表示
     @IBOutlet weak var laundryIndex: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-    
     //DailyDataをセルに表示
-    func setDailyData(_ dailyData: DailyData,_ weekData: WeekData){
+    func setDailyData(_ daily: Daily,_ detail: DailyWeatherDetail){
+        let outputFormatterDD = DateFormatter()
+        outputFormatterDD.locale = Locale(identifier: "ja_JP")
+        outputFormatterDD.dateFormat = "d日(EEE)"
+        let day = (outputFormatterDD.string(from: Date(timeIntervalSince1970: Double(daily.dt))))
         self.dayLabel.adjustsFontSizeToFitWidth = true
-        self.dayLabel.text = "\(dailyData.daydt)"
+        self.dayLabel.text = "\(day)"
         self.maxtemp.adjustsFontSizeToFitWidth = true
-        self.maxtemp.text = "\(dailyData.maxtempRound)℃"
+        self.maxtemp.text = "\(Int(round(daily.temp.max)))℃"
         self.mintemp.adjustsFontSizeToFitWidth = true
-        self.mintemp.text = "\(dailyData.mintempRound)℃"
+        self.mintemp.text = "\(Int(round(daily.temp.min)))℃"
         self.humidity.adjustsFontSizeToFitWidth = true
-        self.humidity.text = "\(dailyData.humidity)%"
-        //self.weatherImage.image = UIImage(named: "\(dailyData.icon)")
-        self.weatherImage.image = UIImage(named: "\(weekData.icon)")
-        self.laundryIndex.image = UIImage(named: "index\(dailyData.laundryIndex)")
-       
-       
+        self.humidity.text = "\(daily.humidity)%"
+        self.weatherImage.image = UIImage(named: "\(daily.weather[0].icon)")
+        self.laundryIndex.image = UIImage(named: "index\(detail.laundryIndex)")
     }
-    
 }

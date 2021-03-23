@@ -10,6 +10,7 @@ target 'WeatherInfo' do
   pod 'Alamofire'
   pod 'NendSDK_iOS'
   pod "Kanna"
+  pod 'PKHUD'
 
 
 end
