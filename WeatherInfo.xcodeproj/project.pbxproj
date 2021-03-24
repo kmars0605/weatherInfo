@@ -22,6 +22,8 @@
 		2146BB63260A8FD7001177F7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2146BB62260A8FD7001177F7 /* HomeView.swift */; };
 		2146BB71260B22EE001177F7 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2146BB70260B22EE001177F7 /* WeatherModel.swift */; };
 		2146BB76260B2F78001177F7 /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2146BB75260B2F78001177F7 /* TagViewController.swift */; };
+		2146BB79260B32DF001177F7 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2146BB78260B32DF001177F7 /* Tag.swift */; };
+		2146BB7C260B340C001177F7 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2146BB7B260B340C001177F7 /* TagView.swift */; };
 		21879F6E2547EA2300D7B5EE /* IconDescViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21879F6D2547EA2300D7B5EE /* IconDescViewController.swift */; };
 		21879F752547FD2900D7B5EE /* IconDescTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21879F732547FD2900D7B5EE /* IconDescTableViewCell.swift */; };
 		21C6943D252989E600C8BE65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6943C252989E600C8BE65 /* AppDelegate.swift */; };
@@ -54,6 +56,8 @@
 		2146BB62260A8FD7001177F7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2146BB70260B22EE001177F7 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		2146BB75260B2F78001177F7 /* TagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
+		2146BB78260B32DF001177F7 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		2146BB7B260B340C001177F7 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		21879F6D2547EA2300D7B5EE /* IconDescViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconDescViewController.swift; sourceTree = "<group>"; };
 		21879F732547FD2900D7B5EE /* IconDescTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconDescTableViewCell.swift; sourceTree = "<group>"; };
 		21C69439252989E600C8BE65 /* WeatherInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +111,7 @@
 				21C69512252CC7D400C8BE65 /* Hourly.swift */,
 				21E33DCD253460C800C7524D /* Daily.swift */,
 				2107FB222575FB60008CED99 /* DailyWeatherDetail.swift */,
+				2146BB78260B32DF001177F7 /* Tag.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -162,8 +167,8 @@
 		2146B9972609B5DA001177F7 /* Tag */ = {
 			isa = PBXGroup;
 			children = (
-				2135CA13253DC884004EE6EC /* TagTableViewCell.swift */,
-				2107FB292575FD14008CED99 /* TagTableViewCell.xib */,
+				2146BB7B260B340C001177F7 /* TagView.swift */,
+				2146BB7F260B3962001177F7 /* TagTable */,
 			);
 			path = Tag;
 			sourceTree = "<group>";
@@ -179,6 +184,15 @@
 				21C69522253048BF00C8BE65 /* TabBarController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		2146BB7F260B3962001177F7 /* TagTable */ = {
+			isa = PBXGroup;
+			children = (
+				2135CA13253DC884004EE6EC /* TagTableViewCell.swift */,
+				2107FB292575FD14008CED99 /* TagTableViewCell.xib */,
+			);
+			path = TagTable;
 			sourceTree = "<group>";
 		};
 		21C69430252989E500C8BE65 = {
@@ -379,7 +393,9 @@
 				2146B99A2609B6AB001177F7 /* Current.swift in Sources */,
 				21E33DCE253460C800C7524D /* Daily.swift in Sources */,
 				2146BB63260A8FD7001177F7 /* HomeView.swift in Sources */,
+				2146BB7C260B340C001177F7 /* TagView.swift in Sources */,
 				21C69523253048BF00C8BE65 /* TabBarController.swift in Sources */,
+				2146BB79260B32DF001177F7 /* Tag.swift in Sources */,
 				2146BB76260B2F78001177F7 /* TagViewController.swift in Sources */,
 				21C69513252CC7D400C8BE65 /* Hourly.swift in Sources */,
 				21E33DD12534645900C7524D /* DailyTableViewCell.swift in Sources */,
