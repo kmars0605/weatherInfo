@@ -197,16 +197,16 @@ if [ -r "${ARTIFACT_LIST_FILE}" ]; then
 fi
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire-framework/Alamofire.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Kanna-framework/Kanna.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/PKHUD-framework/PKHUD.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON-framework/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire-framework/Alamofire.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Kanna-framework/Kanna.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/PKHUD-framework/PKHUD.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON-framework/SwiftyJSON.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
