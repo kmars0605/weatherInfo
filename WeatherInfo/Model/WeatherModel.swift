@@ -12,6 +12,9 @@ class WeatherModel {
     deinit {
         requestCancellable?.cancel()
     }
+}
+
+extension WeatherModel {
     //URLSessionでの実装
     func request(latitude: Double, longitude: Double, address: String) {
         let url = URL(string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee")!
@@ -27,22 +30,24 @@ class WeatherModel {
                     print("通信成功")
                 case .failure(let error):
                     print("エラー:\(error)")
-                    HUD.flash(.labeledError(title: "通信に失敗しました。", subtitle: nil))
+                    HUD.show(.labeledError(title: "通信に失敗しました。", subtitle: nil))
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { HUD.hide() }
                 }
             }, receiveValue: { [self] onecall in
                 self.onecall = onecall
-                for i in onecall.daily {
+                for i in self.onecall!.daily {
                     detail.append(DailyWeatherDetail(daily: i))
                 }
                 //OneCallのデータを保存
                 saveOnecall(items: [onecall])
                 saveDetail(items: detail)
-                detail.removeAll()
+//                detail.removeAll()
                 //通信した時間の1時間後をunixで保存
                 UserDefaults.standard.set(self.onecall!.hourly[1].dt, forKey: "upper")
             })
         UserDefaults.standard.set(true, forKey: "reVisit")
     }
+    
     //Alamofireでの実装
     func requestAF(latitude: Double, longitude: Double, address: String) {
         var detail: [DailyWeatherDetail] = []
@@ -56,15 +61,14 @@ class WeatherModel {
                     print("通信成功")
                 case .failure(let error):
                     print("エラー:\(error)")
-                    HUD.flash(.labeledError(title: "通信に失敗しました。", subtitle: nil))
+                    HUD.show(.labeledError(title: "通信に失敗しました。", subtitle: nil))
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { HUD.hide() }
                 }
             }, receiveValue: { [self] onecall in
                 self.onecall = onecall
                 for i in onecall.daily {
                     detail.append(DailyWeatherDetail(daily: i))
                 }
-//                homeView.onecall = onecall
-//                homeView.setView(address: address, onecall: self.onecall!, detail: detail)
                 HUD.hide()
                 //OneCallのデータを保存
                 saveOnecall(items: [onecall])

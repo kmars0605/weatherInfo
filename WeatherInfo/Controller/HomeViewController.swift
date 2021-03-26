@@ -45,9 +45,11 @@ extension HomeViewController {
                     } else {
                         //通信あり
                         weatherModel.request(latitude: lat, longitude: lon, address: address)
+                        while weatherModel.detail.isEmpty {}
                         DispatchQueue.main.async {
                             homeView.onecall = weatherModel.onecall
                             homeView.setView(address: address, onecall: weatherModel.onecall!, detail: weatherModel.detail)
+                            weatherModel.detail.removeAll()
                             HUD.hide()
                         }
                     }
@@ -64,6 +66,9 @@ extension HomeViewController {
             }
         } else {
             print("エラー：位置情報なし")
+            HUD.show(.labeledError(title: "位置情報なし", subtitle: "他の位置情報を\n入力してください。"))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { HUD.hide() }
+            return
         }
     }
 }

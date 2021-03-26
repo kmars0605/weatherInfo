@@ -1,6 +1,7 @@
 import UIKit
 import CoreLocation
 import MapKit
+import PKHUD
 
 class SettingPlaceViewController: UIViewController,UITableViewDelegate, UITableViewDataSource,MKLocalSearchCompleterDelegate,UITextFieldDelegate {
 
@@ -60,21 +61,29 @@ class SettingPlaceViewController: UIViewController,UITableViewDelegate, UITableV
 
     // 検索が失敗したとき
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        print("エラー")
+        print("エラー:検索に失敗")
+        HUD.show(.labeledError(title: "検索に失敗しました。", subtitle: nil))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { HUD.hide() }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.address = "\(searchCompleter.results[indexPath.row].title)"
-
-        UserDefaults.standard.set(self.address, forKey:"latest")
-        UserDefaults.standard.synchronize()
-        // セルの選択を解除
-        tableView.deselectRow(at: indexPath, animated: true)
-        self.dismiss(animated: true, completion: nil)
-    }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        CLGeocoder().geocodeAddressString(address) { [self] placemarks, error in
+            guard (placemarks?.first?.location?.coordinate.latitude) != nil else {
+                print("エラー:位置情報なし")
+                HUD.show(.labeledError(title: "位置情報なし", subtitle: "他の位置情報を\n入力してください。"))
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { HUD.hide() }
+                return }
+            UserDefaults.standard.set(self.address, forKey:"latest")
+            UserDefaults.standard.synchronize()
+            // セルの選択を解除
+            tableView.deselectRow(at: indexPath, animated: true)
+            self.dismiss(animated: true, completion: nil)
+        }
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool{
             // キーボードを閉じる
             textField.resignFirstResponder()
             return true
         }
+    }
 }
