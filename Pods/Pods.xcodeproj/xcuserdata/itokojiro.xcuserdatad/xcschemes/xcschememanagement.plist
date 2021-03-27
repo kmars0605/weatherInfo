@@ -5,6 +5,7 @@
 	<key>SchemeUserState</key>
 	<dict>
 		<key>Alamofire-framework.xcscheme</key>
+<<<<<<< HEAD
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
@@ -15,6 +16,8 @@
 			<integer>3</integer>
 		</dict>
 		<key>Alamofire.xcscheme</key>
+=======
+>>>>>>> change_to_MVC
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -31,7 +34,17 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
-		<key>Kanna.xcscheme</key>
+		<key>Alamofire-library.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Kanna-framework.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Kanna-library.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -48,11 +61,22 @@
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
-		<key>PKHUD-PKHUDResources.xcscheme</key>
+		<key>PKHUD-framework-PKHUDResources.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PKHUD-framework.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>PKHUD-library-PKHUDResources.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+<<<<<<< HEAD
 		<key>PKHUD-PKHUDResources.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -79,6 +103,9 @@
 			<integer>9</integer>
 		</dict>
 		<key>PKHUD.xcscheme</key>
+=======
+		<key>PKHUD-library.xcscheme</key>
+>>>>>>> change_to_MVC
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -120,7 +147,27 @@
 			<key>orderHint</key>
 			<integer>17</integer>
 		</dict>
-		<key>SwiftyJSON.xcscheme</key>
+		<key>Pods-WeatherInfoTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftGen-framework.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftGen-library.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyJSON-framework.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyJSON-library.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

@@ -1,0 +1,13 @@
+xcassets:
+  inputs:
+    - WeatherInfo/Resources/Assets.xcassets
+  outputs:
+    - templateName: swift5
+      output: WeatherInfo/Sources/Generated/Assets.swift
+
+strings:
+  inputs:
+    - WeatherInfo/Resources/Localizable.strings
+  outputs:
+    - templateName: structured-swift5
+      output: WeatherInfo/Sources/Generated/Strings.swift

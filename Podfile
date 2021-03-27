@@ -11,6 +11,15 @@ target 'WeatherInfo' do
   pod 'NendSDK_iOS'
   pod "Kanna"
   pod 'PKHUD'
+  pod 'SwiftGen'
+ end
 
-
-end
+  target 'WeatherInfoTests' do
+    inherit! :search_paths
+    # Pods for testing
+    pod 'SwiftyJSON'
+    pod 'Alamofire'
+    pod "Kanna"
+    pod 'PKHUD'
+    pod 'SwiftGen'
+  end

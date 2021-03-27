@@ -1,5 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-WeatherInfo/Pods-WeatherInfo-frameworks.sh
-${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
-${BUILT_PRODUCTS_DIR}/Kanna/Kanna.framework
-${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework
-${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework
+${BUILT_PRODUCTS_DIR}/Alamofire-framework/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/Kanna-framework/Kanna.framework
+${BUILT_PRODUCTS_DIR}/PKHUD-framework/PKHUD.framework
+${BUILT_PRODUCTS_DIR}/SwiftyJSON-framework/SwiftyJSON.framework
