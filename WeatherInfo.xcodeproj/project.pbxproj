@@ -16,6 +16,11 @@
 		2107FB362575FD90008CED99 /* IconDescTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2107FB352575FD90008CED99 /* IconDescTableViewCell.xib */; };
 		210B056425375A6F00F427A7 /* JIS.symbol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 210B056325375A6F00F427A7 /* JIS.symbol.ttf */; };
 		210B056625375A8C00F427A7 /* ISOsymbol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 210B056525375A8C00F427A7 /* ISOsymbol.ttf */; };
+		212BB00C260F914100B8DBCA /* OneCallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212BB00B260F914100B8DBCA /* OneCallTests.swift */; };
+		212BB010260F916100B8DBCA /* CurrentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212BB00F260F916100B8DBCA /* CurrentTests.swift */; };
+		212BB014260F917A00B8DBCA /* HourlyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212BB013260F917A00B8DBCA /* HourlyTests.swift */; };
+		212BB018260F919900B8DBCA /* DailyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212BB017260F919900B8DBCA /* DailyTests.swift */; };
+		212BB01C260F91B500B8DBCA /* ExampleJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212BB01B260F91B500B8DBCA /* ExampleJSON.swift */; };
 		2135CA15253DC884004EE6EC /* TagTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135CA13253DC884004EE6EC /* TagTableViewCell.swift */; };
 		2135CA1E253EEA34004EE6EC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2135CA1D253EEA33004EE6EC /* SettingViewController.swift */; };
 		2146B99A2609B6AB001177F7 /* Current.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2146B9992609B6AB001177F7 /* Current.swift */; };
@@ -35,7 +40,6 @@
 		21C6951D2530424900C8BE65 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6951C2530424900C8BE65 /* HomeViewController.swift */; };
 		21C69523253048BF00C8BE65 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C69522253048BF00C8BE65 /* TabBarController.swift */; };
 		21C6952525304B5300C8BE65 /* SettingPlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C6952425304B5300C8BE65 /* SettingPlaceViewController.swift */; };
-		21DEB3C1260DA089004C101F /* WeatherInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DEB3C0260DA089004C101F /* WeatherInfoTests.swift */; };
 		21DEB41A260DBE36004C101F /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DEB419260DBE36004C101F /* Strings.swift */; };
 		21DEB420260DBE4E004C101F /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DEB41F260DBE4E004C101F /* Assets.swift */; };
 		21DEB42E260DC4FA004C101F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21DEB42D260DC4FA004C101F /* Localizable.strings */; };
@@ -70,6 +74,11 @@
 		2107FB352575FD90008CED99 /* IconDescTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IconDescTableViewCell.xib; sourceTree = "<group>"; };
 		210B056325375A6F00F427A7 /* JIS.symbol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JIS.symbol.ttf; sourceTree = "<group>"; };
 		210B056525375A8C00F427A7 /* ISOsymbol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ISOsymbol.ttf; sourceTree = "<group>"; };
+		212BB00B260F914100B8DBCA /* OneCallTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneCallTests.swift; sourceTree = "<group>"; };
+		212BB00F260F916100B8DBCA /* CurrentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentTests.swift; sourceTree = "<group>"; };
+		212BB013260F917A00B8DBCA /* HourlyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyTests.swift; sourceTree = "<group>"; };
+		212BB017260F919900B8DBCA /* DailyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTests.swift; sourceTree = "<group>"; };
+		212BB01B260F91B500B8DBCA /* ExampleJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleJSON.swift; sourceTree = "<group>"; };
 		2135CA13253DC884004EE6EC /* TagTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTableViewCell.swift; sourceTree = "<group>"; };
 		2135CA1D253EEA33004EE6EC /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		2146B9992609B6AB001177F7 /* Current.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Current.swift; sourceTree = "<group>"; };
@@ -92,7 +101,6 @@
 		21C69522253048BF00C8BE65 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		21C6952425304B5300C8BE65 /* SettingPlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPlaceViewController.swift; sourceTree = "<group>"; };
 		21DEB3BE260DA089004C101F /* WeatherInfoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherInfoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		21DEB3C0260DA089004C101F /* WeatherInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfoTests.swift; sourceTree = "<group>"; };
 		21DEB3C2260DA089004C101F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		21DEB419260DBE36004C101F /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		21DEB41F260DBE4E004C101F /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
@@ -273,7 +281,11 @@
 		21DEB3BF260DA089004C101F /* WeatherInfoTests */ = {
 			isa = PBXGroup;
 			children = (
-				21DEB3C0260DA089004C101F /* WeatherInfoTests.swift */,
+				212BB00B260F914100B8DBCA /* OneCallTests.swift */,
+				212BB00F260F916100B8DBCA /* CurrentTests.swift */,
+				212BB013260F917A00B8DBCA /* HourlyTests.swift */,
+				212BB017260F919900B8DBCA /* DailyTests.swift */,
+				212BB01B260F91B500B8DBCA /* ExampleJSON.swift */,
 				21DEB3C2260DA089004C101F /* Info.plist */,
 			);
 			path = WeatherInfoTests;
@@ -621,7 +633,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21DEB3C1260DA089004C101F /* WeatherInfoTests.swift in Sources */,
+				212BB00C260F914100B8DBCA /* OneCallTests.swift in Sources */,
+				212BB014260F917A00B8DBCA /* HourlyTests.swift in Sources */,
+				212BB018260F919900B8DBCA /* DailyTests.swift in Sources */,
+				212BB010260F916100B8DBCA /* CurrentTests.swift in Sources */,
+				212BB01C260F91B500B8DBCA /* ExampleJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
