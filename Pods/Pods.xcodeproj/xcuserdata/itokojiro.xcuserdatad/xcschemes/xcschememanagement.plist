@@ -39,7 +39,7 @@
 		<key>Kanna.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>18</integer>
+			<integer>19</integer>
 		</dict>
 		<key>NendSDK_iOS.xcscheme</key>
 		<dict>
@@ -56,7 +56,7 @@
 		<key>PKHUD-PKHUDResources.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>20</integer>
+			<integer>18</integer>
 		</dict>
 		<key>PKHUD-framework-PKHUDResources.xcscheme</key>
 		<dict>
@@ -86,7 +86,7 @@
 		<key>PKHUD.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>19</integer>
+			<integer>20</integer>
 		</dict>
 		<key>Pods-WeatherInfo.xcscheme</key>
 		<dict>
