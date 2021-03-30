@@ -1,5 +1,3 @@
-import Foundation
-
 struct Current: Codable {
     let dt: Int
     let sunrise: Double

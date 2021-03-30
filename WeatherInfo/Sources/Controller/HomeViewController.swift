@@ -2,12 +2,21 @@ import UIKit
 import CoreLocation
 import PKHUD
 import Kanna
+import Combine
+import Alamofire
 
 class HomeViewController: UIViewController {
     //Viewの参照を保持
     @IBOutlet var homeView: HomeView!
     //Modelの参照を保持
     var weatherModel = WeatherModel()
+
+    let decorder = JSONDecoder()
+    var requestCancellable: Cancellable?
+
+    deinit {
+        requestCancellable?.cancel()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +34,7 @@ class HomeViewController: UIViewController {
         start()
     }
 }
+
 extension HomeViewController {
     func start() {
         if let address = UserDefaults.standard.object(forKey: "latest") as? String {
@@ -43,28 +53,11 @@ extension HomeViewController {
                         homeView.setView(address: address, detail: weatherModel.readDetail()!)
                     } else {
                         //通信あり
-                        weatherModel.request(latitude: lat, longitude: lon, address: address)
-                        while weatherModel.detail.isEmpty {}
-                        DispatchQueue.main.async {
-                            homeView.onecall = weatherModel.onecall
-                            homeView.setView(address: address, detail: weatherModel.detail)
-                            weatherModel.saveDetail(items: weatherModel.detail)
-                            weatherModel.detail.removeAll()
-                            HUD.hide()
-                        }
+                        request(latitude: lat, longitude: lon, address: address)
                     }
                 } else {
                     //初回訪問
-                    HUD.show(.progress)
-                    weatherModel.request(latitude: lat, longitude: lon, address: address)
-                    while weatherModel.detail.isEmpty {}
-                    DispatchQueue.main.async {
-                        homeView.onecall = weatherModel.onecall
-                        homeView.setView(address: address, detail: weatherModel.detail)
-                        HUD.hide()
-                        weatherModel.saveDetail(items: weatherModel.detail)
-                        weatherModel.detail.removeAll()
-                    }
+                    request(latitude: lat, longitude: lon, address: address)
                 }
             }
         } else {
@@ -82,5 +75,77 @@ extension HomeViewController {
                 self.tabBarController?.selectedViewController = UINavigationController}
             return
         }
+    }
+}
+
+extension HomeViewController {
+    //URLSessionでの実装
+    func request(latitude: Double, longitude: Double, address: String) {
+        let url = URL(string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee")!
+        HUD.show(.progress)
+        requestCancellable = URLSession.shared.dataTaskPublisher(for: URLRequest(url: url))
+            .map({(data, res) in
+                return data
+            })
+            .decode(type: OneCall.self, decoder: decorder)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    print("通信成功")
+                    break
+                case .failure:
+                    print("通信失敗")
+                    HUD.hide()
+                    HUD.show(.labeledError(title: L10n.SearchErrorView.Title.text, subtitle: nil))
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { HUD.hide() }
+                }
+            }, receiveValue: { [self] onecall in
+                weatherModel.onecall = onecall
+                weatherModel.detail = onecall.daily.map{DailyWeatherDetail(daily: $0)}
+                homeView.onecall = onecall
+                DispatchQueue.main.async {
+                    homeView.setView(address: address, detail: weatherModel.detail)
+                    HUD.hide()
+                }
+                weatherModel.saveDetail(items: weatherModel.detail)
+                //OneCallのデータを保存
+                weatherModel.saveOnecall(items: [onecall])
+                //通信した時間の1時間後をunixで保存
+                UserDefaults.standard.set(weatherModel.onecall!.hourly[1].dt, forKey: "upper")
+                weatherModel.detail.removeAll()
+            })
+        UserDefaults.standard.set(true, forKey: "reVisit")
+    }
+    //Alamofireでの実装
+    func requestAF(latitude: Double, longitude: Double, address: String) {
+        let url = "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee"
+        requestCancellable = AF.request(url).publishDecodable(type: OneCall.self, decoder: decorder)
+            .value()
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    //通信成功
+                    break
+                case .failure:
+                    //error
+                    HUD.show(.labeledError(title: L10n.CommunicationErrorView.Title.text, subtitle: nil))
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { HUD.hide() }
+                }
+            }, receiveValue: { [self] onecall in
+                weatherModel.onecall = onecall
+                weatherModel.detail = onecall.daily.map{DailyWeatherDetail(daily: $0)}
+                homeView.onecall = onecall
+                DispatchQueue.main.async {
+                    homeView.setView(address: address, detail: weatherModel.detail)
+                    HUD.hide()
+                }
+                weatherModel.saveDetail(items: weatherModel.detail)
+                //OneCallのデータを保存
+                weatherModel.saveOnecall(items: [onecall])
+                //通信した時間の1時間後をunixで保存
+                UserDefaults.standard.set(weatherModel.onecall!.hourly[1].dt, forKey: "upper")
+                weatherModel.detail.removeAll()
+            })
+        UserDefaults.standard.set(true, forKey: "reVisit")
     }
 }

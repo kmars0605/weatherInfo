@@ -23,7 +23,6 @@ struct DailyWeatherDetail: Codable {
         self.desc = daily.weather[0].description
         self.jsonicon = daily.weather[0].icon
         self.pop  = daily.pop
-        //self.jsontemp = jsonResponse["temp"]
         self.maxtemp = daily.temp.max
         self.mintemp = daily.temp.min
         self.maxtempRound = Int(round(maxtemp))
