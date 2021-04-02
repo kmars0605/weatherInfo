@@ -8,9 +8,11 @@ class WeatherModel {
     var detail: [DailyWeatherDetail] = []
     let decorder = JSONDecoder()
     var requestCancellable: Cancellable?
+    var subscriptions: Set<AnyCancellable> = []
 }
+
 extension WeatherModel {
-   
+
     func saveOnecall(onecall: [OneCall]) {
         let data = onecall.map { try! JSONEncoder().encode($0) }
         UserDefaults.standard.set(data as [Any], forKey: "oneCall")
@@ -88,5 +90,37 @@ extension WeatherModel {
                 self.detail.removeAll()
             })
         UserDefaults.standard.set(true, forKey: "reVisit")
+    }
+
+    //気象庁とopenWeatherMapの両者の通信を束ねる時に使用
+    func requestAPIandAgency(localCode: Int, latitude: Double, longitude: Double) {
+        let urlOfAgency = URL(string: "https://www.jma.go.jp/bosai/forecast/data/forecast/\(localCode).json")!
+        let agencyPublisher = URLSession.shared.dataTaskPublisher(for: URLRequest(url: urlOfAgency))
+            .map(\.data)
+            .decode(type: [Agency].self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+
+        let urlOfAPI = URL(string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee")!
+        let apiPublisher = URLSession.shared.dataTaskPublisher(for: URLRequest(url: urlOfAPI))
+            .map(\.data)
+            .decode(type: [Agency].self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+
+        Publishers.Zip(agencyPublisher, apiPublisher)
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: {completion in
+                    switch completion {
+                    case .finished:
+                        print("通信成功")
+                        break
+                    case .failure:
+                        print("通信失敗")
+                    }},
+                receiveValue: { agency, onecall in
+                    //2つの通信結果を用いた処理
+                }
+            )
+            .store(in: &subscriptions)
     }
 }
