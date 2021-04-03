@@ -54,21 +54,35 @@ extension HomeViewController {
                         //通信あり
                         weatherModel.request(latitude: lat, longitude: lon)
                         HUD.show(.progress)
-                        while weatherModel.detail.isEmpty{}
                         homeView.onecall = weatherModel.onecall
-                        homeView.setView(address: address, detail: weatherModel.detail)
+                        requestCancellable = weatherModel.$detail
+                            .sink(receiveValue: { detail in 
+                                if !detail.isEmpty {
+                                    DispatchQueue.main.async {
+                                        homeView.onecall = weatherModel.onecall
+                                        homeView.setView(address: address, detail: detail)
+                                        weatherModel.saveDetail(detail: detail)
+                                    }
+                                }
+                            })
                         HUD.hide()
-                        weatherModel.saveDetail(detail: weatherModel.detail)
                     }
                 } else {
                     //初回訪問
                     weatherModel.request(latitude: lat, longitude: lon)
                     HUD.show(.progress)
-                    while weatherModel.detail.isEmpty{}
                     homeView.onecall = weatherModel.onecall
-                    homeView.setView(address: address, detail: weatherModel.detail)
+                    requestCancellable = weatherModel.$detail
+                        .sink(receiveValue: { detail in
+                            if !detail.isEmpty {
+                                DispatchQueue.main.async {
+                                    homeView.onecall = weatherModel.onecall
+                                    homeView.setView(address: address, detail: detail)
+                                    weatherModel.saveDetail(detail: detail)
+                                }
+                            }
+                        })
                     HUD.hide()
-                    weatherModel.saveDetail(detail: weatherModel.detail)
                 }
             }
         } else {

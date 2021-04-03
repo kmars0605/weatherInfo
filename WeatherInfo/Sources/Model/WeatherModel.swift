@@ -5,7 +5,7 @@ import PKHUD
 
 class WeatherModel {
     var onecall: OneCall?
-    var detail: [DailyWeatherDetail] = []
+    @Published var detail: [DailyWeatherDetail] = []
     let decorder = JSONDecoder()
     var requestCancellable: Cancellable?
     var subscriptions: Set<AnyCancellable> = []
