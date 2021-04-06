@@ -8,7 +8,7 @@ class WeatherModel {
     @Published var detail: [DailyWeatherDetail] = []
     let decorder = JSONDecoder()
     var requestCancellable: Cancellable?
-    var subscriptions: Set<AnyCancellable> = []
+    var subscriptions = Set<AnyCancellable>()
 }
 
 extension WeatherModel {
@@ -40,15 +40,12 @@ extension WeatherModel {
         let url = URL(string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee")!
         HUD.show(.progress)
         requestCancellable = URLSession.shared.dataTaskPublisher(for: URLRequest(url: url))
-            .map({(data, res) in
-                return data
-            })
+            .map({(data, res) in return data})
             .decode(type: OneCall.self, decoder: decorder)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
                     print("通信成功")
-                    break
                 case .failure:
                     print("通信失敗")
                     HUD.hide()
@@ -73,10 +70,9 @@ extension WeatherModel {
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
-                    //通信成功
-                    break
+                    print("通信成功")
                 case .failure:
-                    //error
+                    print("通信失敗")
                     HUD.show(.labeledError(title: L10n.CommunicationErrorView.Title.text, subtitle: nil))
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { HUD.hide() }
                 }
@@ -96,24 +92,23 @@ extension WeatherModel {
     func requestAPIandAgency(localCode: Int, latitude: Double, longitude: Double) {
         let urlOfAgency = URL(string: "https://www.jma.go.jp/bosai/forecast/data/forecast/\(localCode).json")!
         let agencyPublisher = URLSession.shared.dataTaskPublisher(for: URLRequest(url: urlOfAgency))
-            .map(\.data)
+            .map({(data, res) in return data})
             .decode(type: [Agency].self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
 
         let urlOfAPI = URL(string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee")!
         let apiPublisher = URLSession.shared.dataTaskPublisher(for: URLRequest(url: urlOfAPI))
-            .map(\.data)
+            .map({(data, res) in return data})
             .decode(type: [Agency].self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
 
-        Publishers.Zip(agencyPublisher, apiPublisher)
+         Publishers.Zip(agencyPublisher, apiPublisher)
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: {completion in
                     switch completion {
                     case .finished:
                         print("通信成功")
-                        break
                     case .failure:
                         print("通信失敗")
                     }},
