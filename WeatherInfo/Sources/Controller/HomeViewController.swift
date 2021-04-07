@@ -8,6 +8,8 @@ import Alamofire
 class HomeViewController: UIViewController {
     //Viewの参照を保持
     @IBOutlet var homeView: HomeView!
+    @IBOutlet weak var header: UIView!
+    @IBOutlet weak var middle: UIView!
     //Modelの参照を保持
     var weatherModel = WeatherModel()
     let decorder = JSONDecoder()
@@ -49,7 +51,14 @@ extension HomeViewController {
                     if unixtime < upper && floor(weatherModel.onecall!.lat*100) == floor(lat*100) && floor(weatherModel.onecall!.lon*100) == floor(lon*100) {
                         //通信なし
                         homeView.onecall = weatherModel.onecall
+                        //Viewの描画
                         homeView.setView(address: address, detail: weatherModel.readDetail()!)
+                        let xibHeaderView = HeaderView(frame: CGRect(x: 0, y: 0, width: 375, height: 177))
+                        xibHeaderView.set(onecall: weatherModel.onecall!, detail: weatherModel.readDetail()!)
+                        header.addSubview(xibHeaderView)
+                        let xibMiddleView = MiddleView(frame: CGRect(x: 0, y: 0, width: 375, height: 129))
+                        xibMiddleView.set(onecall: weatherModel.onecall!, detail: weatherModel.readDetail()!)
+                        middle.addSubview(xibMiddleView)
                     } else {
                         //通信あり
                         weatherModel.request(latitude: lat, longitude: lon)
@@ -60,7 +69,15 @@ extension HomeViewController {
                                 if !detail.isEmpty {
                                     DispatchQueue.main.async {
                                         homeView.onecall = weatherModel.onecall
+                                        //Viewを描画
                                         homeView.setView(address: address, detail: detail)
+                                        let xibHeaderView = HeaderView(frame: CGRect(x: 0, y: 0, width: 375, height: 177))
+                                        xibHeaderView.set(onecall: weatherModel.onecall!, detail: detail)
+                                        header.addSubview(xibHeaderView)
+                                        let xibMiddleView = MiddleView(frame: CGRect(x: 0, y: 0, width: 375, height: 129))
+                                        xibMiddleView.set(onecall: weatherModel.onecall!, detail: weatherModel.detail)
+                                        middle.addSubview(xibMiddleView)
+                                        //detailの保存
                                         weatherModel.saveDetail(detail: detail)
                                     }
                                 }
