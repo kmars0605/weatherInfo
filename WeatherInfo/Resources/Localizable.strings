@@ -1,8 +1,10 @@
-"CommunicationErrorView.Title.Text" = "通信に失敗しました";
+"CommunicationErrorView.Title.Text" = "通信に失敗しました。";
 "SearchErrorView.Title.Text" = "検索に失敗しました。";
 "LocationErrorView.Title.Text" = "位置情報なし";
 "LocationErrorView.Message.Text" = "他の位置情報を\n入力してください。";
 "LaundryIndexErrorView.Title.Text" = "エラー";
+"netWorkErrorView.Title.Text" = "ネットワークエラー";
+"netWorkErrorView.Message.Text" = "通信環境を\n確認してください。";
 
 "LaundryIndexLevel1.TiTle.Text" = "乾かない";
 "LaundryIndexLevel2.TiTle.Text" = "あまり乾かない";
@@ -10,7 +12,7 @@
 "LaundryIndexLevel4.TiTle.Text" = "乾く";
 "LaundryIndexLevel5.TiTle.Text" = "よく乾く";
 
-"InitialInputOfPlace.Text" = "位置情報を登録してください";
+"InitialInputOfPlace.Text" = "位置情報を登録してください。";
 "InputOfPlace.Text" = "位置情報を入力";
 
 "SafariURL.Text" = "https://forms.gle/U6PhvHVNUxH6zgJD9";

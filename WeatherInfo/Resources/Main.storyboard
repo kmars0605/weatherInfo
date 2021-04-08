@@ -190,9 +190,21 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ulp-GI-hy2" customClass="NADView">
                                                 <rect key="frame" x="0.0" y="506" width="375" height="100"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5Y-22-47n">
+                                                        <rect key="frame" x="150" y="40" width="75" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
                                                 <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="P5Y-22-47n" secondAttribute="trailing" constant="150" id="0Ux-gA-6ZY"/>
                                                     <constraint firstAttribute="height" constant="100" id="HQG-pP-0F6"/>
+                                                    <constraint firstAttribute="bottom" secondItem="P5Y-22-47n" secondAttribute="bottom" constant="39" id="Xzr-hE-16l"/>
+                                                    <constraint firstItem="P5Y-22-47n" firstAttribute="top" secondItem="Ulp-GI-hy2" secondAttribute="top" constant="40" id="cJt-O0-KdQ"/>
+                                                    <constraint firstItem="P5Y-22-47n" firstAttribute="leading" secondItem="Ulp-GI-hy2" secondAttribute="leading" constant="150" id="zm3-d5-0HT"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="nendApiKey" value="ad9efb439dfb2367f74c5fabb5a0725b3164154d"/>

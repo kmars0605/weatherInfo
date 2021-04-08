@@ -13,13 +13,13 @@ internal enum L10n {
 
   internal enum CommunicationErrorView {
     internal enum Title {
-      /// 通信に失敗しました
+      /// 通信に失敗しました。
       internal static let text = L10n.tr("Localizable", "CommunicationErrorView.Title.Text")
     }
   }
 
   internal enum InitialInputOfPlace {
-    /// 位置情報を登録してください
+    /// 位置情報を登録してください。
     internal static let text = L10n.tr("Localizable", "InitialInputOfPlace.Text")
   }
 
@@ -90,6 +90,17 @@ internal enum L10n {
     internal enum Title {
       /// 検索に失敗しました。
       internal static let text = L10n.tr("Localizable", "SearchErrorView.Title.Text")
+    }
+  }
+
+  internal enum NetWorkErrorView {
+    internal enum Message {
+      /// 通信環境を\n確認してください。
+      internal static let text = L10n.tr("Localizable", "netWorkErrorView.Message.Text")
+    }
+    internal enum Title {
+      /// ネットワークエラー
+      internal static let text = L10n.tr("Localizable", "netWorkErrorView.Title.Text")
     }
   }
 }

@@ -77,6 +77,18 @@ extension SettingPlaceView: MKLocalSearchCompleterDelegate{
         HUD.show(.labeledError(title: L10n.SearchErrorView.Title.text, subtitle: nil))
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { HUD.hide() }
     }
+
+    func netWorkError() {
+        DispatchQueue.main.async {
+            HUD.show(.labeledError(title: L10n.NetWorkErrorView.Title.text, subtitle: L10n.NetWorkErrorView.Message.text))
+        }
+    }
+
+    func netWorkSuccess() {
+        DispatchQueue.main.async {
+            HUD.hide()
+        }
+    }
 }
 
 extension SettingPlaceView: UITextFieldDelegate{

@@ -38,6 +38,7 @@ internal enum Asset {
   internal static let _50d = ImageAsset(name: "50d")
   internal static let _50n = ImageAsset(name: "50n")
   internal static let icon = ImageAsset(name: "Icon")
+  internal static let iconMono = ImageAsset(name: "Icon_mono")
   internal static let home = ImageAsset(name: "home")
   internal static let index1 = ImageAsset(name: "index1")
   internal static let index2 = ImageAsset(name: "index2")

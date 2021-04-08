@@ -37,7 +37,7 @@ extension WeatherModel {
     }
     //URLSessionでの実装
     func request(latitude: Double, longitude: Double) {
-        let url = URL(string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03e")!//e
+        let url = URL(string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee")!
         requestCancellable = URLSession.shared.dataTaskPublisher(for: URLRequest(url: url))
             .map({(data, res) in return data})
             .decode(type: OneCall.self, decoder: decorder)

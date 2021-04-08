@@ -1,12 +1,14 @@
 import UIKit
+import Network
+import PKHUD
 
 class SettingPlaceViewController: UIViewController {
     @IBOutlet var settingPlaceView: SettingPlaceView!
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewDidLoad()
         var bool = false
         var string = ""
+
         NotificationCenter.default.addObserver(self, selector: #selector(closePlace), name: .closePlace, object: nil)
         if let _ = UserDefaults.standard.object(forKey: "latest") {
             bool = false
@@ -17,8 +19,27 @@ class SettingPlaceViewController: UIViewController {
         }
         settingPlaceView.setView(bool: bool, string: string)
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        netWorkCheck()
+    }
     
     @objc func closePlace() {
         self.dismiss(animated: true, completion: nil)
+    }
+
+    func netWorkCheck() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                //通信環境あり
+                self.settingPlaceView.netWorkSuccess()
+            } else {
+                //通信環境なし
+                self.settingPlaceView.netWorkError()
+            }
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
     }
 }

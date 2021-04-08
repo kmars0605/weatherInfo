@@ -4,6 +4,7 @@ import PKHUD
 import Kanna
 import Combine
 import Alamofire
+import Network
 
 class HomeViewController: UIViewController {
     //Viewの参照を保持
@@ -33,7 +34,7 @@ class HomeViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        start()
+        netWorkCheck()
     }
 }
 
@@ -69,7 +70,7 @@ extension HomeViewController {
                             .sink(receiveValue: {error in
                                 if true {
                                     print("error")
-                                    errorProcess()
+                                    communicationError()
                                 }
                             })
                         requestCancellable = weatherModel.$detail
@@ -99,7 +100,7 @@ extension HomeViewController {
                         .sink(receiveValue: {error in
                             if error {
                                 //通信エラー処理
-                                errorProcess()
+                                communicationError()
                             }
                         })
                     HUD.show(.progress)
@@ -108,12 +109,20 @@ extension HomeViewController {
                             if !detail.isEmpty {
                                 DispatchQueue.main.async {
                                     homeView.onecall = weatherModel.onecall
+                                    //Viewを描画
                                     homeView.setView(address: address, detail: detail)
+                                    let xibHeaderView = HeaderView(frame: CGRect(x: 0, y: 0, width: 375, height: 177))
+                                    xibHeaderView.set(onecall: weatherModel.onecall!, detail: detail)
+                                    header.addSubview(xibHeaderView)
+                                    let xibMiddleView = MiddleView(frame: CGRect(x: 0, y: 0, width: 375, height: 129))
+                                    xibMiddleView.set(onecall: weatherModel.onecall!, detail: weatherModel.detail)
+                                    middle.addSubview(xibMiddleView)
+                                    //detailの保存
                                     weatherModel.saveDetail(detail: detail)
+                                    HUD.hide()
                                 }
                             }
                         })
-                    HUD.hide()
                 }
             }
         } else {
@@ -121,8 +130,8 @@ extension HomeViewController {
         }
     }
 
-    func errorProcess() {
-        homeView.errorProcess()
+    func communicationError() {
+        homeView.communicationError()
         DispatchQueue.main.asyncAfter(deadline:.now() + 1.2){
             let settingPlaceViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingPlace")
             self.present(settingPlaceViewController!, animated: true, completion: nil)
@@ -135,5 +144,21 @@ extension HomeViewController {
             UserDefaults.standard.set(nil, forKey: "detail")
         }
         return
+    }
+
+    func netWorkCheck() {
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                //通信環境あり
+                self.homeView.netWorkSuccess()
+                self.start()
+            } else {
+                //通信環境なし
+                self.homeView.netWorkError()
+            }
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
     }
 }
