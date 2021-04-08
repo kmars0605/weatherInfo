@@ -25,12 +25,10 @@ class HomeView: UIView {
     }
 
     func errorProcess() {
-        HUD.show(.labeledError(title: L10n.CommunicationErrorView.Title.text, subtitle: nil))
+        DispatchQueue.main.async {
+            HUD.show(.labeledError(title: L10n.CommunicationErrorView.Title.text, subtitle: nil))
+        }
         DispatchQueue.main.asyncAfter(deadline:.now() + 2.0){ HUD.hide() }
-        UserDefaults.standard.set(nil, forKey: "upper")
-        UserDefaults.standard.set(nil, forKey: "reVisit")
-        UserDefaults.standard.set(nil, forKey: "oneCall")
-        UserDefaults.standard.set(nil, forKey: "detail")
     }
 }
 

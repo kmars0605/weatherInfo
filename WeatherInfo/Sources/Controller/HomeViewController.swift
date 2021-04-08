@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
     var weatherModel = WeatherModel()
     let decorder = JSONDecoder()
     var requestCancellable: Cancellable?
+    var errorCancellable : Cancellable?
 
     deinit {
         requestCancellable?.cancel()
@@ -61,9 +62,16 @@ extension HomeViewController {
                         middle.addSubview(xibMiddleView)
                     } else {
                         //通信あり
-                        weatherModel.request(latitude: lat, longitude: lon)
                         HUD.show(.progress)
-                        homeView.onecall = weatherModel.onecall
+                        weatherModel.request(latitude: lat, longitude: lon)
+                        print("C:\(weatherModel.error)")
+                        requestCancellable = weatherModel.$error
+                            .sink(receiveValue: {error in
+                                if true {
+                                    print("error")
+                                    errorProcess()
+                                }
+                            })
                         requestCancellable = weatherModel.$detail
                             .sink(receiveValue: { detail in 
                                 if !detail.isEmpty {
@@ -79,16 +87,22 @@ extension HomeViewController {
                                         middle.addSubview(xibMiddleView)
                                         //detailの保存
                                         weatherModel.saveDetail(detail: detail)
+                                        HUD.hide()
                                     }
                                 }
                             })
-                        HUD.hide()
                     }
                 } else {
                     //初回訪問
                     weatherModel.request(latitude: lat, longitude: lon)
+                    errorCancellable = weatherModel.$error
+                        .sink(receiveValue: {error in
+                            if error {
+                                //通信エラー処理
+                                errorProcess()
+                            }
+                        })
                     HUD.show(.progress)
-                    homeView.onecall = weatherModel.onecall
                     requestCancellable = weatherModel.$detail
                         .sink(receiveValue: { detail in
                             if !detail.isEmpty {
@@ -108,14 +122,18 @@ extension HomeViewController {
     }
 
     func errorProcess() {
-        if weatherModel.detail.isEmpty {
-            homeView.errorProcess()
-            DispatchQueue.main.asyncAfter(deadline:.now() + 1.2){
-                let settingPlaceViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingPlace")
-                self.present(settingPlaceViewController!, animated: true, completion: nil)
-                let UINavigationController = self.tabBarController?.viewControllers?[0]
-                self.tabBarController?.selectedViewController = UINavigationController}
-            return
+        homeView.errorProcess()
+        DispatchQueue.main.asyncAfter(deadline:.now() + 1.2){
+            let settingPlaceViewController = self.storyboard?.instantiateViewController(withIdentifier: "SettingPlace")
+            self.present(settingPlaceViewController!, animated: true, completion: nil)
+            let UINavigationController = self.tabBarController?.viewControllers?[0]
+            self.tabBarController?.selectedViewController = UINavigationController
+            UserDefaults.standard.set(nil, forKey: "latest")
+            UserDefaults.standard.set(nil, forKey: "upper")
+            UserDefaults.standard.set(nil, forKey: "reVisit")
+            UserDefaults.standard.set(nil, forKey: "oneCall")
+            UserDefaults.standard.set(nil, forKey: "detail")
         }
+        return
     }
 }

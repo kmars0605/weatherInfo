@@ -3,7 +3,7 @@ import UIKit
 class SettingPlaceViewController: UIViewController {
     @IBOutlet var settingPlaceView: SettingPlaceView!
 
-    override func viewDidLoad() {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewDidLoad()
         var bool = false
         var string = ""

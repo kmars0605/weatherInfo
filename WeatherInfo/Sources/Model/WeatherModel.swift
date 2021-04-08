@@ -1,7 +1,6 @@
 import Foundation
 import Combine
 import Alamofire
-import PKHUD
 
 class WeatherModel {
     var onecall: OneCall?
@@ -9,6 +8,7 @@ class WeatherModel {
     let decorder = JSONDecoder()
     var requestCancellable: Cancellable?
     var subscriptions = Set<AnyCancellable>()
+    @Published var error = false
 }
 
 extension WeatherModel {
@@ -37,8 +37,7 @@ extension WeatherModel {
     }
     //URLSessionでの実装
     func request(latitude: Double, longitude: Double) {
-        let url = URL(string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee")!
-        HUD.show(.progress)
+        let url = URL(string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03e")!//e
         requestCancellable = URLSession.shared.dataTaskPublisher(for: URLRequest(url: url))
             .map({(data, res) in return data})
             .decode(type: OneCall.self, decoder: decorder)
@@ -48,9 +47,7 @@ extension WeatherModel {
                     print("通信成功")
                 case .failure:
                     print("通信失敗")
-                    HUD.hide()
-                    HUD.show(.labeledError(title: L10n.SearchErrorView.Title.text, subtitle: nil))
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { HUD.hide() }
+                    self.error = true
                 }
             }, receiveValue: { [self] onecall in
                 self.onecall = onecall
@@ -73,8 +70,7 @@ extension WeatherModel {
                     print("通信成功")
                 case .failure:
                     print("通信失敗")
-                    HUD.show(.labeledError(title: L10n.CommunicationErrorView.Title.text, subtitle: nil))
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { HUD.hide() }
+                    self.error = true
                 }
             }, receiveValue: { [self] onecall in
                 self.onecall = onecall
