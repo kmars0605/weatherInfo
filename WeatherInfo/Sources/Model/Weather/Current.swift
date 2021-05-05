@@ -1,4 +1,4 @@
-struct Current: Codable {
+class Current: Codable {
     let dt: Int
     let sunrise: Double
     let sunset: Double
@@ -28,7 +28,7 @@ struct Current: Codable {
     }
 }
 
-struct CurrentWeather: Codable{
+class CurrentWeather: Codable{
     let main: String
     let description: String
     let icon: String

@@ -1,3 +1,3 @@
-class Agency: Codable {
+class AgencyModel: Codable {
     let publishingOffice: String
 }

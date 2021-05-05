@@ -1,4 +1,4 @@
-class Icon {
+class IconModel {
     let sectionTitle = ["洗濯指数","天気アイコン"]
     let arrayData1 = [
         ["title":"index1", "content":"乾かない。外干しをしても乾かないため、\n部屋干しを特に推奨"],

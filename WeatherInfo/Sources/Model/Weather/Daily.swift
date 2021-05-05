@@ -1,4 +1,4 @@
-struct Daily: Codable {
+class Daily: Codable {
     let dt: Int
     let sunrise: Double
     let sunset: Double
@@ -28,14 +28,14 @@ struct Daily: Codable {
     }
 }
 
-struct DailyTemp: Codable{
+class DailyTemp: Codable{
     let day: Double
     let min: Double
     let max: Double
     let night: Double
 }
 
-struct DailyWeather: Codable{
+class DailyWeather: Codable{
     let main: String
     let description: String
     let icon:String

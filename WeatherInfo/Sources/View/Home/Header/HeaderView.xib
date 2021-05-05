@@ -78,6 +78,13 @@
                             <color key="textColor" red="0.1137254902" green="0.67450980390000004" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jPn-dz-IHQ">
+                            <rect key="frame" x="225" y="0.0" width="4" height="177"/>
+                            <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="4" id="WcT-Hu-VBN"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
@@ -93,11 +100,14 @@
                         <constraint firstItem="Va5-uZ-ePW" firstAttribute="top" secondItem="T0C-6I-yrg" secondAttribute="top" id="HpO-g2-ivW"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ATv-T2-2me" secondAttribute="trailing" constant="20" symbolic="YES" id="JDX-or-8tg"/>
                         <constraint firstItem="Va5-uZ-ePW" firstAttribute="centerX" secondItem="T0C-6I-yrg" secondAttribute="centerX" id="NOo-Ab-QFf"/>
+                        <constraint firstAttribute="bottom" secondItem="jPn-dz-IHQ" secondAttribute="bottom" id="PMD-wz-9kC"/>
+                        <constraint firstItem="jPn-dz-IHQ" firstAttribute="leading" secondItem="yUI-H0-taE" secondAttribute="trailing" constant="58.5" id="PuS-Cu-gtC"/>
                         <constraint firstItem="fCY-yl-XWb" firstAttribute="top" secondItem="yUI-H0-taE" secondAttribute="bottom" constant="10" id="Qnb-h3-Fzj"/>
                         <constraint firstAttribute="bottom" secondItem="LIe-qu-2ct" secondAttribute="bottom" constant="9" id="TfM-yf-OfZ"/>
                         <constraint firstAttribute="bottom" secondItem="fCY-yl-XWb" secondAttribute="bottom" constant="9" id="XMb-Fv-rAO"/>
                         <constraint firstItem="fCY-yl-XWb" firstAttribute="leading" secondItem="Va5-uZ-ePW" secondAttribute="trailing" constant="8" id="aOV-b1-UrD"/>
                         <constraint firstItem="LIe-qu-2ct" firstAttribute="top" secondItem="yUI-H0-taE" secondAttribute="bottom" constant="10" id="c1n-oV-dtN"/>
+                        <constraint firstItem="jPn-dz-IHQ" firstAttribute="top" secondItem="T0C-6I-yrg" secondAttribute="top" id="cUg-qi-PCb"/>
                         <constraint firstItem="Va5-uZ-ePW" firstAttribute="leading" secondItem="XfQ-2T-q8L" secondAttribute="trailing" constant="10" id="dBE-aD-7ok"/>
                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fCY-yl-XWb" secondAttribute="trailing" constant="20" symbolic="YES" id="nvn-I5-gCa"/>
                         <constraint firstItem="XfQ-2T-q8L" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="T0C-6I-yrg" secondAttribute="leading" constant="20" symbolic="YES" id="ucZ-hb-M4R"/>
@@ -183,7 +193,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="T0C-6I-yrg" firstAttribute="top" secondItem="duk-We-PLW" secondAttribute="top" id="ZuW-N0-TmP"/>
                 <constraint firstAttribute="trailing" secondItem="T0C-6I-yrg" secondAttribute="trailing" constant="150" id="b3B-s0-z1s"/>

@@ -1,4 +1,4 @@
-class Tag {
+class TagModel {
     let arrayData1 =  [
         ["JIS":"A","title":"a", "content":"液温は95℃を限度とし、\n洗濯機で洗濯ができる"],
         ["JIS":"","title":"b", "content":"液温は70℃を限度とし、\n洗濯機で洗濯ができる"],

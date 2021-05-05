@@ -1,4 +1,4 @@
-struct OneCall: Codable {
+class OneCall: Codable {
     let lat: Double
     let lon: Double
     let current: Current

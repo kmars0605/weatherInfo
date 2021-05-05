@@ -1,7 +1,7 @@
 import UIKit
 
 class IconDescView: UIView {
-    var icon = Icon()
+    var iconModel = IconModel()
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var iconTableView: UITableView!
     
@@ -22,15 +22,15 @@ extension IconDescView {
 
 extension IconDescView: UITableViewDataSource,UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return icon.sectionTitle.count
+        return iconModel.sectionTitle.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return icon.arrayData1.count
+            return iconModel.arrayData1.count
         }
         else if section == 1 {
-            return icon.arrayData2.count
+            return iconModel.arrayData2.count
         }
         else{
             return 0
@@ -40,17 +40,17 @@ extension IconDescView: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! IconDescTableViewCell
         if indexPath.section == 0{
-            cell.iconImage.image = UIImage(named: String(icon.arrayData1[indexPath.row]["title"]!))
-            cell.descLabel.text = icon.arrayData1[indexPath.row]["content"]
+            cell.iconImage.image = UIImage(named: String(iconModel.arrayData1[indexPath.row]["title"]!))
+            cell.descLabel.text = iconModel.arrayData1[indexPath.row]["content"]
         }else if indexPath.section == 1{
-            cell.iconImage.image = UIImage(named: String(icon.arrayData2[indexPath.row]["title"]!))
-            cell.descLabel.text = icon.arrayData2[indexPath.row]["content"]
+            cell.iconImage.image = UIImage(named: String(iconModel.arrayData2[indexPath.row]["title"]!))
+            cell.descLabel.text = iconModel.arrayData2[indexPath.row]["content"]
         }
         return cell
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return icon.sectionTitle[section]
+        return iconModel.sectionTitle[section]
     }
 
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

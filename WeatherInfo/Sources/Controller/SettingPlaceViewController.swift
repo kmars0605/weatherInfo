@@ -4,13 +4,14 @@ import PKHUD
 
 class SettingPlaceViewController: UIViewController {
     @IBOutlet var settingPlaceView: SettingPlaceView!
+    let userModel = UserModel()
 
     override func viewWillAppear(_ animated: Bool) {
         var bool = false
         var string = ""
 
         NotificationCenter.default.addObserver(self, selector: #selector(closePlace), name: .closePlace, object: nil)
-        if let _ = UserDefaults.standard.object(forKey: "latest") {
+        if let _ = userModel.loadAddress() {
             bool = false
             string = L10n.InputOfPlace.text
         } else {

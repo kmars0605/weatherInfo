@@ -63,9 +63,7 @@ extension WeatherModel {
                 //OneCallのデータを保存
                 self.saveOnecall(onecall: [onecall])
                 //通信した時間の1時間後をunixで保存
-                UserDefaults.standard.set(self.onecall!.hourly[1].dt, forKey: "upper")
             })
-        UserDefaults.standard.set(true, forKey: "reVisit")
     }
     //Alamofireでの実装
     func requestAF(latitude: Double, longitude: Double) {
@@ -86,10 +84,8 @@ extension WeatherModel {
                 //OneCallのデータを保存
                 self.saveOnecall(onecall: [onecall])
                 //通信した時間の1時間後をunixで保存
-                UserDefaults.standard.set(self.onecall!.hourly[1].dt, forKey: "upper")
                 self.detail.removeAll()
             })
-        UserDefaults.standard.set(true, forKey: "reVisit")
     }
 
     //気象庁とopenWeatherMapの両者の通信を束ねる時に使用
@@ -97,13 +93,13 @@ extension WeatherModel {
         let urlOfAgency = URL(string: "https://www.jma.go.jp/bosai/forecast/data/forecast/\(localCode).json")!
         let agencyPublisher = URLSession.shared.dataTaskPublisher(for: URLRequest(url: urlOfAgency))
             .map({(data, res) in return data})
-            .decode(type: [Agency].self, decoder: JSONDecoder())
+            .decode(type: [AgencyModel].self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
 
         let urlOfAPI = URL(string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee")!
         let apiPublisher = URLSession.shared.dataTaskPublisher(for: URLRequest(url: urlOfAPI))
             .map({(data, res) in return data})
-            .decode(type: [Agency].self, decoder: JSONDecoder())
+            .decode(type: [AgencyModel].self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
 
          Publishers.Zip(agencyPublisher, apiPublisher)

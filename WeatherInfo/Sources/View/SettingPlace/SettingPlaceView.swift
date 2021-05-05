@@ -6,6 +6,7 @@ class SettingPlaceView: UIView {
     private var searchCompleter = MKLocalSearchCompleter()
     var address = "地名"
     var bool = false
+    let userModel = UserModel()
     
     @IBOutlet weak var cancelIcon: UIImageView!
     @IBOutlet weak var cancelButton: UIButton!
@@ -51,7 +52,7 @@ extension SettingPlaceView: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.address = searchCompleter.results[indexPath.row].title
+        address = searchCompleter.results[indexPath.row].title
         CLGeocoder().geocodeAddressString(address) { [self] placemarks, error in
             guard (placemarks?.first?.location?.coordinate.latitude) != nil else {
                 //位置情報なし
@@ -59,8 +60,7 @@ extension SettingPlaceView: UITableViewDelegate, UITableViewDataSource {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { HUD.hide() }
                 return
             }
-            UserDefaults.standard.set(self.address, forKey:"latest")
-            UserDefaults.standard.synchronize()
+            userModel.saveAddress(address: address)
             tableView.deselectRow(at: indexPath, animated: true)
             NotificationCenter.default.post(name: .closePlace, object: nil)
         }

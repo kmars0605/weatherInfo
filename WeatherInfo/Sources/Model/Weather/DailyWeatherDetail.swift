@@ -1,6 +1,6 @@
 import Foundation
 
-struct DailyWeatherDetail: Codable {
+class DailyWeatherDetail: Codable {
     let desc:String
     let mainjp:String
     let jsonicon:String

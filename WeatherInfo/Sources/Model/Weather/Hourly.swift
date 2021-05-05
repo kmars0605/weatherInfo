@@ -1,4 +1,4 @@
-struct Hourly: Codable {
+class Hourly: Codable {
     let dt: Int
     let temp: Double
     let feelsLike: Double
@@ -26,7 +26,7 @@ struct Hourly: Codable {
     }
 }
 
-struct HourlyWeather: Codable{
+class HourlyWeather: Codable{
     let main: String
     let description: String
     let icon:String

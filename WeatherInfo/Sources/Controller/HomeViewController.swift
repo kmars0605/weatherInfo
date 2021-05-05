@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var middle: UIView!
     //Modelの参照を保持
     var weatherModel = WeatherModel()
+    let userModel = UserModel()
     let decorder = JSONDecoder()
     var requestCancellable: Cancellable?
     var errorCancellable : Cancellable?
@@ -40,26 +41,26 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
     func start() {
-        if let address = UserDefaults.standard.object(forKey: "latest") as? String {
+        if let address = userModel.loadAddress() {
             CLGeocoder().geocodeAddressString(address) { [self] placemarks, error in
                 guard let lat = placemarks?.first?.location?.coordinate.latitude else { return }
                 guard let lon = placemarks?.first?.location?.coordinate.longitude else { return }
-                if UserDefaults.standard.bool(forKey: "reVisit") {
+                if userModel.loadVisitInfo() {
                     //再訪問
-                    let upper = UserDefaults.standard.object(forKey: "upper") as! Int
+                    let upper = userModel.loadTime()
                     let unixtime = Int(Date().timeIntervalSince1970)
-                    weatherModel.onecall = weatherModel.readOnecall()![0]
+                    weatherModel.onecall = weatherModel.loadOnecall()![0]
                     //過去の位置情報と現在の位置情報を比較
                     if unixtime < upper && floor(weatherModel.onecall!.lat*100) == floor(lat*100) && floor(weatherModel.onecall!.lon*100) == floor(lon*100) {
                         //通信なし
                         homeView.onecall = weatherModel.onecall
                         //Viewの描画
-                        homeView.setView(address: address, detail: weatherModel.readDetail()!)
+                        homeView.setView(address: address, detail: weatherModel.loadDetail()!)
                         let xibHeaderView = HeaderView(frame: CGRect(x: 0, y: 0, width: 375, height: 177))
-                        xibHeaderView.set(onecall: weatherModel.onecall!, detail: weatherModel.readDetail()!)
+                        xibHeaderView.set(onecall: weatherModel.onecall!, detail: weatherModel.loadDetail()!)
                         header.addSubview(xibHeaderView)
                         let xibMiddleView = MiddleView(frame: CGRect(x: 0, y: 0, width: 375, height: 129))
-                        xibMiddleView.set(onecall: weatherModel.onecall!, detail: weatherModel.readDetail()!)
+                        xibMiddleView.set(onecall: weatherModel.onecall!, detail: weatherModel.loadDetail()!)
                         middle.addSubview(xibMiddleView)
                     } else {
                         //通信あり
@@ -68,10 +69,10 @@ extension HomeViewController {
                         print("C:\(weatherModel.error)")
                         requestCancellable = weatherModel.$error
                             .sink(receiveValue: {error in
-                                if true {
-                                    print("error")
-                                    communicationError()
-                                }
+//                                if true {
+//                                    print("error")
+//                                    communicationError()
+//                                }
                             })
                         requestCancellable = weatherModel.$detail
                             .sink(receiveValue: { detail in 
@@ -86,7 +87,8 @@ extension HomeViewController {
                                         let xibMiddleView = MiddleView(frame: CGRect(x: 0, y: 0, width: 375, height: 129))
                                         xibMiddleView.set(onecall: weatherModel.onecall!, detail: weatherModel.detail)
                                         middle.addSubview(xibMiddleView)
-                                        //detailの保存
+                                        //保存
+                                        userModel.saveTime(dt: weatherModel.onecall!.hourly[1].dt)
                                         weatherModel.saveDetail(detail: detail)
                                         HUD.hide()
                                     }
@@ -117,7 +119,9 @@ extension HomeViewController {
                                     let xibMiddleView = MiddleView(frame: CGRect(x: 0, y: 0, width: 375, height: 129))
                                     xibMiddleView.set(onecall: weatherModel.onecall!, detail: weatherModel.detail)
                                     middle.addSubview(xibMiddleView)
-                                    //detailの保存
+                                    //保存
+                                    userModel.saveTime(dt: weatherModel.onecall!.hourly[1].dt)
+                                    userModel.saveVisitInfo(bool: true)
                                     weatherModel.saveDetail(detail: detail)
                                     HUD.hide()
                                 }
@@ -137,11 +141,9 @@ extension HomeViewController {
             self.present(settingPlaceViewController!, animated: true, completion: nil)
             let UINavigationController = self.tabBarController?.viewControllers?[0]
             self.tabBarController?.selectedViewController = UINavigationController
-            UserDefaults.standard.set(nil, forKey: "latest")
-            UserDefaults.standard.set(nil, forKey: "upper")
-            UserDefaults.standard.set(nil, forKey: "reVisit")
-            UserDefaults.standard.set(nil, forKey: "oneCall")
-            UserDefaults.standard.set(nil, forKey: "detail")
+            self.userModel.resetUserInfo()
+            self.weatherModel.resetOnecall()
+            self.weatherModel.resetDetail()
         }
         return
     }
