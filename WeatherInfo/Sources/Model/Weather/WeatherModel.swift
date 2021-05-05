@@ -18,10 +18,14 @@ extension WeatherModel {
         UserDefaults.standard.set(data as [Any], forKey: "oneCall")
     }
 
-    func readOnecall() -> [OneCall]? {
+    func loadOnecall() -> [OneCall]? {
         guard let items = UserDefaults.standard.array(forKey: "oneCall") as? [Data] else { return [OneCall]() }
         let decodedItems = items.map { try! JSONDecoder().decode(OneCall.self, from: $0) }
         return decodedItems
+    }
+
+    func resetOnecall()  {
+        UserDefaults.standard.set(nil, forKey: "oneCall")
     }
 
     func saveDetail(detail: [DailyWeatherDetail]) {
@@ -30,10 +34,14 @@ extension WeatherModel {
         self.detail.removeAll()
     }
 
-    func readDetail() -> [DailyWeatherDetail]? {
+    func loadDetail() -> [DailyWeatherDetail]? {
         guard let items = UserDefaults.standard.array(forKey: "detail") as? [Data] else { return [DailyWeatherDetail]() }
         let decodedItems = items.map { try! JSONDecoder().decode(DailyWeatherDetail.self, from: $0) }
         return decodedItems
+    }
+
+    func resetDetail() {
+        UserDefaults.standard.set(nil, forKey: "detail")
     }
     //URLSessionでの実装
     func request(latitude: Double, longitude: Double) {

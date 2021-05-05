@@ -1,3 +1,3 @@
-struct Agency: Codable {
+class Agency: Codable {
     let publishingOffice: String
 }
