@@ -1,9 +1,13 @@
 import UIKit
 
 class IconDescView: UIView {
-    var iconModel = IconModel()
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var iconTableView: UITableView!
+    var iconModel: IconModel!
+
+    func inject(iconModel: IconModel) {
+        self.iconModel = iconModel
+    }
     
     public func setView() {
         let nib = UINib(nibName: "IconDescTableViewCell", bundle: nil)

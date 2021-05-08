@@ -3,12 +3,11 @@ import Combine
 import Alamofire
 
 class WeatherModel {
-    var onecall: OneCall?
     @Published var detail: [DailyWeatherDetail] = []
-    let decorder = JSONDecoder()
+    @Published var error = false
+    var onecall: OneCall?
     var requestCancellable: Cancellable?
     var subscriptions = Set<AnyCancellable>()
-    @Published var error = false
 }
 
 extension WeatherModel {
@@ -18,10 +17,10 @@ extension WeatherModel {
         UserDefaults.standard.set(data as [Any], forKey: "oneCall")
     }
 
-    func loadOnecall() -> [OneCall]? {
-        guard let items = UserDefaults.standard.array(forKey: "oneCall") as? [Data] else { return [OneCall]() }
+    func loadOnecall() {
+        guard let items = UserDefaults.standard.array(forKey: "oneCall") as? [Data] else { return }
         let decodedItems = items.map { try! JSONDecoder().decode(OneCall.self, from: $0) }
-        return decodedItems
+        self.onecall = decodedItems[0]
     }
 
     func resetOnecall()  {
@@ -45,16 +44,30 @@ extension WeatherModel {
     }
     //URLSessionでの実装
     func request(latitude: Double, longitude: Double) {
+        let decorder = JSONDecoder()
         let url = URL(string: "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee")!
         requestCancellable = URLSession.shared.dataTaskPublisher(for: URLRequest(url: url))
-            .map({(data, res) in return data})
+            .map({(data,response) in
+                    if let response = response as? HTTPURLResponse {
+                        if response.statusCode != 200 {
+                            print("response.statusCode = \(response.statusCode)")
+                            print("通信失敗")
+                            self.error = true
+                        } else { print("通信成功") }
+                    } else {
+                        print("通信失敗")
+                        self.error = true
+                    }
+                    return data})
             .decode(type: OneCall.self, decoder: decorder)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
-                    print("通信成功")
+                    //通信・デコード成功
+                    print("成功")
                 case .failure:
-                    print("通信失敗")
+                    //通信orデコード失敗
+                    print("失敗")
                     self.error = true
                 }
             }, receiveValue: { [self] onecall in
@@ -62,11 +75,11 @@ extension WeatherModel {
                 self.detail = onecall.daily.map{DailyWeatherDetail(daily: $0)}
                 //OneCallのデータを保存
                 self.saveOnecall(onecall: [onecall])
-                //通信した時間の1時間後をunixで保存
             })
     }
     //Alamofireでの実装
     func requestAF(latitude: Double, longitude: Double) {
+        let decorder = JSONDecoder()
         let url = "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&units=metric&APPID=12de4b711b7224a6556ea9e11f9a03ee"
         requestCancellable = AF.request(url).publishDecodable(type: OneCall.self, decoder: decorder)
             .value()

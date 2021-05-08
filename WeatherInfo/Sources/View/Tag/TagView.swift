@@ -1,6 +1,10 @@
 import UIKit
 class TagView: UIView {
-    var tagModel = TagModel()
+    var tagModel: TagModel!
+
+    func inject(tagModel: TagModel){
+        self.tagModel = tagModel
+    }
     @IBOutlet weak var tagTableView: UITableView!
 
     public func setView() {
