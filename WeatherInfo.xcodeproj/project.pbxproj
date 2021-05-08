@@ -29,6 +29,7 @@
 		2146BB76260B2F78001177F7 /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2146BB75260B2F78001177F7 /* TagViewController.swift */; };
 		2146BB79260B32DF001177F7 /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2146BB78260B32DF001177F7 /* TagModel.swift */; };
 		2146BB7C260B340C001177F7 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2146BB7B260B340C001177F7 /* TagView.swift */; };
+		215A4A592646840000751107 /* IndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 215A4A582646840000751107 /* IndexView.swift */; };
 		21879F6E2547EA2300D7B5EE /* IconDescViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21879F6D2547EA2300D7B5EE /* IconDescViewController.swift */; };
 		21879F752547FD2900D7B5EE /* IconDescTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21879F732547FD2900D7B5EE /* IconDescTableViewCell.swift */; };
 		2197F0B62615CA40000CEC32 /* AgencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2197F0B52615CA40000CEC32 /* AgencyModel.swift */; };
@@ -93,6 +94,7 @@
 		2146BB75260B2F78001177F7 /* TagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		2146BB78260B32DF001177F7 /* TagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		2146BB7B260B340C001177F7 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		215A4A582646840000751107 /* IndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexView.swift; sourceTree = "<group>"; };
 		21879F6D2547EA2300D7B5EE /* IconDescViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconDescViewController.swift; sourceTree = "<group>"; };
 		21879F732547FD2900D7B5EE /* IconDescTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconDescTableViewCell.swift; sourceTree = "<group>"; };
 		2197F0B52615CA40000CEC32 /* AgencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgencyModel.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				2146B9932609B555001177F7 /* HourlyCollection */,
 				21EBC4E3261DAAE4002E07AE /* Middle */,
 				2146B9912609B48E001177F7 /* DailyTable */,
+				215A4A5A264699DC00751107 /* Index */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -258,6 +261,14 @@
 				2107FB292575FD14008CED99 /* TagTableViewCell.xib */,
 			);
 			path = TagTable;
+			sourceTree = "<group>";
+		};
+		215A4A5A264699DC00751107 /* Index */ = {
+			isa = PBXGroup;
+			children = (
+				215A4A582646840000751107 /* IndexView.swift */,
+			);
+			path = Index;
 			sourceTree = "<group>";
 		};
 		21B7091326425DBA00FE0E47 /* Weather */ = {
@@ -699,6 +710,7 @@
 				21DEB495260E0989004C101F /* IconDescView.swift in Sources */,
 				21E33DD12534645900C7524D /* DailyTableViewCell.swift in Sources */,
 				2135CA1E253EEA34004EE6EC /* SettingViewController.swift in Sources */,
+				215A4A592646840000751107 /* IndexView.swift in Sources */,
 				21C6951D2530424900C8BE65 /* HomeViewController.swift in Sources */,
 				21EBC4D7261C975A002E07AE /* HeaderView.swift in Sources */,
 				21EBC4E5261DAB87002E07AE /* MiddleView.swift in Sources */,
