@@ -33,10 +33,10 @@ extension WeatherModel {
         self.detail.removeAll()
     }
 
-    func loadDetail() -> [DailyWeatherDetail]? {
-        guard let items = UserDefaults.standard.array(forKey: "detail") as? [Data] else { return [DailyWeatherDetail]() }
+    func loadDetail() {
+        guard let items = UserDefaults.standard.array(forKey: "detail") as? [Data] else { return }
         let decodedItems = items.map { try! JSONDecoder().decode(DailyWeatherDetail.self, from: $0) }
-        return decodedItems
+        self.detail = decodedItems
     }
 
     func resetDetail() {

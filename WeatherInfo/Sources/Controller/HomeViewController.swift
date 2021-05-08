@@ -9,8 +9,6 @@ import Network
 class HomeViewController: UIViewController {
     //Viewの参照を保持
     @IBOutlet var homeView: HomeView!
-    @IBOutlet weak var header: UIView!
-    @IBOutlet weak var middle: UIView!
     //Modelの参照を保持
     var weatherModel = WeatherModel()
     let userModel = UserModel()
@@ -38,7 +36,6 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
     func start() {
-        let width = self.homeView.frame.width
         if let address = userModel.loadAddress() {
             CLGeocoder().geocodeAddressString(address) { [self] placemarks, error in
                 guard let lat = placemarks?.first?.location?.coordinate.latitude else {
@@ -56,15 +53,10 @@ extension HomeViewController {
                 //過去の位置情報と現在の位置情報を比較
                 if unixtime < upper && floor((weatherModel.onecall?.lat ?? 0)*100) == floor(lat*100) && floor((weatherModel.onecall?.lon ?? 0)*100) == floor(lon*100) {
                     //通信なし
-                    homeView.onecall = weatherModel.onecall
+                    weatherModel.loadDetail()
+                    homeView.weatherModel = weatherModel
                     //Viewを描画
-                    homeView.setView(address: address, detail: weatherModel.loadDetail()!)
-                    let xibHeaderView = HeaderView(frame: CGRect(x: 0, y: 0, width: 375, height: 177))
-                    xibHeaderView.set(onecall: weatherModel.onecall!, detail: weatherModel.loadDetail()!)
-                    header.addSubview(xibHeaderView)
-                    let xibMiddleView = MiddleView(frame: CGRect(x: 0, y: 0, width: 375, height: 129))
-                    xibMiddleView.set(onecall: weatherModel.onecall!, detail: weatherModel.loadDetail()!)
-                    middle.addSubview(xibMiddleView)
+                    homeView.setView(address: address)
                 } else {
                     //通信あり
                     HUD.show(.progress)
@@ -80,24 +72,19 @@ extension HomeViewController {
                         .sink(receiveValue: { detail in
                             if !detail.isEmpty {
                                 DispatchQueue.main.async {
-                                    self.homeView.onecall = self.weatherModel.onecall
+                                    homeView.weatherModel = weatherModel
                                     //Viewを描画
-                                    self.homeView.setView(address: address, detail: detail)
-                                    let xibHeaderView = HeaderView(frame: CGRect(x: 0, y: 0, width: 375, height: 30))
-                                    xibHeaderView.set(onecall: self.weatherModel.onecall!, detail: detail)
-                                    self.header.addSubview(xibHeaderView)
-                                    let xibMiddleView = MiddleView(frame: CGRect(x: 0, y: 0, width: 375, height: 129))
-                                    xibMiddleView.set(onecall: self.weatherModel.onecall!, detail: self.weatherModel.detail)
-                                    self.middle.addSubview(xibMiddleView)
+                                    homeView.setView(address: address)
                                     //保存
-                                    self.userModel.saveTime(dt: self.weatherModel.onecall!.hourly[1].dt)
-                                    self.weatherModel.saveDetail(detail: detail)
+                                    userModel.saveTime(dt: weatherModel.onecall!.hourly[1].dt)
+                                    weatherModel.saveDetail(detail: detail)
                                     HUD.hide()
                                 }
                             }
                         })
+                    }
                 }
-                }}
+            }
         } else {
             print("位置情報なし")
         }
