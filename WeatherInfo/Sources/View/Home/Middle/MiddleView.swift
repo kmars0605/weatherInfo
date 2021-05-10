@@ -27,8 +27,8 @@ class MiddleView: UIView {
     func set(onecall:OneCall,detail: [DailyWeatherDetail]) {
         laundryIndexImageView.image = UIImage(named: "index\(detail[0].laundryIndex)")
         laundryIndexLabel.text = "\(detail[0].laundryIndexdesc)"
-        humidLabel.text = "\(onecall.hourly[0].humidity)%"
-        popLabel.text = "\(onecall.hourly[0].pop)%"
+        humidLabel.text = "\(onecall.daily[0].humidity)%"
+        popLabel.text = "\(NSString(format: "%0.2f" , onecall.hourly[0].pop))%"
         wingSpeedLabel.text = "\(round(onecall.hourly[0].windSpeed))m"
     }
 }

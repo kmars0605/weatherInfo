@@ -39,7 +39,6 @@ class HomeView: UIView {
         tableView.reloadData()
         contentView.frame.size.height += tableView.frame.size.height + adView.frame.size.height + 8
         scrollView.contentSize = CGSize(width: scrollView.frame.width, height: contentView.frame.size.height)
-        print(width)
     }
 
     func communicationError() {
