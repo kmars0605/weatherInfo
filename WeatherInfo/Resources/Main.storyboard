@@ -109,10 +109,6 @@
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nZi-ZC-7Ah">
                                                                 <rect key="frame" x="150" y="78" width="75" height="21"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="75" id="T6L-Ga-74Z"/>
-                                                                    <constraint firstAttribute="height" constant="21" id="rKA-oF-VUZ"/>
-                                                                </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -120,12 +116,10 @@
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="bottom" secondItem="nZi-ZC-7Ah" secondAttribute="bottom" constant="78" id="2JY-ud-Iar"/>
-                                                            <constraint firstItem="nZi-ZC-7Ah" firstAttribute="top" secondItem="N1b-yE-ejZ" secondAttribute="top" constant="78" id="5Nj-mh-Qik"/>
                                                             <constraint firstAttribute="height" constant="177" id="RkK-83-uOk"/>
-                                                            <constraint firstItem="nZi-ZC-7Ah" firstAttribute="leading" secondItem="N1b-yE-ejZ" secondAttribute="leading" constant="150" id="TQE-y3-Xsb"/>
+                                                            <constraint firstItem="nZi-ZC-7Ah" firstAttribute="centerX" secondItem="N1b-yE-ejZ" secondAttribute="centerX" id="WCi-Yh-bbt"/>
+                                                            <constraint firstItem="nZi-ZC-7Ah" firstAttribute="centerY" secondItem="N1b-yE-ejZ" secondAttribute="centerY" id="Wh5-pA-HVN"/>
                                                             <constraint firstAttribute="width" constant="375" id="ohZ-aK-rEN"/>
-                                                            <constraint firstAttribute="trailing" secondItem="nZi-ZC-7Ah" secondAttribute="trailing" constant="150" id="uGi-uT-NVe"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -178,8 +172,8 @@
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstItem="Ifs-Gc-Bqk" firstAttribute="centerY" secondItem="1bi-YG-kkU" secondAttribute="centerY" id="BIm-GT-V3z"/>
-                                                    <constraint firstItem="Ifs-Gc-Bqk" firstAttribute="centerX" secondItem="1bi-YG-kkU" secondAttribute="centerX" id="JIU-rB-PgE"/>
+                                                    <constraint firstItem="Ifs-Gc-Bqk" firstAttribute="centerY" secondItem="1bi-YG-kkU" secondAttribute="centerY" id="Eq4-KC-woI"/>
+                                                    <constraint firstItem="Ifs-Gc-Bqk" firstAttribute="centerX" secondItem="1bi-YG-kkU" secondAttribute="centerX" id="NpH-fz-9TI"/>
                                                     <constraint firstAttribute="height" constant="129" id="m5t-eN-oXU"/>
                                                 </constraints>
                                             </view>
