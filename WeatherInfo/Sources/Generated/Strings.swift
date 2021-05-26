@@ -37,14 +37,14 @@ internal enum L10n {
 
   internal enum LaundryIndexLevel1 {
     internal enum TiTle {
-      /// 乾かない
+      /// 全く乾かない
       internal static let text = L10n.tr("Localizable", "LaundryIndexLevel1.TiTle.Text")
     }
   }
 
   internal enum LaundryIndexLevel2 {
     internal enum TiTle {
-      /// あまり乾かない
+      /// 乾かない
       internal static let text = L10n.tr("Localizable", "LaundryIndexLevel2.TiTle.Text")
     }
   }
