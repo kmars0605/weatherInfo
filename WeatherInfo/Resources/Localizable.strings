@@ -6,8 +6,8 @@
 "netWorkErrorView.Title.Text" = "ネットワークエラー";
 "netWorkErrorView.Message.Text" = "通信環境を\n確認してください。";
 
-"LaundryIndexLevel1.TiTle.Text" = "乾かない";
-"LaundryIndexLevel2.TiTle.Text" = "あまり乾かない";
+"LaundryIndexLevel1.TiTle.Text" = "全く乾かない";
+"LaundryIndexLevel2.TiTle.Text" = "乾かない";
 "LaundryIndexLevel3.TiTle.Text" = "やや乾く";
 "LaundryIndexLevel4.TiTle.Text" = "乾く";
 "LaundryIndexLevel5.TiTle.Text" = "よく乾く";
