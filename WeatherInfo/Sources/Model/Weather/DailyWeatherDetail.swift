@@ -1,23 +1,23 @@
 import Foundation
 
 class DailyWeatherDetail: Codable {
-    let desc:String
-    let mainjp:String
-    let jsonicon:String
-    let icon:String
-    let pop:Double
-    let maxtemp:Double
-    let mintemp:Double
-    let maxtempRound:Int
-    let mintempRound:Int
-    let humidity:Int
-    let humidPer:Double
-    var laundryIndex:Int
-    var laundryIndexdesc:String
-    var e:Double
-    var vaporAmount:Double
-    var humidCapacity:Double
-    var totalScore:Int?
+    public let desc:String
+    public let mainjp:String
+    public let jsonicon:String
+    public let icon:String
+    public let pop:Double
+    public let maxtemp:Double
+    public let mintemp:Double
+    public let maxtempRound:Int
+    public let mintempRound:Int
+    public let humidity:Int
+    public let humidPer:Double
+    public var laundryIndex:Int
+    public var laundryIndexdesc:String
+    public var e:Double
+    public var vaporAmount:Double
+    public var humidCapacity:Double
+    public var totalScore:Int?
 
     init(daily: Daily) {
         self.desc = daily.weather[0].description

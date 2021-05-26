@@ -3,7 +3,7 @@ import UIKit
 class IconDescView: UIView {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var iconTableView: UITableView!
-    var iconModel: IconModel!
+    private var iconModel: IconModel!
 
     func inject(iconModel: IconModel) {
         self.iconModel = iconModel

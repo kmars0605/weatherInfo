@@ -2,7 +2,7 @@ import UIKit
 import SafariServices
 
 class SettingViewController: UIViewController{
-    @IBOutlet var settingView: SettingView!
+    @IBOutlet private var settingView: SettingView!
 
     override func viewDidLoad() {
         super.viewDidLoad()

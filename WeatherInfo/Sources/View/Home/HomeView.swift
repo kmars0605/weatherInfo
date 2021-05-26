@@ -15,8 +15,8 @@ class HomeView: UIView {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var indexView: UIView!
 
-    let view = ContentView()
-    var weatherModel: WeatherModel!
+    private let view = ContentView()
+    public var weatherModel: WeatherModel!
     public func setView(address: String){
         collectionView.delegate  = self
         collectionView.dataSource = self

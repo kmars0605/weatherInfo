@@ -3,7 +3,7 @@ import SafariServices
 
 class SettingView: UIView {
     @IBOutlet var tableView: UITableView!
-    let array = ["地点登録","アイコン説明","お問い合わせ"]
+    private let array = ["地点登録","アイコン説明","お問い合わせ"]
     func setView() {
         tableView.delegate = self
         tableView.dataSource = self

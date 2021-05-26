@@ -1,16 +1,16 @@
 class Current: Codable {
-    let dt: Int
-    let sunrise: Double
-    let sunset: Double
-    let temp: Double
-    let feelsLike: Double
-    let pressure: Int
-    let humidity: Int
-    let uvi: Double
-    let clouds: Int
-    let windSpeed: Double
-    let windDeg: Int
-    let weather: [CurrentWeather]
+    public let dt: Int
+    public let sunrise: Double
+    public let sunset: Double
+    public let temp: Double
+    public let feelsLike: Double
+    public let pressure: Int
+    public let humidity: Int
+    public let uvi: Double
+    public let clouds: Int
+    public let windSpeed: Double
+    public let windDeg: Int
+    public let weather: [CurrentWeather]
 
     public enum CodingKeys: String, CodingKey {
         case dt
@@ -29,9 +29,9 @@ class Current: Codable {
 }
 
 class CurrentWeather: Codable{
-    let main: String
-    let description: String
-    let icon: String
+    public let main: String
+    public let description: String
+    public let icon: String
 }
 
 

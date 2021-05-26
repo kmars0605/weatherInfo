@@ -1,7 +1,7 @@
 class OneCall: Codable {
-    let lat: Double
-    let lon: Double
-    let current: Current
-    var hourly: [Hourly]
-    let daily: [Daily]
+    public let lat: Double
+    public let lon: Double
+    public let current: Current
+    public var hourly: [Hourly]
+    public let daily: [Daily]
 }

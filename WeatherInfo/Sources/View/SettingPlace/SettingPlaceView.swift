@@ -4,8 +4,8 @@ import PKHUD
 
 class SettingPlaceView: UIView {
     private var searchCompleter = MKLocalSearchCompleter()
-    var address = "地名"
-    var bool = false
+    public var address = "地名"
+    private var bool = false
     
     @IBOutlet weak var cancelIcon: UIImageView!
     @IBOutlet weak var cancelButton: UIButton!

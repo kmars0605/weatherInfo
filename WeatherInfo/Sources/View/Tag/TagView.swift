@@ -1,6 +1,6 @@
 import UIKit
 class TagView: UIView {
-    var tagModel: TagModel!
+    private var tagModel: TagModel!
 
     func inject(tagModel: TagModel){
         self.tagModel = tagModel

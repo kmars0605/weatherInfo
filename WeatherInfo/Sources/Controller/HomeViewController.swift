@@ -8,14 +8,13 @@ import Network
 
 class HomeViewController: UIViewController {
     //Viewの参照を保持
-    @IBOutlet var homeView: HomeView!
+    @IBOutlet private var homeView: HomeView!
     //Modelの参照を保持
-    var weatherModel = WeatherModel()
-    let userModel = UserModel()
-
-    var requestCancellable: Cancellable?
-    var errorCancellable : Cancellable?
-    let monitor = NWPathMonitor()
+    private var weatherModel = WeatherModel()
+    private let userModel = UserModel()
+    private var requestCancellable: Cancellable?
+    private var errorCancellable : Cancellable?
+    private let monitor = NWPathMonitor()
     deinit {
         requestCancellable?.cancel()
     }
@@ -49,11 +48,11 @@ extension HomeViewController {
                 //再訪問
                 let upper = userModel.loadTime() ?? 0
                 let unixtime = Int(Date().timeIntervalSince1970)
-                weatherModel.loadOnecall()
+                weatherModel.loadData(of: WeatherModel.Key.onecall)
                 //過去の位置情報と現在の位置情報を比較
                 if unixtime < upper && floor((weatherModel.onecall?.lat ?? 0)*100) == floor(lat*100) && floor((weatherModel.onecall?.lon ?? 0)*100) == floor(lon*100) {
                     //通信なし
-                    weatherModel.loadDetail()
+                    weatherModel.loadData(of: WeatherModel.Key.detail)
                     homeView.weatherModel = weatherModel
                     //Viewを描画
                     homeView.setView(address: address)
@@ -77,7 +76,7 @@ extension HomeViewController {
                                     homeView.setView(address: address)
                                     //保存
                                     userModel.saveTime(dt: weatherModel.onecall!.hourly[1].dt)
-                                    weatherModel.saveDetail(detail: detail)
+                                    weatherModel.saveData(of: detail, to: WeatherModel.Key.detail)
                                     HUD.hide()
                                 }
                             }
@@ -98,8 +97,8 @@ extension HomeViewController {
             let UINavigationController = self.tabBarController?.viewControllers?[0]
             self.tabBarController?.selectedViewController = UINavigationController
             self.userModel.resetUserInfo()
-            self.weatherModel.resetOnecall()
-            self.weatherModel.resetDetail()
+            self.weatherModel.resetData(of: WeatherModel.Key.onecall)
+            self.weatherModel.resetData(of: WeatherModel.Key.detail)
             self.weatherModel.error = false
         }
         return

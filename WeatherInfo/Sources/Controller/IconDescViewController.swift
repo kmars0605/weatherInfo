@@ -1,8 +1,8 @@
 import UIKit
 
 class IconDescViewController: UIViewController {
-    @IBOutlet var iconDescView: IconDescView!
-    let iconModel = IconModel()
+    @IBOutlet private var iconDescView: IconDescView!
+    private let iconModel = IconModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         iconDescView.inject(iconModel: iconModel)

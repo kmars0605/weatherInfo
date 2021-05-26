@@ -3,45 +3,49 @@ import Combine
 import Alamofire
 
 class WeatherModel {
-    @Published var detail: [DailyWeatherDetail] = []
-    @Published var error = false
-    var onecall: OneCall?
-    var requestCancellable: Cancellable?
-    var subscriptions = Set<AnyCancellable>()
+    @Published public var detail: [DailyWeatherDetail] = []
+    @Published public var error = false
+    public var onecall: OneCall?
+    public var requestCancellable: Cancellable?
+    public var subscriptions = Set<AnyCancellable>()
+
+    enum Key {
+        case onecall
+        case detail
+
+        var name: String {
+            switch self {
+            case .onecall:
+                return "oneCall"
+            case .detail:
+                return "detail"
+            }
+        }
+    }
 }
 
 extension WeatherModel {
-
-    func saveOnecall(onecall: [OneCall]) {
-        let data = onecall.map { try! JSONEncoder().encode($0) }
-        UserDefaults.standard.set(data as [Any], forKey: "oneCall")
+    func saveData<T: Codable>(of weatherData: [T], to key: Key) {
+        let data = weatherData.map{ try! JSONEncoder().encode($0)}
+        UserDefaults.standard.set(data as [Any], forKey: key.name)
     }
 
-    func loadOnecall() {
-        guard let items = UserDefaults.standard.array(forKey: "oneCall") as? [Data] else { return }
-        let decodedItems = items.map { try! JSONDecoder().decode(OneCall.self, from: $0) }
-        self.onecall = decodedItems[0]
+    func loadData(of key: Key) {
+        guard let items = UserDefaults.standard.array(forKey: key.name) as? [Data] else { return }
+        switch key {
+        case .onecall:
+            let decodedItems = items.map { try! JSONDecoder().decode(OneCall.self, from: $0) }
+            self.onecall = decodedItems[0]
+        case .detail:
+            let decodedItems = items.map { try! JSONDecoder().decode(DailyWeatherDetail.self, from: $0) }
+            self.detail = decodedItems
+        }
     }
 
-    func resetOnecall()  {
-        UserDefaults.standard.set(nil, forKey: "oneCall")
+    func resetData(of key: Key) {
+        UserDefaults.standard.set(nil, forKey: key.name)
     }
-
-    func saveDetail(detail: [DailyWeatherDetail]) {
-        let data = detail.map { try! JSONEncoder().encode($0) }
-        UserDefaults.standard.set(data as [Any], forKey: "detail")
-        self.detail.removeAll()
-    }
-
-    func loadDetail() {
-        guard let items = UserDefaults.standard.array(forKey: "detail") as? [Data] else { return }
-        let decodedItems = items.map { try! JSONDecoder().decode(DailyWeatherDetail.self, from: $0) }
-        self.detail = decodedItems
-    }
-
-    func resetDetail() {
-        UserDefaults.standard.set(nil, forKey: "detail")
-    }
+    
     //URLSessionでの実装
     func request(latitude: Double, longitude: Double) {
         let decorder = JSONDecoder()
@@ -50,8 +54,7 @@ extension WeatherModel {
             .map({(data,response) in
                     if let response = response as? HTTPURLResponse {
                         if response.statusCode != 200 {
-                            print("response.statusCode = \(response.statusCode)")
-                            print("通信失敗")
+                            print("通信失敗:\(response.statusCode)")
                             self.error = true
                         } else { print("通信成功") }
                     } else {
@@ -74,7 +77,7 @@ extension WeatherModel {
                 self.onecall = onecall
                 self.detail = onecall.daily.map{DailyWeatherDetail(daily: $0)}
                 //OneCallのデータを保存
-                self.saveOnecall(onecall: [onecall])
+                saveData(of: [onecall], to: Key.onecall)
             })
     }
     //Alamofireでの実装
@@ -95,7 +98,7 @@ extension WeatherModel {
                 self.onecall = onecall
                 self.detail = onecall.daily.map{DailyWeatherDetail(daily: $0)}
                 //OneCallのデータを保存
-                self.saveOnecall(onecall: [onecall])
+                saveData(of: [onecall], to: Key.onecall)
                 //通信した時間の1時間後をunixで保存
                 self.detail.removeAll()
             })

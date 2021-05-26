@@ -1,16 +1,16 @@
 class Daily: Codable {
-    let dt: Int
-    let sunrise: Double
-    let sunset: Double
-    let temp: DailyTemp
-    let pressure: Int
-    let humidity: Int
-    let uvi: Double
-    let clouds: Int
-    let windSpeed: Double
-    let windDeg: Int
-    let weather: [DailyWeather]
-    let pop: Double
+    public let dt: Int
+    public let sunrise: Double
+    public let sunset: Double
+    public let temp: DailyTemp
+    public let pressure: Int
+    public let humidity: Int
+    public let uvi: Double
+    public let clouds: Int
+    public let windSpeed: Double
+    public let windDeg: Int
+    public let weather: [DailyWeather]
+    public let pop: Double
 
     public enum CodingKeys: String, CodingKey {
         case dt
@@ -29,14 +29,14 @@ class Daily: Codable {
 }
 
 class DailyTemp: Codable{
-    let day: Double
-    let min: Double
-    let max: Double
-    let night: Double
+    public let day: Double
+    public let min: Double
+    public let max: Double
+    public let night: Double
 }
 
 class DailyWeather: Codable{
-    let main: String
-    let description: String
-    let icon:String
+    public let main: String
+    public let description: String
+    public let icon:String
 }

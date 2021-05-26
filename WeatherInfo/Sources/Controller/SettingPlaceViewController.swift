@@ -3,9 +3,9 @@ import Network
 import PKHUD
 
 class SettingPlaceViewController: UIViewController {
-    @IBOutlet var settingPlaceView: SettingPlaceView!
-    let userModel = UserModel()
-    let monitor = NWPathMonitor()
+    @IBOutlet private var settingPlaceView: SettingPlaceView!
+    private let userModel = UserModel()
+    private let monitor = NWPathMonitor()
 
     override func viewWillAppear(_ animated: Bool) {
         var bool = false
